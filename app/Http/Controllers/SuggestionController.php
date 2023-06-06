@@ -14,7 +14,7 @@ class SuggestionController extends Controller
     {
         return view('suggestion.index', [
             'user' => Auth::user() ?: new User(),
-            'suggestions' => Suggestion::latest()->paginate(1),
+            'suggestions' => Suggestion::latest()->paginate(10),
         ]);
     }
     public function create()
@@ -38,5 +38,12 @@ class SuggestionController extends Controller
         Suggestion::create($validateData);
 
         return to_route('suggestion.index')->with('success', 'Suggestion enregistrée avec succès');
+    }
+
+    public function destroy($id)
+    {
+        $suggestion = Suggestion::findOrFail($id);
+        $suggestion->delete();
+        return to_route('suggestion.index')->with('success', 'Suggestion supprimée avec succès');
     }
 }

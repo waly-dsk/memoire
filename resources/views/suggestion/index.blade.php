@@ -12,6 +12,7 @@
             <a class="btn btn-gradient-primary" href="{{ route('suggestion.create') }}">Ajouter une Suggestion</a>
         </nav>
     </div>
+    @include('shared.flash')
     <div class="row">
         <div class="col-12 grid-margin">
             <div class="card">
@@ -46,7 +47,7 @@
                                             </label>
                                         </td>
                                         <td>
-                                            <label class="badge badge-gradient-warning">
+                                            <label class="badge badge-gradient-danger">
                                                 {{ \Carbon\Carbon::parse($suggestion->created_at)->locale('fr_FR')->isoFormat('LL') }}
                                             </label>
                                         </td>
@@ -56,7 +57,8 @@
                                                     <a href="" title="Répondre"
                                                         class="offset-1 mdi mdi-message-reply">
                                                     </a>
-                                                    <form action="" method="post" class="offset-5 align-self-center">
+                                                    <form action="{{ route('suggestion.destroy', $suggestion->id) }}"
+                                                        method="post" class="offset-5 align-self-center">
                                                         @csrf
                                                         @method('delete')
                                                         <button style="color:red;" class="btn btn-link p-0"

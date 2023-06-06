@@ -18,7 +18,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="categorie">Catégorie</label>
-                            <input type="text" name="categorie" class="form-control" id="categorie"
+                            <input autofocus type="text" name="categorie" class="form-control" id="categorie"
                                 placeholder="Catégorie">
                         </div>
                         <div class="form-group">
