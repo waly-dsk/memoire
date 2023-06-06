@@ -19,8 +19,9 @@ Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
-Route::get('suggestion', [\App\Http\Controllers\SuggestionController::class, 'create'])->name('suggestion');
-Route::post('suggestion', [\App\Http\Controllers\SuggestionController::class, 'store'])->name('suggestion');
+Route::get('suggestion', [\App\Http\Controllers\SuggestionController::class, 'index'])->name('suggestion.index');
+Route::get('suggestion/create', [\App\Http\Controllers\SuggestionController::class, 'create'])->name('suggestion.create');
+Route::post('suggestion', [\App\Http\Controllers\SuggestionController::class, 'store'])->name('suggestion.store');
 
 Route::get('/non_admin', [\App\Http\Controllers\HomeController::class, 'non_admin'])->name('non_admin');
 Route::get('/get_options/{entiteId}', [\App\Http\Controllers\OptionController::class, 'get_options'])->name('get_options');

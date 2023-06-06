@@ -184,7 +184,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suggestion') }}">
+                        <a class="nav-link" href="{{ route('suggestion.index') }}">
                             <span class="menu-title">Suggestion</span>
                             <i class="mdi mdi-format-wrap-tight  menu-icon"></i>
                         </a>
