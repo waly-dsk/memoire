@@ -210,7 +210,12 @@
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('category.index') }}">
+                                <span class="menu-title">Catégories</span>
+                                <i class="mdi mdi-brightness-7 menu-icon"></i>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">
                                 <span class="menu-title">Livres Imprimés</span>
@@ -218,6 +223,12 @@
                             </a>
                         </li>
                     @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('category.index') }}">
+                                <span class="menu-title">Catégories</span>
+                                <i class="mdi mdi-brightness-7 menu-icon"></i>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('memoires.index') }}">
                                 <span class="menu-title">Mémoires-Thèses</span>

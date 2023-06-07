@@ -37,7 +37,6 @@
                                         <label class="badge badge-success">
                                             {{ $abonne->entite }}
                                         </label>
-
                                     </th>
                                     <th>
                                         <label class="badge badge-info">
