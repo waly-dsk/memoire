@@ -210,6 +210,13 @@
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="">
+                                <span class="menu-title">Livres Imprimés</span>
+                                <i class="mdi mdi-book-open menu-icon"></i>
+                            </a>
+                        </li>
                     @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('memoires.index') }}">

@@ -14,7 +14,8 @@ class SuggestionController extends Controller
     {
         return view('suggestion.index', [
             'user' => Auth::user() ?: new User(),
-            'suggestions' => Suggestion::latest()->paginate(10),
+            'suggestions' => Suggestion::latest()->paginate(5),
+            'suggestionCount' => Suggestion::count(),
         ]);
     }
     public function create()

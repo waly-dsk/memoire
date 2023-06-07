@@ -17,6 +17,10 @@
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
+                    <h4 class="card-title">Hoverable Table {{ $suggestionCount }}</h4>
+                    <p class="card-description">
+                        Add class <code>.table-hover</code>
+                    </p>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>

@@ -157,7 +157,7 @@ class MemoireTheseController extends Controller
             // Vérifier les erreurs de téléchargement du fichier PDF
             if ($pdf->isValid()) {
                 // Stocker le nouveau fichier PDF avec le nom personnalisé
-                $pdfPath = $pdf->storeAs('public/pdfs', $filename);
+                $pdfPath = $pdf->storeAs('public/memoires', $filename);
             } else {
                 // Gérer les erreurs de téléchargement du fichier
                 return redirect()->back()->withErrors(['pdf' => 'Une erreur s\'est produite lors du téléchargement du fichier PDF.']);
