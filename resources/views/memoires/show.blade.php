@@ -88,7 +88,6 @@
                                 </a>
                             </div>
                         @endif
-
                     </form>
                 </div>
             </div>

@@ -211,24 +211,28 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.index') }}">
-                                <span class="menu-title">Catégories</span>
-                                <i class="mdi mdi-brightness-7 menu-icon"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('livre_imprime.index') }}">
+                            <a class="nav-link" data-toggle="collapse" href="#livres" aria-expanded="false"
+                                aria-controls="livres">
                                 <span class="menu-title">Livres Imprimés</span>
-                                <i class="mdi mdi-book-open menu-icon"></i>
+                                <i class="menu-arrow"></i>
+                                <i class="mdi mdi-medical-bag menu-icon"></i>
                             </a>
+                            <div class="collapse" id="livres">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('category.index') }}">
+                                            Catégories de Livres
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('livre_imprime.index') }}">
+                                            Tous les Livres
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.index') }}">
-                                <span class="menu-title">Catégories</span>
-                                <i class="mdi mdi-brightness-7 menu-icon"></i>
-                            </a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('memoires.index') }}">
                                 <span class="menu-title">Mémoires-Thèses</span>
@@ -236,10 +240,26 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('livre_imprimes.index') }}">
+                            <a class="nav-link" data-toggle="collapse" href="#livres" aria-expanded="false"
+                                aria-controls="livres">
                                 <span class="menu-title">Livres Imprimés</span>
-                                <i class="mdi mdi-book-open menu-icon"></i>
+                                <i class="menu-arrow"></i>
+                                <i class="mdi mdi-medical-bag menu-icon"></i>
                             </a>
+                            <div class="collapse" id="livres">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('category.index') }}">
+                                            Catégories de Livres
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('livre_imprimes.index') }}">
+                                            Tous les Livres
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     @endif
                 </ul>
