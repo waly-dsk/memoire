@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('livre_imprimes', function (Blueprint $table) {
+        Schema::create('exemplaire_pretes', function (Blueprint $table) {
             $table->id();
-            $table->string('cote');
-            $table->string('auteur');
-            $table->string('titre');
-            $table->foreignId('category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('livre_imprime_exemplaire_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('pret_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('livre_imprimes');
+        //
     }
 };

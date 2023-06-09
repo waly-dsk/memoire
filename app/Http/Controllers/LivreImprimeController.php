@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\LivreImprime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class LivreImprimeController extends Controller
 {
@@ -12,7 +15,10 @@ class LivreImprimeController extends Controller
      */
     public function index()
     {
-        //
+        return view('livre_imprimes.index', [
+            'user' => Auth::user() ?: new User(),
+            'livre_imprimes' => LivreImprime::paginate(15),
+        ]);
     }
 
     /**
@@ -20,7 +26,12 @@ class LivreImprimeController extends Controller
      */
     public function create()
     {
-        //
+        return view('livre_imprimes.form', [
+            'user' => Auth::user(),
+            'livre_imprime' => new LivreImprime(),
+            'categories' => DB::table('categories')->get(),
+            'divisions' => DB::table('divisions')->get(),
+        ]);
     }
 
     /**
@@ -28,7 +39,14 @@ class LivreImprimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'cote' => 'required',
+            'titre' => 'required',
+            'auteur' => 'required',
+            'division_id' => 'required',
+            'exemplaire' => 'required',
+            'cote' => 'required',
+        ]);
     }
 
     /**

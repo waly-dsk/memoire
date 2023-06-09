@@ -217,7 +217,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">
+                            <a class="nav-link" href="{{ route('livre_imprime.index') }}">
                                 <span class="menu-title">Livres Imprimés</span>
                                 <i class="mdi mdi-book-open menu-icon"></i>
                             </a>
@@ -233,6 +233,12 @@
                             <a class="nav-link" href="{{ route('memoires.index') }}">
                                 <span class="menu-title">Mémoires-Thèses</span>
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('livre_imprimes.index') }}">
+                                <span class="menu-title">Livres Imprimés</span>
+                                <i class="mdi mdi-book-open menu-icon"></i>
                             </a>
                         </li>
                     @endif
