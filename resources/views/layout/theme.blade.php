@@ -17,7 +17,6 @@
     <!-- inject select2 css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2/css/select2.min.css') }}">
     <!-- inject:css -->
-
     <title>Title | @yield('title')</title>
 </head>
 
@@ -177,7 +176,7 @@
                         @endif
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">
+                        <a class="nav-link" href="{{ $user->exists ? 'dashboard' : 'home' }}">
                             <span class="menu-title">Accueil</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
@@ -231,6 +230,18 @@
                                     </li>
                                 </ul>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="menu-title">Consultations sur place</span>
+                                <i class="mdi mdi-air-conditioner  menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('pret.index') }}">
+                                <span class="menu-title">Prêts à domicile</span>
+                                <i class=" mdi mdi-airplane-takeoff  menu-icon"></i>
+                            </a>
                         </li>
                     @else
                         <li class="nav-item">

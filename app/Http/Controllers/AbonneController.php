@@ -56,10 +56,11 @@ class AbonneController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'matricule' => 'required',
+            'matricule' => ['required', 'unique:abonnes,matricule'],
             'nom' => 'required',
             'option_id' => 'required',
         ], [
+            'matricule.unique' => 'Ce matricule est déjà utilisé par un Abonné.',
             'matricule.required' => 'Le numéro matricule est obligatoire.',
             'nom.required' => 'Le champ nom est obligatoire.',
             'option.required' => 'Vous devez choisir une option.',

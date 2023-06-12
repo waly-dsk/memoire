@@ -11,7 +11,6 @@
         <a class="btn btn-gradient-info" href="{{ route('category.index') }}">Retour</a>
     </div>
     <div class="row">
-
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">

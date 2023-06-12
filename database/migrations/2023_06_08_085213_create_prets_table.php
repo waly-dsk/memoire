@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('abonne_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('livre_imprime_exemplaire_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->date('date_debut');
             $table->date('date_fin_prevue');
             $table->timestamps();

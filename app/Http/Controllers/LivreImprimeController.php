@@ -112,6 +112,7 @@ class LivreImprimeController extends Controller
     public function update(Request $request, $id)
     {
         $livreImprime = LivreImprime::findOrFail($id);
+
         DB::table('livre_imprime_exemplaires')->where('livre_imprime_id', $id)->delete();
         $validateData = $request->validate([
             'cote' => 'required',

@@ -73,10 +73,11 @@ Route::get('/get_divisions/{categoryId}', [\App\Http\Controllers\AjaxController:
  *  Il s'agit ici des différentes fonctionnalités qui sont les leurs dans le système
  */
 Route::middleware('auth')->group(function () {
+    Route::delete('suggestion/{id}', [\App\Http\Controllers\SuggestionController::class, 'destroy'])->name('suggestion.destroy');
     Route::resource('abonne', \App\Http\Controllers\AbonneController::class)->except('show');
     Route::resource('memoire', \App\Http\Controllers\MemoireTheseController::class);
     Route::resource('livre_imprime', \App\Http\Controllers\LivreImprimeController::class);
-    Route::delete('suggestion/{id}', [\App\Http\Controllers\SuggestionController::class, 'destroy'])->name('suggestion.destroy');
+    Route::resource('pret', \App\Http\Controllers\PretController::class);
 });
 
 /**

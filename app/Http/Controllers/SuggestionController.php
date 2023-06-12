@@ -38,7 +38,7 @@ class SuggestionController extends Controller
         ]);
         Suggestion::create($validateData);
 
-        return to_route('suggestion.index')->with('success', 'Suggestion enregistrée avec succès');
+        return to_route('suggestion.index');
     }
 
     public function destroy($id)

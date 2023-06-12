@@ -10,11 +10,8 @@
         </h3>
         @if ($user->exists)
             <a class="btn btn-gradient-secondary" href="{{ route('memoire.create') }}">Ajouter Mémoires / Thèses</a>
-        @else
-            <a class="btn btn-gradient-secondary" href="#">Ajouter Mémoires / Thèses</a>
         @endif
     </div>
-    @include('shared.flash')
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">

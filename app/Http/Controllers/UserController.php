@@ -59,7 +59,7 @@ class UserController extends Controller
             'password' => $hashedPassword,
         ]);
 
-        return redirect()->back()->with('success', 'Agent de la Bibliothèque enregisté avec succès');
+        return to_route('user.index');
     }
 
     /**
@@ -110,7 +110,7 @@ class UserController extends Controller
             // 'role' => $validatedData['role'], // Supprimé pour permettre la mise à jour de l'administrateur sans validation du champ 'role'
         ]);
 
-        return redirect()->back()->with('success', 'Agent de la Bibliothèque edité avec succès');
+        return to_route('user.index');
     }
 
     /**

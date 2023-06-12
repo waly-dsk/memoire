@@ -37,6 +37,5 @@ class CategoryController extends Controller
             'categorie' => $categorie,
             'divisions' => $divisions,
         ]);
-        dd($categorie);
     }
 }
