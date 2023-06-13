@@ -102,7 +102,6 @@ class UserController extends Controller
         $validatedData = $request->validate($rules, $messages);
 
         $hashedPassword = Hash::make($validatedData['password']);
-
         $agent->update([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],

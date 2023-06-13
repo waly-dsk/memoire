@@ -68,7 +68,7 @@ class AbonneController extends Controller
 
         Abonne::create($validateData);
 
-        return back()->with('success', 'Abonné ajouté avec succès');
+        return to_route('abonne.index');
     }
 
     /**

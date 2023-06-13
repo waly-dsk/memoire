@@ -12,12 +12,21 @@ class PretController extends Controller
 {
     /**
      * Display a listing of the resource.
+     * Pour sélectionner uniquement les prêts contenant encore des
+     * ouvrages non retournés, vous pouvez utiliser une sous-requête
+     * pour filtrer les prêts en fonction de leur statut dans la table
+     * exemplaire_pretes. Voici la requête améliorée :
      */
     public function index()
     {
         $prets = DB::table('prets')
             ->join('abonnes', 'prets.abonne_id', '=', 'abonnes.id')
             ->join('users', 'prets.user_id', '=', 'users.id')
+            ->whereIn('prets.id', function ($query) {
+                $query->select('pret_id')
+                    ->from('exemplaire_pretes')
+                    ->where('retourne', '=', false);
+            })
             ->select(
                 'prets.id as pret_id',
                 'prets.date_debut',
@@ -25,8 +34,7 @@ class PretController extends Controller
                 'abonnes.nom',
                 'users.name as agent',
             )
-            ->paginate(2);
-
+            ->get();
         return view('prets.index', [
             'user' => Auth::user(),
             'prets' => $prets,
@@ -118,6 +126,7 @@ class PretController extends Controller
             ->join('livre_imprime_exemplaires', 'exemplaire_pretes.livre_imprime_exemplaire_id', '=', 'livre_imprime_exemplaires.id')
             ->join('livre_imprimes', 'livre_imprime_exemplaires.livre_imprime_id', '=', 'livre_imprimes.id')
             ->where('prets.id', '=', $id)
+            ->where('exemplaire_pretes.retourne', '=', false) // Ajouter cette condition
             ->select('livre_imprimes.titre', DB::raw('COUNT(livre_imprime_exemplaires.livre_imprime_id) as total'))
             ->groupBy('livre_imprime_id')
             ->get();
@@ -134,8 +143,34 @@ class PretController extends Controller
      */
     public function edit($id)
     {
-        $user = auth()->user();
-        $abonnes = Abonne::all();
+
+        $informations_pret = DB::table('prets')
+            ->where('prets.id', '=', $id)
+            ->join('users', 'users.id', '=', 'prets.user_id')
+            ->join('abonnes', 'abonnes.id', '=', 'prets.abonne_id')
+            ->first();
+
+        $mes_prets = DB::table('prets')
+            ->join('exemplaire_pretes', 'prets.id', '=', 'exemplaire_pretes.pret_id')
+            ->join('livre_imprime_exemplaires', 'exemplaire_pretes.livre_imprime_exemplaire_id', '=', 'livre_imprime_exemplaires.id')
+            ->where('exemplaire_pretes.pret_id', '=', $id)
+            ->select('livre_imprime_exemplaires.id as exemplaire_id')
+            ->get();
+
+        foreach ($mes_prets as $pret) {
+
+            DB::table('exemplaire_pretes')
+                ->where('livre_imprime_exemplaire_id', '=', $pret->exemplaire_id)
+                ->delete();
+
+            DB::table('livre_imprime_exemplaires')
+                ->where('id', '=', $pret->exemplaire_id)
+                ->where('statut', '=', 1)
+                ->update([
+                    'statut' => 0,
+                ]);
+        }
+
         $livre_imprimes = DB::table('livre_imprimes')
             ->join('livre_imprime_exemplaires', 'livre_imprime_exemplaires.livre_imprime_id', '=', 'livre_imprimes.id')
             ->where('livre_imprime_exemplaires.statut', '=', 0)
@@ -143,10 +178,10 @@ class PretController extends Controller
             ->get();
 
         return view('prets.form', [
-            'user' => $user,
-            'abonnes' => $abonnes,
+            'user' => Auth::user(),
             'livre_imprimes' => $livre_imprimes,
-            'pret' => new Pret(),
+            'pret' => Pret::findOrFail($id),
+            'informations_pret' => $informations_pret,
         ]);
         //
     }
@@ -154,16 +189,88 @@ class PretController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pret $pret)
+    public function update(Request $request, $id)
     {
-        //
+        if ($request->isMethod('put')) {
+            $validateData = $request->validate([
+                'date_debut' => ['required'],
+                'date_fin_prevue' => ['required'],
+                'livre_imprime_exemplaire_id' => ['required', 'array'],
+            ], [
+                'livre_imprime_exemplaire_id.required' => 'Choisissez au moins un ouvrage.',
+                'date_debut.required' => 'Renseignez la date de début.',
+                'date_fin_prevue.required' => 'Renseignez la date de fin prévue.',
+            ]);
+
+            $pret = Pret::findOrFail($id);
+
+            $pret->update([
+                'date_debut' => $validateData['date_debut'],
+                'date_fin_prevue' => $validateData['date_fin_prevue'],
+            ]);
+
+            $taille = sizeof($validateData['livre_imprime_exemplaire_id']);
+
+            for ($i = 0; $i < $taille; $i++) {
+                DB::table('exemplaire_pretes')->insert([
+                    'pret_id' => $id,
+                    'livre_imprime_exemplaire_id' => $validateData['livre_imprime_exemplaire_id'][$i],
+                ]);
+
+                DB::table('livre_imprime_exemplaires')
+                    ->where('id', '=', $validateData['livre_imprime_exemplaire_id'][$i])
+                    ->update([
+                        'statut' => 1,
+                    ]);
+            }
+
+            return to_route('pret.index');
+        } else {
+            // Retourner la vue de mise à jour du prêt sans effectuer les modifications
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pret $pret)
+    public function pret_retour_create($id)
     {
-        //
+
+        $informations_pret = DB::table('prets')
+            ->where('prets.id', '=', $id)
+            ->join('users', 'users.id', '=', 'prets.user_id')
+            ->join('abonnes', 'abonnes.id', '=', 'prets.abonne_id')
+            ->first();
+
+        $mes_prets = DB::table('prets')
+            ->join('exemplaire_pretes', 'prets.id', '=', 'exemplaire_pretes.pret_id')
+            ->join('livre_imprime_exemplaires', 'exemplaire_pretes.livre_imprime_exemplaire_id', '=', 'livre_imprime_exemplaires.id')
+            ->join('livre_imprimes', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+            ->where('exemplaire_pretes.pret_id', '=', $id)
+            ->where('exemplaire_pretes.retourne', '=', false) // Ajouter cette condition
+            ->select('livre_imprimes.titre', 'livre_imprime_exemplaires.id as exemplaire_id')
+            ->get();
+
+        return view('prets.retour_form', [
+            'user' => Auth::user(),
+            'pret' => Pret::findOrFail($id),
+            'mes_prets' => $mes_prets,
+            'informations_pret' => $informations_pret,
+        ]);
+    }
+
+    public function retour_pret($id)
+    {
+        // Mettre à jour le statut des exemplaires
+        DB::table('livre_imprime_exemplaires')
+            ->where('id', '=', $id)
+            ->update([
+                'statut' => 0,
+            ]);
+        // Autres actions que vous souhaitez effectuer lors du retour
+        DB::table('exemplaire_pretes')
+            ->where('livre_imprime_exemplaire_id', '=', $id)
+            ->update([
+                'retourne' => true,
+            ]);
+        // Rediriger vers la page d'accueil ou une autre vue appropriée
+        return redirect()->back()->with('success', 'Le prêt a été retourné avec succès.');
     }
 }

@@ -77,7 +77,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('abonne', \App\Http\Controllers\AbonneController::class)->except('show');
     Route::resource('memoire', \App\Http\Controllers\MemoireTheseController::class);
     Route::resource('livre_imprime', \App\Http\Controllers\LivreImprimeController::class);
-    Route::resource('pret', \App\Http\Controllers\PretController::class);
+    Route::resource('pret', \App\Http\Controllers\PretController::class)->except('destroy');
+    Route::get('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'pret_retour_create'])->name('pret.retour.create');
+    Route::put('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'retour_pret'])->name('pret.retour.put');
 });
 
 /**

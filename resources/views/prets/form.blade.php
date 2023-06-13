@@ -23,13 +23,27 @@
                         method="post" enctype="multipart/form-data">
                         @csrf @method($pret->exists ? 'PUT' : 'POST')
 
+                        @if ($pret->exists)
+                            <div class="form-group">
+                                <label for="abonne">Agent</label>
+                                <input disabled type="text" name="agent_id" class="form-control"
+                                    value="{{ $informations_pret->name }}">
+                            </div>
+                        @endif
+
+
                         <div class="form-group">
                             <label for="abonne">Abonné</label>
-                            <select name="abonne_id" class="form-control">
-                                @foreach ($abonnes as $abonne)
-                                    <option value="{{ $abonne->id }}">{{ $abonne->nom }}</option>
-                                @endforeach
-                            </select>
+                            @if ($pret->exists)
+                                <input disabled type="text" name="abonne_id" class="form-control"
+                                    value="{{ $informations_pret->nom }}">
+                            @else
+                                <select name="abonne_id" class="form-control">
+                                    @foreach ($abonnes as $abonne)
+                                        <option value="{{ $abonne->id }}">{{ $abonne->nom }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
                         </div>
 
                         <div class="form-group">

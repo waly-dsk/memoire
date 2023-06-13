@@ -46,6 +46,7 @@
                                 <input disabled class="form-control" id="date_fin_prevue"
                                     value="{{ $pret->date_fin_prevue }}">
                             </div>
+
                             <div class="form-group">
                                 <label for="books">Livres Imprimés prêtés</label>
                                 @foreach ($details as $detail)
