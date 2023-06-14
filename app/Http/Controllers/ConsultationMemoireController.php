@@ -10,20 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ConsultationMemoireController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('consultations_memoires_theses.index', [
-            'user' => Auth::user(),
-            'consultations' => DB::table('memoire_these_consultes')->get(),
-        ]);
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('consultations_memoires_theses.form', [

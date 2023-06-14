@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('livre_imprime_consultes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('livre_imprime_exemplaire_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('livre_imprime_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

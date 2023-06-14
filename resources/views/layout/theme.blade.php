@@ -242,12 +242,12 @@
                             <div class="collapse" id="consultations">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('consultation_memoire_these.index') }}">
+                                        <a class="nav-link" href="{{ route('consultation_memoire_these.create') }}">
                                             Mémoires-Thèses
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">
+                                        <a class="nav-link" href="{{ route('consultation_livre_imprime.create') }}">
                                             Livres Imprimés
                                         </a>
                                     </li>
