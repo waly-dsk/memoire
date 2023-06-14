@@ -231,12 +231,30 @@
                                 </ul>
                             </div>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <span class="menu-title">Consultations sur place</span>
-                                <i class="mdi mdi-air-conditioner  menu-icon"></i>
+                            <a class="nav-link" data-toggle="collapse" href="#consultations" aria-expanded="false"
+                                aria-controls="consultations">
+                                <span class="menu-title">Consultations</span>
+                                <i class="menu-arrow"></i>
+                                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                             </a>
+                            <div class="collapse" id="consultations">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('consultation_memoire_these.index') }}">
+                                            Mémoires-Thèses
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="">
+                                            Livres Imprimés
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('pret.index') }}">
                                 <span class="menu-title">Prêts à domicile</span>

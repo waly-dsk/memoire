@@ -12,11 +12,9 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('exemplaire_pretes', function (Blueprint $table) {
+        Schema::create('memoire_these_consultes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pret_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('livre_imprime_exemplaire_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->boolean('retourne')->default(false);
+            $table->foreignId('memoire_these_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exemplaire_pretes');
+        Schema::dropIfExists('memoire_these_consultes');
     }
 };

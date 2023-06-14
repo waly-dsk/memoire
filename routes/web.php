@@ -80,6 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('pret', \App\Http\Controllers\PretController::class)->except('destroy');
     Route::get('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'pret_retour_create'])->name('pret.retour.create');
     Route::put('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'retour_pret'])->name('pret.retour.put');
+    Route::resource('consultation_memoire_these', \App\Http\Controllers\ConsultationMemoireController::class)->except('destroy');
 });
 
 /**
