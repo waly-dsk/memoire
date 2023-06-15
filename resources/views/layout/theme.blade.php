@@ -204,7 +204,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('memoire.index') }}">
+                            <a class="nav-link" href="{{ route('memoire_these.index') }}">
                                 <span class="menu-title">Mémoires-Thèses</span>
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
                             </a>
@@ -248,6 +248,30 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ route('consultation_livre_imprime.create') }}">
+                                            Livres Imprimés
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#stats_memoires_theses"
+                                aria-expanded="false" aria-controls="stats_memoires_theses">
+                                <span class="menu-title">Statistiques </span>
+                                <i class="menu-arrow"></i>
+                                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                            </a>
+                            <div class="collapse" id="stats_memoires_theses">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('stats_memoires_theses') }}">
+                                            Mémoires-Thèses
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('stats_livres_imprimes') }}">
                                             Livres Imprimés
                                         </a>
                                     </li>

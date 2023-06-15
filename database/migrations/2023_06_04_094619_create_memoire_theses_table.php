@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('memoire_theses', function (Blueprint $table) {
             $table->id();
-            $table->string('cote');
+            $table->string('cote')->unique();
             $table->string('theme');
             $table->string('auteur');
             $table->foreignId('option_id')->constrained()->onDelete('cascade')->onUpdate('cascade');

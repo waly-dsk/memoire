@@ -1,5 +1,5 @@
 @extends('layout.theme')
-@section('title', $memoire->exists ? 'Editer un mémoire ' : 'Ajouter un mémoire')
+@section('title', $memoire->exists ? 'Editer un mémoire / thèse ' : 'Ajouter un mémoire / thèse')
 @section('content')
     <div class="page-header">
         <h3 class="page-title">
@@ -7,9 +7,9 @@
                 <i class="mdi mdi-book"></i>
             </span>
             @if ($memoire->exists)
-                Editer un mémoire
+                Editer un Mémoire / Thèse
             @else
-                Ajouter un mémoire
+                Ajouter un Mémoire / Thèse
             @endif
         </h3>
     </div>
@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     <form class="forms-sample"
-                        action="{{ route($memoire->exists ? 'memoire.update' : 'memoire.store', ['memoire' => $memoire->id]) }}"
+                        action="{{ route($memoire->exists ? 'memoire_these.update' : 'memoire_these.store', ['memoire' => $memoire->id]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf @method($memoire->exists ? 'PUT' : 'POST')
                         <div class="form-group">

@@ -75,13 +75,15 @@ Route::get('/get_divisions/{categoryId}', [\App\Http\Controllers\AjaxController:
 Route::middleware('auth')->group(function () {
     Route::delete('suggestion/{id}', [\App\Http\Controllers\SuggestionController::class, 'destroy'])->name('suggestion.destroy');
     Route::resource('abonne', \App\Http\Controllers\AbonneController::class)->except('show');
-    Route::resource('memoire', \App\Http\Controllers\MemoireTheseController::class);
+    Route::resource('memoire_these', \App\Http\Controllers\MemoireTheseController::class);
     Route::resource('livre_imprime', \App\Http\Controllers\LivreImprimeController::class);
     Route::resource('pret', \App\Http\Controllers\PretController::class)->except('destroy');
     Route::get('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'pret_retour_create'])->name('pret.retour.create');
     Route::put('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'retour_pret'])->name('pret.retour.put');
-    Route::resource('consultation_memoire_these', \App\Http\Controllers\ConsultationMemoireController::class)->except('destroy');
-    Route::resource('consultation_livre_imprime', \App\Http\Controllers\ConsultationLivreImprimeController::class)->except('destroy');
+    Route::resource('consultation_memoire_these', \App\Http\Controllers\ConsultationMemoireController::class)->except(['destroy', 'show', 'index', 'update', 'edit']);
+    Route::resource('consultation_livre_imprime', \App\Http\Controllers\ConsultationLivreImprimeController::class)->except(['destroy', 'show', 'index', 'update', 'edit']);
+    Route::get('statistiques/consultations/memoires_theses', [\App\Http\Controllers\StatistiquesController::class, 'stats_memoires_theses'])->name('stats_memoires_theses');
+    Route::get('statistiques/consultations/livres', [\App\Http\Controllers\StatistiquesController::class, 'stats_livres_imprimes'])->name('stats_livres_imprimes');
 });
 
 /**

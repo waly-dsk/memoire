@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Entite;
-use App\Models\MemoireThese;
-use App\Models\Option;
 use App\Models\User;
+use App\Models\Entite;
+use App\Models\Option;
+use App\Models\MemoireThese;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -17,9 +18,15 @@ class MemoireTheseController extends Controller
      */
     public function index()
     {
+        $memories = DB::table('memoire_theses')
+            ->join('options', 'memoire_theses.option_id', '=', 'options.id')
+            ->join('entites', 'options.entite_id', '=', 'entites.id')
+            ->orderBy('entites.intitule')
+            ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+            ->get();
         return view('memoires.index', [
             'user' => Auth::user() ?: new User(),
-            'memoires' => MemoireThese::all(),
+            'memoires' => $memories,
         ]);
     }
 
@@ -83,7 +90,7 @@ class MemoireTheseController extends Controller
         $memoire->save();
 
         // Rediriger vers une autre page ou afficher un message de succès
-        return redirect()->route('memoire.index')->with('success', 'Le Mémoire a été enregistré avec succès.');
+        return redirect()->route('memoire_these.index')->with('success', 'Le Mémoire a été enregistré avec succès.');
     }
 
 
@@ -120,7 +127,7 @@ class MemoireTheseController extends Controller
     {
         $memoireThese = MemoireThese::findOrFail($id);
         $validatedData = $request->validate([
-            'cote' => 'required',
+            'cote' => 'required|unique:memoire_theses,cote',
             'theme' => 'required',
             'auteur' => 'required',
             'annee' => 'required|regex:/\d{4}-\d{4}/',
@@ -175,7 +182,7 @@ class MemoireTheseController extends Controller
             'pdf' => $pdfPath,
         ]);
 
-        return redirect()->route('memoire.index')->with('success', 'Le Mémoire a été modifié avec succès.');
+        return redirect()->route('memoire_these.index')->with('success', 'Le Mémoire a été modifié avec succès.');
     }
 
 

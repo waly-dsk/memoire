@@ -9,7 +9,7 @@
             Mémoires et Thèses
         </h3>
         @if ($user->exists)
-            <a class="btn btn-gradient-secondary" href="{{ route('memoire.create') }}">Ajouter Mémoires / Thèses</a>
+            <a class="btn btn-gradient-secondary" href="{{ route('memoire_these.create') }}">Ajouter Mémoires / Thèses</a>
         @endif
     </div>
     <div class="row">
@@ -37,12 +37,12 @@
                                     {{-- <td>{{ Str::limit($memoire->theme, $limit = 15, '...') }}</td> --}}
                                     <th>
                                         <label class="badge badge-success">
-                                            {{ $memoire->option->entite->intitule }}
+                                            {{ $memoire->entite }}
                                         </label>
                                     </th>
                                     <th>
                                         <label class="badge badge-info">
-                                            {{ $memoire->option->intitule }}
+                                            {{ $memoire->option }}
                                         </label>
                                     </th>
                                     <td>
@@ -53,14 +53,14 @@
                                     <td>
                                         <div class="row">
                                             @if ($user->exists)
-                                                <a href="{{ route('memoire.show', $memoire->id) }}" title="Détails"
+                                                <a href="{{ route('memoire_these.show', $memoire->id) }}" title="Détails"
                                                     class="mdi mdi-eye">
                                                 </a>
-                                                <a href="{{ route('memoire.edit', $memoire->id) }}" title="Modifier"
+                                                <a href="{{ route('memoire_these.edit', $memoire->id) }}" title="Modifier"
                                                     class="offset-3 mdi mdi-grease-pencil">
                                                 </a>
-                                                <form action="{{ route('memoire.destroy', $memoire->id) }}" method="post"
-                                                    class="offset-3 align-self-center">
+                                                <form action="{{ route('memoire_these.destroy', $memoire->id) }}"
+                                                    method="post" class="offset-3 align-self-center">
                                                     @csrf
                                                     @method('delete')
                                                     <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
