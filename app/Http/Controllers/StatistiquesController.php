@@ -72,6 +72,7 @@ class StatistiquesController extends Controller
             )
             ->where('exemplaire_pretes.retourne', true)
             ->groupBy('categories.id', 'categories.intitule', 'mois_annee')
+            ->orderByDesc('mois_annee')
             ->get();
 
         return view('stats_consultations.stats_prets', [

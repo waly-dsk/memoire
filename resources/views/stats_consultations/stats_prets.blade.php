@@ -1,6 +1,6 @@
 @extends('layout.theme')
 
-@section('title', 'Statistiques')
+@section('title', 'Statistiques prêts à domicile')
 
 @section('content')
     <div class="page-header">
@@ -17,7 +17,9 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">Livres Imprimés</h4>
-                    <p class="card-description"> Statistiques des Prêts pour les Livres Imprimés </p>
+                    <p class="card-description"> Statistiques des <code> Prêts à Domicile </code> pour les <code>Livres
+                            Imprimés</code>.
+                    </p>
                     <table style="table-layout: fixed;" class="table">
                         @if (count($stats) > 0)
                             <thead>
@@ -34,6 +36,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $moisPrecedent = null;
+                                @endphp
+
                                 @foreach ($stats as $stat)
                                     <tr>
                                         <td style="vertical-align: middle;">
@@ -41,7 +47,12 @@
                                         </td>
                                         <td>
                                             <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>
-                                            {{ ucfirst(strftime('%B %Y', strtotime($stat->mois_annee))) }}
+                                            @if ($stat->mois_annee !== $moisPrecedent)
+                                                {{ ucfirst(strftime('%B %Y', strtotime($stat->mois_annee))) }}
+                                                @php
+                                                    $moisPrecedent = $stat->mois_annee;
+                                                @endphp
+                                            @endif
                                         </td>
                                         <td>
                                             <label style="text-center">
