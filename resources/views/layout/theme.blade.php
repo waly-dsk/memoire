@@ -259,7 +259,7 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#stats_memoires_theses"
                                 aria-expanded="false" aria-controls="stats_memoires_theses">
-                                <span class="menu-title">Statistiques </span>
+                                <span class="menu-title">Stats Consultations</span>
                                 <i class="menu-arrow"></i>
                                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
                             </a>
@@ -282,7 +282,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('pret.index') }}">
                                 <span class="menu-title">Prêts à domicile</span>
-                                <i class=" mdi mdi-airplane-takeoff  menu-icon"></i>
+                                <i class="mdi mdi-airplane-takeoff  menu-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('stats_prets') }}">
+                                <span class="menu-title">Statistiques Prêts</span>
+                                <i class="mdi mdi-chart-areaspline  menu-icon"></i>
                             </a>
                         </li>
                     @else

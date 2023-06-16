@@ -55,4 +55,28 @@ class StatistiquesController extends Controller
             'stats' => $stats,
         ]);
     }
+
+
+    public function stats_prets()
+    {
+        $stats = DB::table('categories')
+            ->join('divisions', 'categories.id', '=', 'divisions.category_id')
+            ->join('livre_imprimes', 'divisions.id', '=', 'livre_imprimes.division_id')
+            ->leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+            ->leftJoin('exemplaire_pretes', 'livre_imprime_exemplaires.id', '=', 'exemplaire_pretes.livre_imprime_exemplaire_id')
+            ->select(
+                'categories.id',
+                'categories.intitule',
+                DB::raw("strftime('%Y-%m', exemplaire_pretes.created_at) as mois_annee"),
+                DB::raw('COUNT(exemplaire_pretes.id) as nombre_prets')
+            )
+            ->where('exemplaire_pretes.retourne', true)
+            ->groupBy('categories.id', 'categories.intitule', 'mois_annee')
+            ->get();
+
+        return view('stats_consultations.stats_prets', [
+            'user' => Auth::user(),
+            'stats' => $stats,
+        ]);
+    }
 }

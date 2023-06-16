@@ -38,7 +38,7 @@
                                 <input disabled type="text" name="abonne_id" class="form-control"
                                     value="{{ $informations_pret->nom }}">
                             @else
-                                <select name="abonne_id" class="form-control">
+                                <select name="abonne_id" class="form-control" multiple id="abonne">
                                     @foreach ($abonnes as $abonne)
                                         <option value="{{ $abonne->id }}">{{ $abonne->nom }}</option>
                                     @endforeach
@@ -82,8 +82,12 @@
 @section('script')
     <script>
         $(function() {
+            $('#abonne').select2({
+                placeholder: "Sélectionnez un abonné",
+                maximumSelectionLength: 1,
+            });
             $('#livre_imprime_exemplaire_id').select2({
-                placeholder: "Sélectionnez un livre",
+                placeholder: "Sélectionnez au moins un livre",
                 maximumSelectionLength: 2,
             });
         })

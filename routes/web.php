@@ -84,6 +84,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('consultation_livre_imprime', \App\Http\Controllers\ConsultationLivreImprimeController::class)->except(['destroy', 'show', 'index', 'update', 'edit']);
     Route::get('statistiques/consultations/memoires_theses', [\App\Http\Controllers\StatistiquesController::class, 'stats_memoires_theses'])->name('stats_memoires_theses');
     Route::get('statistiques/consultations/livres', [\App\Http\Controllers\StatistiquesController::class, 'stats_livres_imprimes'])->name('stats_livres_imprimes');
+    Route::get('statistiques/prets_a_domicile', [\App\Http\Controllers\StatistiquesController::class, 'stats_prets'])->name('stats_prets');
 });
 
 /**

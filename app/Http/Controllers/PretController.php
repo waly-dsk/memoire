@@ -98,6 +98,7 @@ class PretController extends Controller
             DB::table('exemplaire_pretes')->insert([
                 'pret_id' => $pret_id,
                 'livre_imprime_exemplaire_id' => $validateData['livre_imprime_exemplaire_id'][$i],
+                'created_at' => now(),
             ]);
 
             DB::table('livre_imprime_exemplaires')
