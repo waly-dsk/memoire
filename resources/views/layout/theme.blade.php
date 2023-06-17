@@ -122,7 +122,7 @@
                         @endif
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ $user->exists ? 'dashboard' : 'home' }}">
+                        <a class="nav-link" href="{{ route('home') }}">
                             <span class="menu-title">Accueil</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
