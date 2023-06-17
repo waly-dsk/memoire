@@ -8,6 +8,7 @@
             </span>
             Statistiques des Consultations
         </h3>
+        <a class="btn btn-gradient-info" href="{{ route('consultations_memoires_theses') }}">Consulter Graphes</a>
 
     </div>
     <div class="row">
@@ -39,6 +40,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $previousMonth = null;
+                                @endphp
+
                                 @foreach ($memos as $memo)
                                     <tr>
                                         <td style="vertical-align:middle;">
@@ -84,7 +89,13 @@
                                         </td>
                                         <td>
                                             <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>
-                                            {{ ucfirst(strftime('%B %Y', strtotime($memo->mois_annee))) }}
+                                            @php
+                                                $currentMonth = ucfirst(strftime('%B %Y', strtotime($memo->mois_annee)));
+                                                if ($currentMonth !== $previousMonth) {
+                                                    echo $currentMonth;
+                                                }
+                                                $previousMonth = $currentMonth;
+                                            @endphp
                                         </td>
 
                                         <td>

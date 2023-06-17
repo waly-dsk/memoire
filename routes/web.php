@@ -66,6 +66,7 @@ Route::get('/non_admin', [\App\Http\Controllers\HomeController::class, 'non_admi
  */
 Route::get('/get_options/{entiteId}', [\App\Http\Controllers\AjaxController::class, 'get_options'])->name('get_options');
 Route::get('/get_divisions/{categoryId}', [\App\Http\Controllers\AjaxController::class, 'get_divisions'])->name('get_divisions');
+Route::get('/get_memos/{mois}', [\App\Http\Controllers\AjaxController::class, 'get_memos'])->name('get_memos');
 
 
 /**
@@ -85,6 +86,7 @@ Route::middleware('auth')->group(function () {
     Route::get('statistiques/consultations/memoires_theses', [\App\Http\Controllers\StatistiquesController::class, 'stats_memoires_theses'])->name('stats_memoires_theses');
     Route::get('statistiques/consultations/livres', [\App\Http\Controllers\StatistiquesController::class, 'stats_livres_imprimes'])->name('stats_livres_imprimes');
     Route::get('statistiques/prets_a_domicile', [\App\Http\Controllers\StatistiquesController::class, 'stats_prets'])->name('stats_prets');
+    Route::get('graphes/consultations_memoires_theses', [\App\Http\Controllers\ChartController::class, 'consultations_memoires_theses'])->name('consultations_memoires_theses');
 });
 
 /**
