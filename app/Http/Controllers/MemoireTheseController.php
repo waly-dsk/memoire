@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchMemoireTheseRequest;
 use App\Models\User;
 use App\Models\Entite;
 use App\Models\Option;
@@ -16,17 +17,59 @@ class MemoireTheseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(SearchMemoireTheseRequest $request)
     {
         $memories = DB::table('memoire_theses')
             ->join('options', 'memoire_theses.option_id', '=', 'options.id')
             ->join('entites', 'options.entite_id', '=', 'entites.id')
             ->orderBy('entites.intitule')
             ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
-            ->get();
+            ->paginate(10);
+
+        if ($cote = $request->validated('cote')) {
+            $memories = DB::table('memoire_theses')
+                ->join('options', 'memoire_theses.option_id', '=', 'options.id')
+                ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->where('memoire_theses.cote', '=', $cote)
+                ->orderBy('entites.intitule')
+                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+                ->paginate(10);
+        }
+
+        if ($entite = $request->validated('entite')) {
+            $memories = DB::table('memoire_theses')
+                ->join('options', 'memoire_theses.option_id', '=', 'options.id')
+                ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->where('entites.intitule', '=', $entite)
+                ->orderBy('entites.intitule')
+                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+                ->paginate(10);
+        }
+
+        if ($option = $request->validated('option')) {
+            $memories = DB::table('memoire_theses')
+                ->join('options', 'memoire_theses.option_id', '=', 'options.id')
+                ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->where('options.intitule', 'like', '%' . $option . '%')
+                ->orderBy('entites.intitule')
+                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+                ->paginate(10);
+        }
+
+        if ($auteur = $request->validated('auteur')) {
+            $memories = DB::table('memoire_theses')
+                ->join('options', 'memoire_theses.option_id', '=', 'options.id')
+                ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->where('memoire_theses.auteur', 'like', '%' . $auteur . '%')
+                ->orderBy('entites.intitule')
+                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+                ->paginate(10);
+        }
+
         return view('memoires.index', [
             'user' => Auth::user() ?: new User(),
             'memoires' => $memories,
+            'input' => $request->validated(),
         ]);
     }
 

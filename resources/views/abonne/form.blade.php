@@ -12,6 +12,12 @@
                 Ajouter un abonné
             @endif
         </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Abonnés</li>
+            </ol>
+        </nav>
     </div>
     @include('shared.flash')
     <div class="row">

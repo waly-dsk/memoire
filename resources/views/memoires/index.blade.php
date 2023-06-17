@@ -8,22 +8,44 @@
             </span>
             Mémoires et Thèses
         </h3>
-        @if ($user->exists)
-            <a class="btn btn-gradient-secondary" href="{{ route('memoire_these.create') }}">Ajouter Mémoires / Thèses</a>
-        @endif
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                @if ($user->exists)
+                    <li class="breadcrumb-item"><a href="{{ route('memoire_these.create') }}">Ajouter Mémoires-Thèses</a>
+                    </li>
+                @endif
+                <li class="breadcrumb-item active" aria-current="page">Mémoires - Thèses</li>
+            </ol>
+        </nav>
     </div>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <table class="table">
+                    <h4 class="card-title">Mémoires et Thèses</h4>
+                    <p class="card-description">
+                        Vous pouvez <code> Filtrer </code> la <code>Liste</code>.
+                    </p>
+                    <form action="" method="get" class="forms sample d-flex gap-2">
+                        <input type="text" placeholder="Cote" class="form-control" name="cote"
+                            value="{{ $input['cote'] ?? '' }}">
+                        <input type="text" placeholder="Entité" class="form-control" name="entite"
+                            value="{{ $input['entite'] ?? '' }}">
+                        <input type="text" placeholder="Option" class="form-control" name="option"
+                            value="{{ $input['option'] ?? '' }}">
+                        <input type="text" placeholder="Auteur" class="form-control" name="auteur"
+                            value="{{ $input['auteur'] ?? '' }}">
+                        <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
+                            Rechercher
+                        </button>
+                    </form>
+                    <table class="table mt-5">
                         <thead>
                             <tr>
-                                <th>Cote</th>
                                 <th>Auteur</th>
                                 <th>Entité</th>
                                 <th>Option</th>
-                                <th>Date</th>
+                                <th>Date Ajout</th>
                                 <th class="">
                                     Actions
                                 </th>
@@ -32,23 +54,16 @@
                         <tbody>
                             @foreach ($memoires as $memoire)
                                 <tr>
-                                    <td>{{ $memoire->cote }}</td>
                                     <td>{{ $memoire->auteur }}</td>
                                     {{-- <td>{{ Str::limit($memoire->theme, $limit = 15, '...') }}</td> --}}
-                                    <th>
-                                        <label class="badge badge-success">
-                                            {{ $memoire->entite }}
-                                        </label>
-                                    </th>
-                                    <th>
-                                        <label class="badge badge-info">
-                                            {{ $memoire->option }}
-                                        </label>
-                                    </th>
                                     <td>
-                                        <label class="badge badge-danger">
-                                            {{ \Carbon\Carbon::parse($memoire->created_at)->locale('fr_FR')->isoFormat('LL') }}
-                                        </label>
+                                        {{ $memoire->entite }}
+                                    </td>
+                                    <td>
+                                        {{ $memoire->option }}
+                                    </td>
+                                    <td>
+                                        {{ \Carbon\Carbon::parse($memoire->created_at)->locale('fr_FR')->isoFormat('LL') }}
                                     </td>
                                     <td>
                                         <div class="row">
@@ -82,6 +97,7 @@
             </div>
         </div>
     </div>
+    {{ $memoires->links() }}
     <div id="login-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">

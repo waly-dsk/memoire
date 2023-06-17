@@ -6,14 +6,15 @@
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-book-open-page-variant"></i>
             </span>
-            Nos Livres
+            Nos Livres Imprimés
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 @if ($user->exists)
-                    <li class="breadcrumb-item"><a href="{{ route('livre_imprime.create') }}">Ajouter un Livre</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('livre_imprime.create') }}">Ajouter un Livre Imprimé</a>
+                    </li>
                 @endif
-                <li class="breadcrumb-item active" aria-current="page"> Nos Livres</li>
+                <li class="breadcrumb-item active" aria-current="page">Livres Imprimés</li>
             </ol>
         </nav>
     </div>
@@ -23,8 +24,22 @@
                 <div class="card-body">
                     <h4 class="card-title">Livres Imprimés</h4>
                     <p class="card-description">
-                        Tous les <code> Livres Imprimés</code> de notre<code> Bibliothèque</code>
+                        <code> Filtrer</code> les <code> Livres Imprimés</code>
                     </p>
+                    <form action="" method="get" class="forms sample d-flex gap-2">
+                        <input type="text" placeholder="Cote" class="form-control" name="cote"
+                            value="{{ $input['cote'] ?? '' }}">
+                        <input type="number" placeholder="Classe" class="form-control" name="classe"
+                            value="{{ $input['classe'] ?? '' }}">
+                        <input type="text" placeholder="Auteur" class="form-control" name="auteur"
+                            value="{{ $input['auteur'] ?? '' }}">
+                        <input type="text" placeholder="Titre" class="form-control" name="titre"
+                            value="{{ $input['titre'] ?? '' }}">
+                        <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
+                            Rechercher
+                        </button>
+                    </form>
+                    <hr>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -67,8 +82,8 @@
                                         </td>
                                     @else
                                         <td>
-                                            <a href="{{ route('livre_imprimes.show', $livre_imprime->id) }}" title="Détails"
-                                                class="offset-2  mdi mdi-eye">
+                                            <a href="{{ route('livre_imprimes.show', $livre_imprime->id) }}"
+                                                title="Détails" class="offset-2  mdi mdi-eye">
                                             </a>
 
                                         </td>

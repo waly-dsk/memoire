@@ -8,14 +8,24 @@
             </span>
             Agents
         </h3>
-
-        <a class="btn btn-gradient-secondary" href="{{ route('user.create') }}">Ajouter un Agent</a>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('user.create') }}">Ajouter un Agent</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Agents</li>
+            </ol>
+        </nav>
     </div>
-    @include('shared.flash')
+    <div id="flash">
+        @include('shared.flash')
+    </div>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
+                    <h4 class="card-title">Liste des Agents</h4>
+                    <p class="card-description">
+                        <code>Le Responsable </code> et les <code>Agents de la Bibliothèque Centrale</code>
+                    </p>
                     <table class="table">
                         <thead>
                             <tr>
@@ -34,14 +44,10 @@
                                     <td>{{ $agent->name }}</td>
                                     <td>{{ $agent->email }}</td>
                                     <td>
-                                        <label class="badge badge-success">
-                                            {{ Str::ucfirst($agent->role) }}
-                                        </label>
+                                        {{ Str::ucfirst($agent->role) }}
                                     </td>
                                     <td>
-                                        <label class="badge badge-danger">
-                                            {{ \Carbon\Carbon::parse($agent->created_at)->locale('fr_FR')->isoFormat('LL') }}
-                                        </label>
+                                        {{ \Carbon\Carbon::parse($agent->created_at)->locale('fr_FR')->isoFormat('LL') }}
                                     </td>
                                     <td>
                                         <div class="row">
@@ -66,4 +72,5 @@
             </div>
         </div>
     </div>
+    {{ $agents->links() }}
 @endsection

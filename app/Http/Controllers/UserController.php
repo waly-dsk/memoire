@@ -14,10 +14,13 @@ class UserController extends Controller
      */
     public function index()
     {
+        $users = User::orderBy('name')
+            ->orderBy('role')
+            ->paginate(1);
+
         return view('users.index', [
             'user' => Auth::user(),
-            // 'agents' => User::where('role', '!=', 'admin')->get(),
-            'agents' => User::all(),
+            'agents' => $users,
         ]);
     }
 
@@ -59,7 +62,7 @@ class UserController extends Controller
             'password' => $hashedPassword,
         ]);
 
-        return to_route('user.index');
+        return to_route('user.index')->with('success', 'Agent bien ajouté !');
     }
 
     /**
@@ -102,14 +105,19 @@ class UserController extends Controller
         $validatedData = $request->validate($rules, $messages);
 
         $hashedPassword = Hash::make($validatedData['password']);
-        $agent->update([
+        $dataToUpdate = [
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'password' => $hashedPassword,
-            // 'role' => $validatedData['role'], // Supprimé pour permettre la mise à jour de l'administrateur sans validation du champ 'role'
-        ]);
+        ];
 
-        return to_route('user.index');
+        if ($agent->role != "admin") {
+            $dataToUpdate['role'] = $validatedData['role'];
+        }
+
+        $agent->update($dataToUpdate);
+
+        return to_route('user.index')->with('success', 'Informations mises à jour avec succès !');
     }
 
     /**
@@ -119,7 +127,7 @@ class UserController extends Controller
     {
         $agent = User::findOrFail($id);
         if ($agent->role == "admin")
-            return redirect()->back()->with('error', 'Vous ne pouvez supprimer l\'Administrateur');
+            return redirect()->back()->with('error', 'Vous ne pouvez supprimer l\'Administrateur !');
         $agent->delete();
         return redirect()->back()->with('success', 'Agent supprimé avec succès !');
     }

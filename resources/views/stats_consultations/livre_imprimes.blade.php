@@ -29,6 +29,10 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $previousMonth = null;
+                                @endphp
+
                                 @foreach ($stats as $stat)
                                     <tr>
                                         <td style="vertical-align: middle;">
@@ -50,9 +54,6 @@
                                                 @endif
                                             @endforeach
                                         </td>
-
-
-
 
                                         <td style="text-center">
                                             @php
@@ -78,8 +79,15 @@
 
                                         <td>
                                             <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>
-                                            {{ ucfirst(strftime('%B %Y', strtotime($stat->mois_annee))) }}
+                                            @php
+                                                $currentMonth = ucfirst(strftime('%B %Y', strtotime($stat->mois_annee)));
+                                                if ($currentMonth !== $previousMonth) {
+                                                    echo $currentMonth;
+                                                }
+                                                $previousMonth = $currentMonth;
+                                            @endphp
                                         </td>
+
                                         <td>
                                             <label style="text-center">
                                                 {{ $stat->total_consultations }}

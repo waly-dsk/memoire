@@ -8,7 +8,13 @@
             </span>
             Statistiques des Consultations
         </h3>
-        <a class="btn btn-gradient-info" href="{{ route('consultations_memoires_theses') }}">Consulter Graphes</a>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('consultations_memoires_theses') }}">Consulter Graphes</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Mémoires - Thèses</li>
+            </ol>
+        </nav>
 
     </div>
     <div class="row">
@@ -122,4 +128,5 @@
             </div>
         </div>
     </div>
+    {{ $memos->links() }}
 @endsection

@@ -24,7 +24,7 @@ class StatistiquesController extends Controller
             ->groupBy('entites.intitule', 'options.intitule', 'mois_annee')
             ->orderByDesc('mois_annee') // Ajout du tri par mois
             ->having('total_consultations', '>', 0) // Condition pour les consultations effectuées
-            ->get();
+            ->paginate(10);
         // Affichez les statistiques par mois
         return view('stats_consultations.memoire', [
             'user' => Auth::user(),

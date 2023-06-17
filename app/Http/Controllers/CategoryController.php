@@ -13,7 +13,7 @@ class CategoryController extends Controller
     {
         return view('category.index', [
             'user' => Auth::user() ?: new User(),
-            'categories' => DB::table('categories')->get(),
+            'categories' => DB::table('categories')->paginate(5),
         ]);
     }
 
@@ -30,7 +30,7 @@ class CategoryController extends Controller
                 'divisions.classe as division_classe',
                 'divisions.intitule as division_intitule'
             )
-            ->get();
+            ->paginate(5);
 
         return view('category.show', [
             'user' => Auth::user() ?: new User(),
