@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        dd('route');
         return view('welcome', [
             'user' => new User(),
         ]);

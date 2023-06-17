@@ -21,7 +21,7 @@ class SuggestionController extends Controller
     public function create()
     {
         return view('suggestion.create', [
-            'user' => new User(),
+            'user' => Auth::user() ?: new User(),
         ]);
     }
 

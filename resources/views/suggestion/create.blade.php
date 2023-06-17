@@ -8,8 +8,16 @@
             </span>
             Faire une Suggestion
         </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('suggestion.index') }}">Toutes les Suggestions</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Suggestions</li>
+            </ol>
+        </nav>
     </div>
-    @include('shared.flash')
+    <div id="flash">
+        @include('shared.flash')
+    </div>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
@@ -18,7 +26,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="categorie">Catégorie</label>
-                            <input autofocus type="text" name="categorie" class="form-control" id="categorie"
+                            <input type="text" name="categorie" class="form-control" id="categorie"
                                 placeholder="Catégorie">
                         </div>
                         <div class="form-group">

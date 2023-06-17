@@ -9,16 +9,19 @@
             Suggestions
         </h3>
         <nav aria-label="breadcrumb">
-            <a class="btn btn-gradient-primary" href="{{ route('suggestion.create') }}">Ajouter une Suggestion</a>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('suggestion.create') }}">Ajouter une Suggestion</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Suggestions</li>
+            </ol>
         </nav>
     </div>
     <div class="row">
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Hoverable Table {{ $suggestionCount }}</h4>
+                    <h4 class="card-title">{{ $suggestionCount }} suggestions d'Ouvrages</h4>
                     <p class="card-description">
-                        Add class <code>.table-hover</code>
+                        Toutes les <code>.Suggestions</code>
                     </p>
                     <div class="table-responsive">
                         <table class="table">

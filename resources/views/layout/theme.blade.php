@@ -78,61 +78,7 @@
                             <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
-                            data-toggle="dropdown" aria-expanded="false">
-                            <i class="mdi mdi-email-outline"></i>
-                            <span class="count-symbol bg-warning"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                            aria-labelledby="messageDropdown">
-                            <h6 class="p-3 mb-0">Messages</h6>
-                            <div class="preview-thumbnail">
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item">
-                                    <img src="{{ asset('assets/images/faces/face4.jpg') }}" alt="image"
-                                        class="profile-pic" />
-                            </div>
-                            <div
-                                class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                <h6 class="preview-subject ellipsis mb-1 font-weight-normal">
-                                    Mark send you a message
-                                </h6>
-                                <p class="text-gray mb-0">1 Minutes ago</p>
-                            </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-                            data-toggle="dropdown">
-                            <i class="mdi mdi-bell-outline"></i>
-                            <span class="count-symbol bg-danger"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-                            aria-labelledby="notificationDropdown">
-                            <h6 class="p-3 mb-0">Notifications</h6>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
-                                <div class="preview-thumbnail">
-                                    <div class="preview-icon bg-success">
-                                        <i class="mdi mdi-calendar"></i>
-                                    </div>
-                                </div>
-                                <div
-                                    class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                                    <h6 class="preview-subject font-weight-normal mb-1">
-                                        Event today
-                                    </h6>
-                                    <p class="text-gray ellipsis mb-0">
-                                        Just a reminder that you have an event today
-                                    </p>
-                                </div>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                        </div>
-                    </li>
+
                 </ul>
                 @if (!$user->exists)
                     <button id="open-modal-btn" class="nav-item" style="border: none; background:none"
@@ -190,12 +136,14 @@
                     </li>
 
                     @if ($user->exists)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.index') }}">
-                                <span class="menu-title">Agents</span>
-                                <i class="mdi mdi-account-multiple-plus menu-icon"></i>
-                            </a>
-                        </li>
+                        @if ($user->role == 'admin')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('user.index') }}">
+                                    <span class="menu-title">Agents</span>
+                                    <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                                </a>
+                            </li>
+                        @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('abonne.index') }}">
                                 <span class="menu-title">Abonnés</span>
