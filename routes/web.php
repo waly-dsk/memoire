@@ -67,6 +67,7 @@ Route::get('/non_admin', [\App\Http\Controllers\HomeController::class, 'non_admi
 Route::get('/get_options/{entiteId}', [\App\Http\Controllers\AjaxController::class, 'get_options'])->name('get_options');
 Route::get('/get_divisions/{categoryId}', [\App\Http\Controllers\AjaxController::class, 'get_divisions'])->name('get_divisions');
 Route::get('/get_memos/{mois}', [\App\Http\Controllers\AjaxController::class, 'get_memos'])->name('get_memos');
+Route::get('/get_livres/{mois}', [\App\Http\Controllers\AjaxController::class, 'get_livres'])->name('get_livres');
 
 
 /**
@@ -87,6 +88,7 @@ Route::middleware('auth')->group(function () {
     Route::get('statistiques/consultations/livres', [\App\Http\Controllers\StatistiquesController::class, 'stats_livres_imprimes'])->name('stats_livres_imprimes');
     Route::get('statistiques/prets_a_domicile', [\App\Http\Controllers\StatistiquesController::class, 'stats_prets'])->name('stats_prets');
     Route::get('graphes/consultations_memoires_theses', [\App\Http\Controllers\ChartController::class, 'consultations_memoires_theses'])->name('consultations_memoires_theses');
+    Route::get('graphes/consultations_livres_imprimes', [\App\Http\Controllers\ChartController::class, 'consultations_livres_imprimes'])->name('consultations_livres_imprimes');
 });
 
 /**

@@ -34,11 +34,28 @@ class AjaxController extends Controller
             ->join('memoire_theses', 'options.id', '=', 'memoire_theses.option_id')
             ->leftJoin('memoire_these_consultes', 'memoire_theses.id', '=', 'memoire_these_consultes.memoire_these_id')
             ->where(DB::raw("strftime('%Y-%m', memoire_these_consultes.created_at)"), $mois)
-            ->groupBy('entites.intitule', 'options.intitule', 'mois_annee')
-            ->orderByDesc('mois_annee') // Ajout du tri par mois
+            ->groupBy('entites.intitule')
             ->having('total_consultations', '>', 0) // Condition pour les consultations effectuées
             ->get();
 
         return response()->json($memos);
+    }
+
+    public function get_livres($mois)
+    {
+        $livres = DB::table('categories')
+            ->select(
+                'categories.classe as categorie',
+                DB::raw("COUNT(livre_imprime_consultes.id) as total_consultations")
+            )
+            ->join('divisions', 'categories.id', '=', 'divisions.category_id')
+            ->join('livre_imprimes', 'divisions.id', '=', 'livre_imprimes.division_id')
+            ->leftJoin('livre_imprime_consultes', 'livre_imprimes.id', '=', 'livre_imprime_consultes.livre_imprime_id')
+            ->where(DB::raw("strftime('%Y-%m', livre_imprime_consultes.created_at)"), $mois)
+            ->groupBy('categories.classe')
+            ->having('total_consultations', '>', 0) // Condition pour les consultations effectuées
+            ->get();
+
+        return response()->json($livres);
     }
 }

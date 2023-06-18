@@ -12,6 +12,13 @@
                 Ajouter un Prêt
             @endif
         </h3>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('pret.index') }}">Prêts en cours</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Prêts à Domicile</li>
+            </ol>
+        </nav>
     </div>
     @include('shared.flash')
     <div class="row">

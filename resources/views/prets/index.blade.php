@@ -8,11 +8,17 @@
             </span>
             Prêts à Domicile en Cours
         </h3>
+
         <nav aria-label="breadcrumb">
-            <a class="btn btn-gradient-primary" href="{{ route('pret.create') }}">Enregistrer un Pret</a>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('pret.create') }}">Enregistrer un Prêt</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('stats_prets') }}">Statistiques</a></li>
+            </ol>
         </nav>
     </div>
-    @include('shared.flash')
+    <div id="flash">
+        @include('shared.flash')
+    </div>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">

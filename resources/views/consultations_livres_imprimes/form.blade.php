@@ -9,11 +9,19 @@
             @if ($consultation->exists)
                 Editer une consultation
             @else
-                Ajouter une consultation
+                Ajouter une Consultation
             @endif
         </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('stats_livres_imprimes') }}">Statistiques</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Livres Imprimés</li>
+            </ol>
+        </nav>
     </div>
-    @include('shared.flash')
+    <div id="flash">
+        @include('shared.flash')
+    </div>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">

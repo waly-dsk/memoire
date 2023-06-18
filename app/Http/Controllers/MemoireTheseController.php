@@ -24,7 +24,7 @@ class MemoireTheseController extends Controller
             ->join('entites', 'options.entite_id', '=', 'entites.id')
             ->orderBy('entites.intitule')
             ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
-            ->paginate(10);
+            ->paginate(5);
 
         if ($cote = $request->validated('cote')) {
             $memories = DB::table('memoire_theses')
@@ -33,7 +33,7 @@ class MemoireTheseController extends Controller
                 ->where('memoire_theses.cote', '=', $cote)
                 ->orderBy('entites.intitule')
                 ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
-                ->paginate(10);
+                ->paginate(5);
         }
 
         if ($entite = $request->validated('entite')) {
@@ -43,7 +43,7 @@ class MemoireTheseController extends Controller
                 ->where('entites.intitule', '=', $entite)
                 ->orderBy('entites.intitule')
                 ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
-                ->paginate(10);
+                ->paginate(5);
         }
 
         if ($option = $request->validated('option')) {
@@ -53,7 +53,7 @@ class MemoireTheseController extends Controller
                 ->where('options.intitule', 'like', '%' . $option . '%')
                 ->orderBy('entites.intitule')
                 ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
-                ->paginate(10);
+                ->paginate(5);
         }
 
         if ($auteur = $request->validated('auteur')) {
@@ -63,7 +63,7 @@ class MemoireTheseController extends Controller
                 ->where('memoire_theses.auteur', 'like', '%' . $auteur . '%')
                 ->orderBy('entites.intitule')
                 ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
-                ->paginate(10);
+                ->paginate(5);
         }
 
         return view('memoires.index', [
@@ -78,11 +78,15 @@ class MemoireTheseController extends Controller
      */
     public function create()
     {
+        $memoire = new MemoireThese();
+        $memoire->fill([
+            'exemplaire' => 2,
+        ]);
         return view('memoires.form', [
             'user' => Auth::user(),
             'entites' => Entite::all(),
             'options' => Option::all(),
-            'memoire' => new MemoireThese(),
+            'memoire' => $memoire,
         ]);
     }
 

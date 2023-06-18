@@ -21,4 +21,18 @@ class ChartController extends Controller
             'mois' => $mois,
         ]);
     }
+
+    public function consultations_livres_imprimes()
+    {
+        $mois = DB::table('livre_imprime_consultes')
+            ->select(DB::raw("strftime('%Y-%m', created_at) as mois_annee"))
+            ->groupBy('mois_annee')
+            ->orderByDesc('mois_annee')
+            ->get();
+
+        return view('charts.consultation_livres_imprimes', [
+            'user' => Auth::user(),
+            'mois' => $mois,
+        ]);
+    }
 }

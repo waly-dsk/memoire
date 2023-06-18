@@ -8,6 +8,17 @@
             </span>
             Statistiques des Consultations
         </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('consultation_livre_imprime.create') }}">
+                        Ajouter Consultation
+                    </a>
+                </li>
+                <li class="breadcrumb-item"><a href="{{ route('consultations_livres_imprimes') }}">Consulter Graphes</a></li>
+            </ol>
+        </nav>
+
     </div>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">

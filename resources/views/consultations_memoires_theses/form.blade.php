@@ -9,18 +9,24 @@
             @if ($consultation->exists)
                 Editer une consultation
             @else
-                Ajouter une consultation
+                Ajouter une Consultation
             @endif
         </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('stats_memoires_theses') }}">Statistiques</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Mémoires - Thèses</li>
+            </ol>
+        </nav>
     </div>
     @include('shared.flash')
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Mémoire</h4>
+                    <h4 class="card-title">Mémoire Thèses</h4>
                     <p class="card-description">
-                        Consultation de <code>Mémoires</code>
+                        Consultation de <code>Mémoires - Thèses</code>
                     </p>
                     <form class="forms-sample"
                         action="{{ route($consultation->exists ? 'consultation_memoire_these.store' : 'consultation_memoire_these.store', ['consultation' => $consultation->id]) }}"
