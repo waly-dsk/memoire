@@ -67,7 +67,7 @@ class StatistiquesController extends Controller
             ->select(
                 'categories.id',
                 'categories.intitule',
-                DB::raw("strftime('%Y-%m', exemplaire_pretes.created_at) as mois_annee"),
+                DB::raw("strftime('%Y-%m', exemplaire_pretes.updated_at) as mois_annee"),
                 DB::raw('COUNT(exemplaire_pretes.id) as nombre_prets')
             )
             ->where('exemplaire_pretes.retourne', true)

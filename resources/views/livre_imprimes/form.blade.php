@@ -7,14 +7,14 @@
                 <i class="mdi mdi-book"></i>
             </span>
             @if ($livre_imprime->exists)
-                Editer un livre
+                Editer un Livre Imprimé
             @else
-                Ajouter un livre
+                Ajouter un Livre Imprimé
             @endif
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#"></a></li>
+                <li class="breadcrumb-item"><a href="{{ route('livre_imprime.index') }}">Tous les Livres </a></li>
                 <li class="breadcrumb-item active" aria-current="page">Livres Imprimés</li>
             </ol>
         </nav>

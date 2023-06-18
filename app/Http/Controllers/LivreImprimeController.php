@@ -108,7 +108,7 @@ class LivreImprimeController extends Controller
                 'livre_imprime_id' => $livreImprimeId,
             ]);
         }
-        return redirect('livre_imprime');
+        return redirect('livre_imprime')->with('success', 'Livre Iprimé Ajouté avec succès !');
     }
 
 

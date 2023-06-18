@@ -13,7 +13,10 @@
             @endif
         </h3>
     </div>
-    @include('shared.flash')
+    <div id="flash">
+        @include('shared.flash')
+    </div>
+
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">

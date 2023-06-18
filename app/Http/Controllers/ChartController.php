@@ -35,4 +35,19 @@ class ChartController extends Controller
             'mois' => $mois,
         ]);
     }
+
+    public function prets_livres_imprimes()
+    {
+        $mois = DB::table('exemplaire_pretes')
+            ->select(DB::raw("strftime('%Y-%m', updated_at) as mois_annee"))
+            ->groupBy('mois_annee')
+            ->orderByDesc('mois_annee')
+            ->get();
+
+
+        return view('charts.prets', [
+            'user' => Auth::user(),
+            'mois' => $mois,
+        ]);
+    }
 }

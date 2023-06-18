@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('pret.index') }}">Prêts en cours</a></li>
-                <li class="breadcrumb-item"><a href="#">Consulter Graphes</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('prets_livres_imprimes') }}">Consulter Graphes</a></li>
             </ol>
         </nav>
     </div>

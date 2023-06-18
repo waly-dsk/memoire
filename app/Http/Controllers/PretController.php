@@ -68,7 +68,6 @@ class PretController extends Controller
      */
     public function store(Request $request)
     {
-
         $validateData = $request->validate([
             'abonne_id' => ['required'],
             'livre_imprime_exemplaire_id' => ['required', 'array'],
@@ -270,8 +269,9 @@ class PretController extends Controller
             ->where('livre_imprime_exemplaire_id', '=', $id)
             ->update([
                 'retourne' => true,
+                'updated_at' => now(),
             ]);
         // Rediriger vers la page d'accueil ou une autre vue appropriée
-        return redirect()->back()->with('success', 'Le prêt a été retourné avec succès.');
+        return redirect()->back()->with('success', 'Retour de Prêt enregistré avec succès.');
     }
 }

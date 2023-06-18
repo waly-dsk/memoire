@@ -58,4 +58,22 @@ class AjaxController extends Controller
 
         return response()->json($livres);
     }
+
+    public function get_prets($mois)
+    {
+        $prets = DB::table('categories')
+            ->join('divisions', 'categories.id', '=', 'divisions.category_id')
+            ->join('livre_imprimes', 'divisions.id', '=', 'livre_imprimes.division_id')
+            ->leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+            ->leftJoin('exemplaire_pretes', 'livre_imprime_exemplaires.id', '=', 'exemplaire_pretes.livre_imprime_exemplaire_id')
+            ->select(
+                'categories.classe',
+                DB::raw('COUNT(exemplaire_pretes.id) as nombre_prets')
+            )
+            ->where('exemplaire_pretes.retourne', true)
+            ->where('exemplaire_pretes.updated_at', 'like', '%' . $mois . '%')
+            ->groupBy('categories.classe')
+            ->get();
+        return response()->json($prets);
+    }
 }
