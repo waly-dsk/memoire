@@ -8,6 +8,14 @@
             </span>
             Accueil
         </h3>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href=""></a></li>
+                <li class="breadcrumb-item active" aria-current="page">Gestion Fonds Documentaire</li>
+            </ol>
+        </nav>
+
     </div>
     <div class="row">
         <div class="col-md-4 stretch-card grid-margin">

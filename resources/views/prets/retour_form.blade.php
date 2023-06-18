@@ -11,13 +11,21 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
+                    <a href="{{ route('pret.index') }}">
+                        Prêts en cours
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
                     <a href="#">
+                        Prêts à Domicile
                     </a>
                 </li>
             </ol>
         </nav>
     </div>
-    @include('shared.flash')
+    <div id="flash">
+        @include('shared.flash')
+    </div>
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">

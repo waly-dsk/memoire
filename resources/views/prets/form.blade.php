@@ -12,7 +12,6 @@
                 Ajouter un Prêt
             @endif
         </h3>
-
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('pret.index') }}">Prêts en cours</a></li>
@@ -20,7 +19,9 @@
             </ol>
         </nav>
     </div>
-    @include('shared.flash')
+    <div id="flash">
+        @include('shared.flash')
+    </div>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">

@@ -23,10 +23,11 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Prêts </h4>
+                    <h4 class="card-title">Emprunts </h4>
                     <p class="card-description">
                         Tous les <code>Prêts non Retournés</code>
                     </p>
+                    <hr>
                     @if (sizeof($prets) > 0)
                         <table class="table table-striped">
                             <thead>
