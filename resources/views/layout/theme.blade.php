@@ -18,6 +18,13 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2/css/select2.min.css') }}">
     <!-- inject:css -->
     <title>Title | @yield('title')</title>
+    <style>
+        @media (max-width: 768px) {
+            .col-12 {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -45,7 +52,7 @@
                     </form>
                 </div>
                 <ul class="navbar-nav navbar-nav-right">
-                    @if ($user->exists)
+                    @if ($user && $user->exists)
                         <li class="nav-item nav-profile dropdown">
                             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#"
                                 data-toggle="dropdown" aria-expanded="false">
@@ -80,7 +87,7 @@
                     </li>
 
                 </ul>
-                @if (!$user->exists)
+                @if (!$user || !$user->exists)
                     <button id="open-modal-btn" class="nav-item" style="border: none; background:none"
                         title="Se connecter">
                         <span class="mdi mdi-login"></span>
@@ -98,7 +105,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item nav-profile">
-                        @if ($user->exists)
+                        @if ($user && $user->exists)
                             <a href="#" class="nav-link">
                                 <div class="nav-profile-image">
                                     <img src="{{ asset('assets/images/faces-clipart/pic-1.png') }}" alt="profile" />
@@ -135,7 +142,7 @@
                         </a>
                     </li>
 
-                    @if ($user->exists)
+                    @if ($user && $user->exists)
                         @if ($user->role == 'admin')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user.index') }}">
@@ -276,7 +283,7 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 baniere">
                             <span class="d-flex align-items-center purchase-popup">
                                 <p>
                                     Bienvenue au Centre d'Information et de Documentation (CID)

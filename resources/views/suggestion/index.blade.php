@@ -6,12 +6,12 @@
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-home"></i>
             </span>
-            Suggestions
+            Suggestions d'ouvrages
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('suggestion.create') }}">Ajouter une Suggestion</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Suggestions</li>
+                <li class="breadcrumb-item active" aria-current="page">Suggestions </li>
             </ol>
         </nav>
     </div>
@@ -19,10 +19,40 @@
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">{{ $suggestionCount }} suggestions d'Ouvrages</h4>
+                    <h4 class="card-title">
+                        @if ($suggestionCount == 0)
+                            Aucune suggestion
+                        @else
+                            {{ $suggestionCount }} suggestion(s)
+                        @endif
+                    </h4>
                     <p class="card-description">
-                        Toutes les <code>.Suggestions</code>
+                        Toutes les <code>.Suggestions</code>.
+                        Vous <code>Filtrer</code> les <code>Résultats</code>.
                     </p>
+                    <form action="" method="get" class="forms sample d-flex gap-2">
+                        <input type="text" placeholder="Catégorie" class="form-control" name="categorie"
+                            value="{{ $input['categorie'] ?? '' }}">
+                        <input type="text" placeholder="Auteur" class="form-control" name="auteur"
+                            value="{{ $input['auteur'] ?? '' }}">
+                        <input type="text" placeholder="Titre" class="form-control" name="titre"
+                            value="{{ $input['titre'] ?? '' }}">
+                        <select class="form-control" name="date_ajout">
+                            <option value="">Sélectionnez une date</option>
+                            @foreach ($dates_ajout as $date_ajout)
+                                <option value="{{ $date_ajout->mois_annee }}">
+                                    <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>
+                                    {{ ucfirst(strftime('%B %Y', strtotime($date_ajout->mois_annee))) }}
+                                </option>
+                            @endforeach
+                        </select>
+                        {{-- <input type="text" placeholder="Date Ajout" class="form-control" name="da"
+                            value="{{ $input['nom'] ?? '' }}"> --}}
+                        <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
+                            Rechercher
+                        </button>
+                    </form>
+                    <hr>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -43,19 +73,13 @@
                                             {{ $suggestion->categorie }}
                                         </td>
                                         <td>
-                                            <label class="badge badge-gradient-primary">
-                                                {{ $suggestion->auteur }}
-                                            </label>
+                                            {{ $suggestion->auteur }}
                                         </td>
                                         <td>
-                                            <label class="badge badge-gradient-success">
-                                                {{ $suggestion->titre }}
-                                            </label>
+                                            {{ $suggestion->titre }}
                                         </td>
                                         <td>
-                                            <label class="badge badge-gradient-danger">
-                                                {{ \Carbon\Carbon::parse($suggestion->created_at)->locale('fr_FR')->isoFormat('LL') }}
-                                            </label>
+                                            {{ \Carbon\Carbon::parse($suggestion->created_at)->locale('fr_FR')->isoFormat('LL') }}
                                         </td>
                                         @if ($user->exists)
                                             <td>
@@ -102,7 +126,9 @@
                                 <div class="auth-form-light text-left p-5">
                                     <h4> Bonjour ! Commençons.</h4>
                                     <h6 class="font-weight-light">Connectez-vous pour continuer.</h6>
-                                    @include('shared.flash')
+                                    <div id="flash">
+                                        @include('shared.flash')
+                                    </div>
                                     <form class="pt-3" action="{{ route('login') }}" method="post">
                                         @csrf @method('post')
                                         <div class="form-group">
