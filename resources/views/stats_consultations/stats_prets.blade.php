@@ -34,6 +34,9 @@
                                         Catégorie
                                     </th>
                                     <th scope="col">
+                                        Sous Catégorie
+                                    </th>
+                                    <th scope="col">
                                         Mois
                                     </th>
                                     <th scope="col">
@@ -50,6 +53,9 @@
                                     <tr>
                                         <td style="vertical-align: middle;">
                                             {{ $stat->intitule }}
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            {{ $stat->division_intitule }}
                                         </td>
                                         <td>
                                             <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>

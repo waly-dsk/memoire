@@ -86,11 +86,14 @@ class LivreImprimeController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'cote' => 'required',
+            'cote' => 'required|unique:livre_imprimes,cote',
             'titre' => 'required',
             'auteur' => 'required',
             'division_id' => 'required',
             'exemplaire' => 'required',
+        ], [
+            'cote.required' => "La cote de l'ouvrage est à renseigner.",
+            'cote.unique' => 'Cette cote existe déjà pour un autre ouvrage.',
         ]);
         $livreImprime = new LivreImprime();
         $livreImprime->cote = $validateData['cote'];

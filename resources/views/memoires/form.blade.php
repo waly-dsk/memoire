@@ -62,7 +62,7 @@
                                 @foreach ($entites as $entite)
                                     @if ($memoire->exists)
                                         <option value="{{ $entite->id }}"
-                                            {{ $memoire->option->entite_id == $entite->id ? '{{ $category->intitule }}' : '' }}>
+                                            {{ $memoire->option->entite_id == $entite->id ? 'selected' : '' }}>
                                             {{ $entite->intitule }}
                                         </option>
                                     @else

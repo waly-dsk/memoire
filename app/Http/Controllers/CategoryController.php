@@ -30,7 +30,7 @@ class CategoryController extends Controller
                 'divisions.classe as division_classe',
                 'divisions.intitule as division_intitule'
             )
-            ->paginate(5);
+            ->get();
 
         return view('category.show', [
             'user' => Auth::user() ?: new User(),

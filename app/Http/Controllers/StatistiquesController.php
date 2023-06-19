@@ -67,11 +67,12 @@ class StatistiquesController extends Controller
             ->select(
                 'categories.id',
                 'categories.intitule',
+                'divisions.intitule as division_intitule',
                 DB::raw("strftime('%Y-%m', exemplaire_pretes.updated_at) as mois_annee"),
                 DB::raw('COUNT(exemplaire_pretes.id) as nombre_prets')
             )
             ->where('exemplaire_pretes.retourne', true)
-            ->groupBy('categories.id', 'categories.intitule', 'mois_annee')
+            ->groupBy('categories.id', 'categories.intitule', 'division_intitule', 'mois_annee')
             ->orderByDesc('mois_annee')
             ->get();
 
