@@ -27,14 +27,14 @@
                         Vous pouvez <code> Filtrer </code> la <code>Liste</code>.
                     </p>
                     <form action="" method="get" class="forms sample d-flex gap-2">
-                        <input type="text" placeholder="Cote" class="form-control" name="cote"
-                            value="{{ $input['cote'] ?? '' }}">
                         <input type="text" placeholder="Entité" class="form-control" name="entite"
                             value="{{ $input['entite'] ?? '' }}">
                         <input type="text" placeholder="Option" class="form-control" name="option"
                             value="{{ $input['option'] ?? '' }}">
                         <input type="text" placeholder="Auteur" class="form-control" name="auteur"
                             value="{{ $input['auteur'] ?? '' }}">
+                        <input type="text" placeholder="Année : XXXX-YYYY" class="form-control" name="annee"
+                            value="{{ $input['annee'] ?? '' }}">
                         <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
                             Rechercher
                         </button>
@@ -45,7 +45,7 @@
                                 <th>Auteur</th>
                                 <th>Entité</th>
                                 <th>Option</th>
-                                <th>Date Ajout</th>
+                                <th>Année</th>
                                 <th class="">
                                     Actions
                                 </th>
@@ -63,11 +63,13 @@
                                         {{ $memoire->option }}
                                     </td>
                                     <td>
-                                        {{ \Carbon\Carbon::parse($memoire->created_at)->locale('fr_FR')->isoFormat('LL') }}
+                                        {{ $memoire->annee }}
+
+                                        {{-- {{ \Carbon\Carbon::parse($memoire->created_at)->locale('fr_FR')->isoFormat('LL') }} --}}
                                     </td>
                                     <td>
                                         <div class="row">
-                                            @if ($user->exists)
+                                            @if ($user && $user->exists)
                                                 <a href="{{ route('memoire_these.show', $memoire->id) }}" title="Détails"
                                                     class="mdi mdi-eye">
                                                 </a>
@@ -84,7 +86,8 @@
                                                 </form>
                                             @else
                                                 <a href="{{ route('memoires.show', $memoire->id) }}" title="Détails"
-                                                    class="offset-2">Détails
+                                                    class="offset-2">
+                                                    Détails
                                                 </a>
                                             @endif
                                         </div>

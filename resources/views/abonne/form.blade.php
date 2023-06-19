@@ -43,19 +43,32 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="entite_id">Entité</label>
+                            <label for="entite">Entité</label>
                             <select class="form-control" name="entite_id" id="entite">
-                                <option value="">Sélectionnez une entité</option>
                                 @foreach ($entites as $entite)
-                                    <option value="{{ $entite->id }}">{{ $entite->intitule }}</option>
+                                    @if ($abonne->exists)
+                                        <option value="{{ $entite->id }}"
+                                            {{ $abonne->option->entite_id == $entite->id ? 'selected' : '' }}>
+                                            {{ $entite->intitule }}</option>
+                                    @else
+                                        <option value="{{ $entite->id }}">{{ $entite->intitule }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="option_id">Option</label>
+                            <label for="option">Option</label>
                             <select class="form-control" name="option_id" id="option">
-                                <option value="">Sélectionnez une option</option>
+                                @foreach ($options as $option)
+                                    @if ($abonne->exists)
+                                        <option value="{{ $option->id }}"
+                                            {{ $abonne->option_id == $option->id ? 'selected' : '' }}>
+                                            {{ $option->intitule }}</option>
+                                    @else
+                                        <option value="{{ $option->id }}">{{ $option->intitule }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
 

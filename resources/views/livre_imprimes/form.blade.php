@@ -54,7 +54,14 @@
                             <select name="category_id" class="form-control" id="category">
                                 <!-- Afficher les options disponibles dans la base de données -->
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->intitule }}</option>
+                                    @if ($livre_imprime->exists)
+                                        <option value="{{ $category->id }}"
+                                            {{ $livre_imprime->division->category_id == $category->id ? 'selected' : '' }}>
+                                            {{ $category->intitule }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $category->id }}">{{ $category->intitule }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -64,7 +71,14 @@
                             <select name="division_id" class="form-control" id="division">
                                 <!-- Afficher les options disponibles dans la base de données -->
                                 @foreach ($divisions as $division)
-                                    <option value="{{ $division->id }}">{{ $division->intitule }}</option>
+                                    @if ($livre_imprime->exists)
+                                        <option value="{{ $division->id }}"
+                                            {{ $livre_imprime->division_id == $division->id ? 'selected' : ' ' }}>
+                                            {{ $division->intitule }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $division->id }}">{{ $division->intitule }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

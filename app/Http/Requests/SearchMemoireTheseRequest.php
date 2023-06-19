@@ -22,7 +22,7 @@ class SearchMemoireTheseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cote' => ['string', 'nullable'],
+            'annee' => ['string', 'nullable'],
             'entite' => ['string', 'nullable'],
             'option' => ['string', 'nullable'],
             'auteur' => ['string', 'nullable'],

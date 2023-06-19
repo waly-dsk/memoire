@@ -26,11 +26,11 @@ class MemoireTheseController extends Controller
             ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
             ->paginate(5);
 
-        if ($cote = $request->validated('cote')) {
+        if ($annee = $request->validated('annee')) {
             $memories = DB::table('memoire_theses')
                 ->join('options', 'memoire_theses.option_id', '=', 'options.id')
                 ->join('entites', 'options.entite_id', '=', 'entites.id')
-                ->where('memoire_theses.cote', '=', $cote)
+                ->where('memoire_theses.annee', '=', $annee)
                 ->orderBy('entites.intitule')
                 ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
                 ->paginate(5);
@@ -98,7 +98,7 @@ class MemoireTheseController extends Controller
     {
         // Valider les données entrées par l'utilisateur
         $validatedData = $request->validate([
-            'cote' => 'required',
+            'cote' => 'required|unique:memoire_theses,cote',
             'theme' => 'required',
             'auteur' => 'required',
             'annee' => 'required|regex:/\d{4}-\d{4}/',
@@ -174,7 +174,7 @@ class MemoireTheseController extends Controller
     {
         $memoireThese = MemoireThese::findOrFail($id);
         $validatedData = $request->validate([
-            'cote' => 'required|unique:memoire_theses,cote',
+            'cote' => 'required',
             'theme' => 'required',
             'auteur' => 'required',
             'annee' => 'required|regex:/\d{4}-\d{4}/',

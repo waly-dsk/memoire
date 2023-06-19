@@ -10,7 +10,7 @@
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Prêts à domicile</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('stats_prets') }}">Prêts à domicile</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Livres Imprimés</li>
             </ol>
         </nav>

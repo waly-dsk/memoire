@@ -6,7 +6,7 @@
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-book-open-page-variant"></i>
             </span>
-            Nos Livres Imprimés
+            Livres Imprimés
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -22,9 +22,9 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Livres Imprimés</h4>
+                    <h4 class="card-title">Livres Disponibles</h4>
                     <p class="card-description">
-                        <code> Filtrer</code> les <code> Livres Imprimés</code>
+                        Vous pouvez <code> Filtrer </code> les <code> Livres Imprimés</code>.
                     </p>
                     <form action="" method="get" class="forms sample d-flex gap-2">
                         <input type="text" placeholder="Cote" class="form-control" name="cote"

@@ -10,7 +10,7 @@ class Entite extends Model
     use HasFactory;
 
     protected $guarded = [];
-
+    protected $table = "entites";
     public function abonnes()
     {
         return $this->hasMany(Abonne::class);

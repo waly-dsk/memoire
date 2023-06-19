@@ -45,11 +45,11 @@ class DatabaseSeeder extends Seeder
             ['intitule' => 'Medecine Générale', 'entite_id' => 7],
             ['intitule' => 'Infirmerie', 'entite_id' => 8],
             ['intitule' => 'Sage-Femme', 'entite_id' => 8],
+            ['intitule' => 'Gestion des Banques', 'entite_id' => 9],
+            ['intitule' => 'Gestion Commerciale', 'entite_id' => 9],
+            ['intitule' => 'Gestion des Entreprises', 'entite_id' => 9],
             ['intitule' => 'Gestion des Ressources Humaines', 'entite_id' => 9],
             ['intitule' => 'Gestion des Transports et Logistiques', 'entite_id' => 9],
-            ['intitule' => 'Gestion des Entreprises', 'entite_id' => 9],
-            ['intitule' => 'Gestion Commerciale', 'entite_id' => 9],
-            ['intitule' => 'Gestion des Banques', 'entite_id' => 9],
             ['intitule' => 'Informatique de Gestion', 'entite_id' => 9],
         ]);
 

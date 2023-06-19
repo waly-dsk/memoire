@@ -24,8 +24,9 @@
                 <div class="card-body">
                     <h4 class="card-title">Liste des Agents</h4>
                     <p class="card-description">
-                        <code>Le Responsable </code> et les <code>Agents de la Bibliothèque Centrale</code>
+                        <code>Le Responsable </code> et les <code>Agents de la Bibliothèque Centrale</code>.
                     </p>
+                    <hr>
                     <table class="table">
                         <thead>
                             <tr>
@@ -47,7 +48,8 @@
                                         {{ Str::ucfirst($agent->role) }}
                                     </td>
                                     <td>
-                                        {{ \Carbon\Carbon::parse($agent->created_at)->locale('fr_FR')->isoFormat('LL') }}
+                                        <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>
+                                        {{ ucfirst(strftime('%B %Y', strtotime($agent->created_at))) }}
                                     </td>
                                     <td>
                                         <div class="row">

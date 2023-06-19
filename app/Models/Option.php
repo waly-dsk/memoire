@@ -12,6 +12,7 @@ class Option extends Model
         "intitule",
         "entite_id",
     ];
+    protected $table = "options";
 
     public function entite()
     {

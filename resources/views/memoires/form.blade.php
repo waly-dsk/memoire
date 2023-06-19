@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-body">
                     <form class="forms-sample"
-                        action="{{ route($memoire->exists ? 'memoire_these.update' : 'memoire_these.store', ['memoire' => $memoire->id]) }}"
+                        action="{{ route($memoire->exists ? 'memoire_these.update' : 'memoire_these.store', ['memoire_these' => $memoire->id]) }}"
                         method="post" enctype="multipart/form-data">
                         @csrf @method($memoire->exists ? 'PUT' : 'POST')
                         <div class="form-group">
@@ -60,7 +60,14 @@
                             <select name="entite_id" class="form-control" id="entite">
                                 <!-- Afficher les options disponibles dans la base de données -->
                                 @foreach ($entites as $entite)
-                                    <option value="{{ $entite->id }}">{{ $entite->intitule }}</option>
+                                    @if ($memoire->exists)
+                                        <option value="{{ $entite->id }}"
+                                            {{ $memoire->option->entite_id == $entite->id ? '{{ $category->intitule }}' : '' }}>
+                                            {{ $entite->intitule }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $entite->id }}">{{ $entite->intitule }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -70,7 +77,14 @@
                             <select name="option_id" class="form-control" id="option">
                                 <!-- Afficher les options disponibles dans la base de données -->
                                 @foreach ($options as $option)
-                                    <option value="{{ $option->id }}">{{ $option->intitule }}</option>
+                                    @if ($memoire->exists)
+                                        <option value="{{ $option->id }}"
+                                            {{ $memoire->option_id == $option->id ? 'selected' : '' }}>
+                                            {{ $option->intitule }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $option->id }}">{{ $option->intitule }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
