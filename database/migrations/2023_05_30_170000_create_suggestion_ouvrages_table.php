@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('suggestions', function (Blueprint $table) {
+        Schema::create('suggestion_ouvrages', function (Blueprint $table) {
             $table->id();
-            $table->string('categorie');
+            $table->foreignId('category_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('titre');
+            $table->string('edition');
+            $table->string('annee_parution');
             $table->string('auteur');
             $table->timestamps();
         });
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('suggestions');
+        Schema::dropIfExists('suggestion_ouvrages');
     }
 };

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SearchSuggestionRequest extends FormRequest
+class SearchSuggestionOuvrageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,10 @@ class SearchSuggestionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'categorie' => 'string|nullable',
-            'auteur' => 'string|nullable',
-            'titre' => 'string|nullable',
-            'date_ajout' => 'date|nullable',
+            'category_id' => "string|nullable",
+            'auteur' => "string|nullable",
+            'mot_cles' => "string|nullable",
+            'date_ajout' => "string|nullable",
         ];
     }
 }

@@ -20,7 +20,7 @@
     <title>Title | @yield('title')</title>
     <style>
         @media (max-width: 768px) {
-            .col-12 {
+            .baniere {
                 display: none;
             }
         }
@@ -136,9 +136,17 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suggestion.index') }}">
-                            <span class="menu-title">Suggestion</span>
+                        <a class="nav-link" href="{{ route('suggestion_generale.index') }}">
+                            <span class="menu-title">Suggestion Générale</span>
                             <i class="mdi mdi-format-wrap-tight  menu-icon"></i>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('suggestion_ouvrage.index') }}">
+                            <span class="menu-title">Suggestion Ouvrage</span>
+                            <i class="mdi mdi mdi-av-timer  menu-icon"></i>
                         </a>
                     </li>
 
@@ -338,6 +346,7 @@
     <script src="{{ asset('assets/js/file-upload.js') }}"></script>
 
     @yield('script')
+
 
 </body>
 

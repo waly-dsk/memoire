@@ -6,11 +6,12 @@
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-home"></i>
             </span>
-            Suggestions d'ouvrages
+            Suggestions Générales
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('suggestion.create') }}">Ajouter une Suggestion</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('suggestion_generale.create') }}">Ajouter une Suggestion</a>
+                </li>
                 <li class="breadcrumb-item active" aria-current="page">Suggestions </li>
             </ol>
         </nav>
@@ -20,34 +21,36 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">
-                        @if ($suggestionCount == 0)
-                            Aucune suggestion
-                        @else
-                            {{ $suggestionCount }} suggestion(s)
-                        @endif
                     </h4>
                     <p class="card-description">
-                        Toutes les <code>.Suggestions</code>.
-                        Vous <code>Filtrer</code> les <code>Résultats</code>.
+                        Toutes les <code> Suggestions Générales.</code>
+                        Vous pouvez <code>Filtrer</code> les <code>Résultats.</code>
                     </p>
-                    <form action="" method="get" class="forms sample d-flex gap-2">
-                        <input type="text" placeholder="Catégorie" class="form-control" name="categorie"
-                            value="{{ $input['categorie'] ?? '' }}">
-                        <input type="text" placeholder="Auteur" class="form-control" name="auteur"
-                            value="{{ $input['auteur'] ?? '' }}">
-                        <input type="text" placeholder="Titre" class="form-control" name="titre"
-                            value="{{ $input['titre'] ?? '' }}">
+                    <form action="" method="get" class="mb-5 forms sample d-flex gap-2">
+                        <select class="form-control" name="type">
+                            <option value="">Sélectionnez un type de Suggestion</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type->id }}"
+                                    {{ ($input['type'] ?? '') == $type->id ? 'selected' : '' }}>
+                                    {{ $type->intitule }}
+                                </option>
+                            @endforeach
+                        </select>
+
                         <select class="form-control" name="date_ajout">
-                            <option value="">Sélectionnez une date</option>
+                            <option value="">Sélectionnez un Mois</option>
                             @foreach ($dates_ajout as $date_ajout)
-                                <option value="{{ $date_ajout->mois_annee }}">
+                                <option value="{{ $date_ajout->mois_annee }}"
+                                    {{ str_contains($input['date_ajout'] ?? '', $date_ajout->mois_annee) ? 'selected' : '' }}>
                                     <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>
                                     {{ ucfirst(strftime('%B %Y', strtotime($date_ajout->mois_annee))) }}
                                 </option>
                             @endforeach
                         </select>
-                        {{-- <input type="text" placeholder="Date Ajout" class="form-control" name="da"
-                            value="{{ $input['nom'] ?? '' }}"> --}}
+
+                        <input type="text" placeholder="Mots-Clés" class="form-control" name="mot_cles"
+                            value="{{ $input['mot_cles'] ?? '' }}">
+
                         <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
                             Rechercher
                         </button>
@@ -57,9 +60,8 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Catégorie</th>
-                                    <th>Auteur</th>
-                                    <th>Titre</th>
+                                    <th>Type</th>
+                                    <th>Contenu</th>
                                     <th>Date d'Ajout</th>
                                     @if ($user->exists)
                                         <th>Actions</th>
@@ -70,15 +72,13 @@
                                 @foreach ($suggestions as $suggestion)
                                     <tr>
                                         <td>
-                                            {{ $suggestion->categorie }}
+                                            {{ $suggestion->intitule }}
                                         </td>
                                         <td>
-                                            {{ $suggestion->auteur }}
+                                            {{ $suggestion->contenu }}
                                         </td>
                                         <td>
-                                            {{ $suggestion->titre }}
-                                        </td>
-                                        <td>
+                                            {{-- {{ $suggestion->created_at }} --}}
                                             {{ \Carbon\Carbon::parse($suggestion->created_at)->locale('fr_FR')->isoFormat('LL') }}
                                         </td>
                                         @if ($user->exists)

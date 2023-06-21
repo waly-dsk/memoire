@@ -15,6 +15,12 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(1)->create();
 
+        DB::table('type_suggestions')->insert([
+            ['id' => 1, 'intitule' => 'Cadre'],
+            ['id' => 2, 'intitule' => 'Equipements'],
+            ['id' => 3, 'intitule' => 'Technologie'],
+        ]);
+
         DB::table('entites')->insert([
             ['id' => 1,  'intitule' => 'ENATSE'],
             ['id' => 2,  'intitule' => 'ENSPD'],

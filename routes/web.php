@@ -31,9 +31,14 @@ Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])-
  *      FAIRE DES SUGGESTIONS
  */
 
-Route::get('suggestion', [\App\Http\Controllers\SuggestionController::class, 'index'])->name('suggestion.index');
-Route::get('suggestion/create', [\App\Http\Controllers\SuggestionController::class, 'create'])->name('suggestion.create');
-Route::post('suggestion', [\App\Http\Controllers\SuggestionController::class, 'store'])->name('suggestion.store');
+Route::get('suggestion_generale', [\App\Http\Controllers\SuggestionGeneraleController::class, 'index'])->name('suggestion_generale.index');
+Route::get('suggestion_generale/create', [\App\Http\Controllers\SuggestionGeneraleController::class, 'create'])->name('suggestion_generale.create');
+Route::post('suggestion_generale', [\App\Http\Controllers\SuggestionGeneraleController::class, 'store'])->name('suggestion_generale.store');
+
+
+Route::get('suggestion_ouvrage', [\App\Http\Controllers\SuggestionOuvrageController::class, 'index'])->name('suggestion_ouvrage.index');
+Route::get('suggestion_ouvrage/create', [\App\Http\Controllers\SuggestionOuvrageController::class, 'create'])->name('suggestion_ouvrage.create');
+Route::post('suggestion_ouvrage', [\App\Http\Controllers\SuggestionOuvrageController::class, 'store'])->name('suggestion_ouvrage.store');
 
 /**
  *      LES ROUTES PARTAGEES PAR UN SIMPLE VISITEUR AVEC LE PERSONNEL
