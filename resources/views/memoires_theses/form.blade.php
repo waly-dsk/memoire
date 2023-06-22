@@ -119,7 +119,7 @@
 
                         <div class="form-group">
                             <label for="exemplaire">Exemplaire (Papier)</label>
-                            <input type="number" name="exemplaire" class="form-control" id="exemplaire"
+                            <input type="text" name="exemplaire" class="form-control" id="exemplaire"
                                 placeholder="Exemplaire" value="{{ $document->exemplaire }}">
                         </div>
                         @if ($document->exists)
@@ -137,6 +137,14 @@
 @endsection
 @section('script')
     <script>
+        $("#exemplaire").on("input", function() {
+            let value = $(this).val();
+            if (/\D/g.test(value)) {
+                value = value.substr(0, value.length - 1);
+                $(this).val(value);
+            }
+        });
+
         $('#entite').change(function() {
             var entiteId = $(this).val();
             var optionSelect = $('#option');

@@ -44,3 +44,10 @@
         </div>
     </div>
 @endsection
+@section('script')
+    <script>
+        $(function() {
+            console.log('mfm')
+        })
+    </script>
+@endsection

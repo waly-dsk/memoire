@@ -89,6 +89,7 @@ class LivreImprimeController extends Controller
             'cote' => 'required|unique:livre_imprimes,cote',
             'titre' => 'required',
             'auteur' => 'required',
+            'emplacement' => 'required',
             'division_id' => 'required',
             'exemplaire' => 'required',
         ], [
@@ -99,6 +100,7 @@ class LivreImprimeController extends Controller
         $livreImprime->cote = $validateData['cote'];
         $livreImprime->titre = $validateData['titre'];
         $livreImprime->auteur = $validateData['auteur'];
+        $livreImprime->emplacement = $validateData['emplacement'];
         $livreImprime->division_id = $validateData['division_id'];
         $livreImprime->save();
 
@@ -160,6 +162,7 @@ class LivreImprimeController extends Controller
         $validateData = $request->validate([
             'cote' => 'required',
             'titre' => 'required',
+            'emplacement' => 'required',
             'auteur' => 'required',
             'division_id' => 'required',
             'exemplaire' => 'required',
@@ -168,6 +171,7 @@ class LivreImprimeController extends Controller
             'cote' => $validateData['cote'],
             'titre' => $validateData['titre'],
             'auteur' => $validateData['auteur'],
+            'emplacement' => $validateData['emplacement'],
             'division_id' => $validateData['division_id'],
         ]);
 

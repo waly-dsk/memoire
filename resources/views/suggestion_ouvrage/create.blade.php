@@ -64,3 +64,17 @@
         </div>
     </div>
 @endsection
+@section('script')
+    <script>
+        $(function() {
+            $("#annee_parution").on("input", function() {
+                let value = $(this).val();
+                if (/\D/g.test(value) || value.length > 4) {
+                    value = value.substr(0, value.length - 1);
+                    $(this).val(value);
+                }
+            });
+
+        });
+    </script>
+@endsection
