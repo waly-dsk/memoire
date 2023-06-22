@@ -27,7 +27,8 @@
                             </div>
                             <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
                                 <h2>DESOLÉ !</h2>
-                                <h3 class="font-weight-light">La page que vous cherchez n'a pas été trouvée !</h3>
+                                <h3 class="font-weight-light">La pagedddddddddddddddd que vous cherchez n'a pas été
+                                    trouvée !</h3>
                             </div>
                         </div>
                         <div class="row mt-5">

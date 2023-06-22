@@ -43,8 +43,12 @@ Route::post('suggestion_ouvrage', [\App\Http\Controllers\SuggestionOuvrageContro
 /**
  *      LES ROUTES PARTAGEES PAR UN SIMPLE VISITEUR AVEC LE PERSONNEL
  */
-Route::get('memoires', [\App\Http\Controllers\MemoireTheseController::class, 'index'])->name('memoires.index');
-Route::get('memoires/{id}', [\App\Http\Controllers\MemoireTheseController::class, 'show'])->name('memoires.show');
+Route::get('memoires_theses/type/{type}', [\App\Http\Controllers\MemoireTheseController::class, 'index'])->name('memoires_theses.type_index');
+Route::get('memoires_theses/{id}', [\App\Http\Controllers\MemoireTheseController::class, 'show'])->name('memoires_theses.show');
+Route::get('memoires_theses/create/{type}', [\App\Http\Controllers\MemoireTheseController::class, 'create'])->name('memoires_theses.type_create');
+
+
+
 Route::get('livre_imprimes', [\App\Http\Controllers\LivreImprimeController::class, 'index'])->name('livre_imprimes.index');
 Route::get('livre_imprimes/{id}', [\App\Http\Controllers\LivreImprimeController::class, 'show'])->name('livre_imprimes.show');
 
@@ -83,7 +87,7 @@ Route::get('/get_prets/{mois}', [\App\Http\Controllers\AjaxController::class, 'g
 Route::middleware('auth')->group(function () {
     Route::delete('suggestion/{id}', [\App\Http\Controllers\SuggestionController::class, 'destroy'])->name('suggestion.destroy');
     Route::resource('abonne', \App\Http\Controllers\AbonneController::class)->except('show');
-    Route::resource('memoire_these', \App\Http\Controllers\MemoireTheseController::class);
+    Route::resource('memoire_these', \App\Http\Controllers\MemoireTheseController::class)->except(['index', 'create', 'show']);
     Route::resource('livre_imprime', \App\Http\Controllers\LivreImprimeController::class);
     Route::resource('pret', \App\Http\Controllers\PretController::class)->except('destroy');
     Route::get('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'pret_retour_create'])->name('pret.retour.create');

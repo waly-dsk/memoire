@@ -22,11 +22,11 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Liste des Abonnés</h4>
+                    <h4 class="card-title"></h4>
                     <p class="card-description">
                         Vous pouvez <code> Filtrer </code> la liste des <code> Abonnés.</code>
                     </p>
-                    <form action="" method="get" class="forms sample d-flex gap-2">
+                    <form action="" method="get" class="mb-5 forms sample d-flex gap-2">
                         <input type="text" placeholder="Entité" class="form-control" name="entite"
                             value="{{ $input['entite'] ?? '' }}">
                         <input type="text" placeholder="Option" class="form-control" name="option"
@@ -39,53 +39,54 @@
                             Rechercher
                         </button>
                     </form>
-                    <hr>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Matricule</th>
-                                <th>Nom &amp; Prénoms</th>
-                                <th>Entité</th>
-                                <th>Option</th>
-                                <th>Date d'Ajout</th>
-                                <th class="text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($abonnes as $abonne)
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $abonne->matricule }}</td>
-                                    <td>{{ $abonne->nom }}</td>
-                                    <td>{{ $abonne->entite }}</td>
-                                    <td>{{ $abonne->option }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($abonne->created_at)->locale('fr_FR')->isoFormat('LL') }}
-                                    </td>
-                                    <td>
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <a href="{{ route('abonne.edit', $abonne->id) }}" title="Modifier"
-                                                class="mdi mdi-grease-pencil"></a>
-                                            <form action="{{ route('abonne.destroy', $abonne->id) }}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
+                                    <th>Matricule</th>
+                                    <th>Nom &amp; Prénoms</th>
+                                    <th>Entité</th>
+                                    <th>Option</th>
+                                    <th>Date d'Ajout</th>
+                                    <th class="text-center">Actions</th>
                                 </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="6" class="text-center">
-                                        <div class="col mt-5">
-                                            <a href="#" class="">AUCUN ABONNE NE CORRESPOND A
-                                                VOTRE RECHERCHE</a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @forelse($abonnes as $abonne)
+                                    <tr>
+                                        <td>{{ $abonne->matricule }}</td>
+                                        <td>{{ $abonne->nom }}</td>
+                                        <td>{{ $abonne->entite }}</td>
+                                        <td>{{ $abonne->option }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($abonne->created_at)->locale('fr_FR')->isoFormat('LL') }}
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <a href="{{ route('abonne.edit', $abonne->id) }}" title="Modifier"
+                                                    class="mdi mdi-grease-pencil"></a>
+                                                <form action="{{ route('abonne.destroy', $abonne->id) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
+                                                        <i class="mdi mdi-delete"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            <div class="col mt-5">
+                                                <a href="#" class="">AUCUN ABONNE NE CORRESPOND A
+                                                    VOTRE RECHERCHE</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>

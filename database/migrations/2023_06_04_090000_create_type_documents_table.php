@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('livre_imprimes', function (Blueprint $table) {
+        Schema::create('type_documents', function (Blueprint $table) {
             $table->id();
-            $table->string('cote')->unique();
-            $table->string('auteur');
-            $table->string('titre');
-            $table->string('emplacement');
-            $table->foreignId('division_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('intitule');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('livre_imprimes');
+        Schema::dropIfExists('type_documents');
     }
 };

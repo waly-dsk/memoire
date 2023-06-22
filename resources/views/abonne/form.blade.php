@@ -14,7 +14,7 @@
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#"></a></li>
+                <li class="breadcrumb-item"><a href="{{ route('abonne.index') }}">Tous les Abonnés</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Abonnés</li>
             </ol>
         </nav>
@@ -33,7 +33,7 @@
 
                         <div class="form-group">
                             <label for="matricule">Matricule</label>
-                            <input autofocus type="text" name="matricule" class="form-control" id="matricule"
+                            <input type="text" name="matricule" class="form-control" id="matricule"
                                 placeholder="Matricule" value="{{ $abonne->matricule }}">
                         </div>
                         <div class="form-group">
@@ -45,6 +45,7 @@
                         <div class="form-group">
                             <label for="entite">Entité</label>
                             <select class="form-control" name="entite_id" id="entite">
+                                <option value="">Choisissez une Entité</option>
                                 @foreach ($entites as $entite)
                                     @if ($abonne->exists)
                                         <option value="{{ $entite->id }}"
@@ -60,6 +61,7 @@
                         <div class="form-group">
                             <label for="option">Option</label>
                             <select class="form-control" name="option_id" id="option">
+                                <option value="">Choisissez une Option</option>
                                 @foreach ($options as $option)
                                     @if ($abonne->exists)
                                         <option value="{{ $option->id }}"

@@ -142,7 +142,6 @@
                         </a>
                     </li>
 
-
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('suggestion_ouvrage.index') }}">
                             <span class="menu-title">Suggestion Ouvrage</span>
@@ -167,11 +166,43 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('memoire_these.index') }}">
-                                <span class="menu-title">Mémoires-Thèses</span>
+                            <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '1']) }}">
+                                <span class="menu-title">Mémoires Licences</span>
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '2']) }}">
+                                <span class="menu-title">Mémoires Master</span>
+                                <i class="mdi  mdi mdi-book-open-page-variant menu-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#theses" aria-expanded="false"
+                                aria-controls="theses">
+                                <span class="menu-title">Thèses</span>
+                                <i class="menu-arrow"></i>
+                                <i class="mdi mdi mdi-book-open menu-icon"></i>
+                            </a>
+                            <div class="collapse" id="theses">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            href="{{ route('memoires_theses.type_index', ['type' => '3']) }}">
+                                            Thèses Classiques
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            href="{{ route('memoires_theses.type_index', ['type' => '4']) }}">
+                                            Thèses PHD
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#livres" aria-expanded="false"
                                 aria-controls="livres">
@@ -257,11 +288,44 @@
                         </li>
                     @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('memoires.index') }}">
-                                <span class="menu-title">Mémoires-Thèses</span>
+                            <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '1']) }}">
+                                <span class="menu-title">Mémoires Licences</span>
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '2']) }}">
+                                <span class="menu-title">Mémoires Master</span>
+                                <i class="mdi  mdi mdi-book-open-page-variant menu-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#theses" aria-expanded="false"
+                                aria-controls="theses">
+                                <span class="menu-title">Thèses</span>
+                                <i class="menu-arrow"></i>
+                                <i class="mdi mdi mdi-book-open menu-icon"></i>
+                            </a>
+                            <div class="collapse" id="theses">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            href="{{ route('memoires_theses.type_index', ['type' => '3']) }}">
+                                            Thèses Classiques
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link"
+                                            href="{{ route('memoires_theses.type_index', ['type' => '4']) }}">
+                                            Thèses PHD
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#livres" aria-expanded="false"
                                 aria-controls="livres">
@@ -344,6 +408,14 @@
     <script src="{{ asset('assets/vendors/select2/js/select2.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/file-upload.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('a[href="#memoires"]').click(function(e) {
+                e.preventDefault(); // Empêche le comportement par défaut du lien
+                $('#memoires').collapse('toggle'); // Ouvre ou ferme le menu "Mémoires"
+            });
+        });
+    </script>
 
     @yield('script')
 

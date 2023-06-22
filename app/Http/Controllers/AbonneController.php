@@ -139,15 +139,27 @@ class AbonneController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'matricule' => ['required', 'unique:abonnes,matricule'],
+            'type_abonne_id' => 'required',
             'nom' => 'required',
-            'option_id' => 'required',
         ], [
+            'type_abonne_id.required' => "Veuillez choisir un type d'Abonné",
             'matricule.unique' => 'Ce matricule est déjà utilisé par un Abonné.',
             'matricule.required' => 'Le numéro matricule est obligatoire.',
             'nom.required' => 'Le champ nom est obligatoire.',
             'option.required' => 'Vous devez choisir une option.',
         ]);
+
+        if ($validateData['type_abonne_id'] == 1) {
+            $validateData['matricule'] = $request->input('matricule');
+            $validateData['option_id'] = $request->input('option_id');
+            $validateData['entite_id'] = 1; // Ou toute autre valeur par défaut appropriée
+        } elseif ($validateData['type_abonne_id'] == 2) {
+            $validateData['option_id'] = 1; // Ou toute autre valeur par défaut appropriée
+            $validateData['entite_id'] = $request->input('entite_id');
+        } else {
+            $validateData['option_id'] = 1; // Ou toute autre valeur par défaut appropriée
+            $validateData['entite_id'] = 1; // Ou toute autre valeur par défaut appropriée
+        }
 
         Abonne::create($validateData);
 

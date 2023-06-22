@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('abonnes', function (Blueprint $table) {
             $table->id();
-            $table->string('matricule')->unique();
+            $table->string('matricule')->unique()->nullable();
             $table->string('nom');
             $table->foreignId('option_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->timestamps();

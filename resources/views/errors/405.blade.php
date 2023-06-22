@@ -27,10 +27,7 @@
                             </div>
                             <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
                                 <h2>DESOLE !</h2>
-                                <h3 class="font-weight-light">Nous sommes désolés, mais la méthode GET n'est pas prise
-                                    en charge pour la page de connexion. Veuillez utiliser la méthode POST pour vous
-                                    connecter. Si vous rencontrez des difficultés, n'hésitez pas à nous contacter pour
-                                    obtenir de l'aide.</h3>
+                                <h3 class="font-weight-light">La page que vous demandez est introuvable.</h3>
                             </div>
                         </div>
                         <div class="row mt-5">

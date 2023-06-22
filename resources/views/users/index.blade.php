@@ -26,50 +26,51 @@
                     <p class="card-description">
                         <code>Le Responsable </code> et les <code>Agents de la Bibliothèque Centrale</code>.
                     </p>
-                    <hr>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Adresse Email</th>
-                                <th>Rôle</th>
-                                <th>Date Ajout</th>
-                                <th class="">
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($agents as $agent)
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $agent->name }}</td>
-                                    <td>{{ $agent->email }}</td>
-                                    <td>
-                                        {{ Str::ucfirst($agent->role) }}
-                                    </td>
-                                    <td>
-                                        <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>
-                                        {{ ucfirst(strftime('%B %Y', strtotime($agent->created_at))) }}
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <a href="{{ route('user.edit', $agent->id) }}" title="Modifier"
-                                                class="offset-1 mdi mdi-grease-pencil">
-                                            </a>
-                                            <form action="{{ route('user.destroy', $agent->id) }}" method="post"
-                                                class="offset-3 align-self-center">
-                                                @csrf
-                                                @method('delete')
-                                                <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
+                                    <th>Nom</th>
+                                    <th>Adresse Email</th>
+                                    <th>Rôle</th>
+                                    <th>Date Ajout</th>
+                                    <th class="">
+                                        Actions
+                                    </th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($agents as $agent)
+                                    <tr>
+                                        <td>{{ $agent->name }}</td>
+                                        <td>{{ $agent->email }}</td>
+                                        <td>
+                                            {{ Str::ucfirst($agent->role) }}
+                                        </td>
+                                        <td>
+                                            <?php setlocale(LC_TIME, 'fr_FR.UTF-8'); ?>
+                                            {{ ucfirst(strftime('%B %Y', strtotime($agent->created_at))) }}
+                                        </td>
+                                        <td>
+                                            <div class="row">
+                                                <a href="{{ route('user.edit', $agent->id) }}" title="Modifier"
+                                                    class="offset-1 mdi mdi-grease-pencil">
+                                                </a>
+                                                <form action="{{ route('user.destroy', $agent->id) }}" method="post"
+                                                    class="offset-3 align-self-center">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
+                                                        <i class="mdi mdi-delete"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

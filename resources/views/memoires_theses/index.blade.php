@@ -1,17 +1,19 @@
 @extends('layout.theme')
-@section('title', 'Mémoires et Thèses')
+@section('title', $type_information->intitule)
 @section('content')
     <div class="page-header">
         <h3 class="page-title">
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-account-multiple-plus"></i>
             </span>
-            Mémoires et Thèses
+            @yield('title')
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 @if ($user->exists)
-                    <li class="breadcrumb-item"><a href="{{ route('memoire_these.create') }}">Ajouter Mémoires-Thèses</a>
+                    <li class="breadcrumb-item"><a
+                            href="{{ route('memoires_theses.type_create', ['type' => $type_information->id]) }}">Ajouter
+                            @yield('title')</a>
                     </li>
                 @endif
                 <li class="breadcrumb-item active" aria-current="page">Mémoires - Thèses</li>
@@ -22,85 +24,56 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Mémoires et Thèses</h4>
                     <p class="card-description">
                         Vous pouvez <code> Filtrer </code> la <code>Liste</code>.
                     </p>
                     <form action="" method="get" class="forms sample d-flex gap-2">
                         <input type="text" placeholder="Entité" class="form-control" name="entite"
                             value="{{ $input['entite'] ?? '' }}">
-                        <input type="text" placeholder="Option" class="form-control" name="option"
-                            value="{{ $input['option'] ?? '' }}">
-                        <input type="text" placeholder="Auteur" class="form-control" name="auteur"
-                            value="{{ $input['auteur'] ?? '' }}">
+                        <input type="text" placeholder="Mots Clés" class="form-control" name="mots_cles"
+                            value="{{ $input['mots_cles'] ?? '' }}">
+                        <input type="text" placeholder="Encadreur" class="form-control" name="encadreur"
+                            value="{{ $input['encadreur'] ?? '' }}">
                         <input type="text" placeholder="Année : XXXX-YYYY" class="form-control" name="annee"
                             value="{{ $input['annee'] ?? '' }}">
                         <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
                             Rechercher
                         </button>
                     </form>
-                    <table class="table mt-5">
-                        <thead>
-                            <tr>
-                                <th>Auteur</th>
-                                <th>Entité</th>
-                                <th>Option</th>
-                                <th>Année</th>
-                                <th class="">
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($memoires as $memoire)
-                                <tr>
-                                    <td>{{ $memoire->auteur }}</td>
-                                    {{-- <td>{{ Str::limit($memoire->theme, $limit = 15, '...') }}</td> --}}
-                                    <td>
-                                        {{ $memoire->entite }}
-                                    </td>
-                                    <td>
-                                        {{ $memoire->option }}
-                                    </td>
-                                    <td>
-                                        {{ $memoire->annee }}
+                    <div class="row mt-5">
+                        <!-- Boucle pour afficher les ouvrages -->
+                        @forelse ($documents as $document)
+                            <div class="col-md-4 stretch-card grid-margin">
+                                <a href="{{ route('memoires_theses.show', ['id' => $document->id]) }}"
+                                    class="card bg-gradient-primary card-img-holder text-white">
+                                    <div class="card-body">
+                                        <img src="{{ asset('assets/images/dashboard/circle.svg') }}"
+                                            class="card-img-absolute" alt="circle-image" />
+                                        <h4 class="font-weight-normal mb-3">
+                                            {{ $document->auteur }}
+                                            <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                                        </h4>
+                                        <p class="card-text">
+                                            {{ $document->entite }} :
+                                            {{ $document->option }} {{ $document->annee }}
+                                        </p>
+                                        <p style="text-align: left" class="card-text">{{ $document->theme }}</p>
 
-                                        {{-- {{ \Carbon\Carbon::parse($memoire->created_at)->locale('fr_FR')->isoFormat('LL') }} --}}
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            @if ($user && $user->exists)
-                                                <a href="{{ route('memoire_these.show', $memoire->id) }}" title="Détails"
-                                                    class="mdi mdi-eye">
-                                                </a>
-                                                <a href="{{ route('memoire_these.edit', $memoire->id) }}" title="Modifier"
-                                                    class="offset-3 mdi mdi-grease-pencil">
-                                                </a>
-                                                <form action="{{ route('memoire_these.destroy', $memoire->id) }}"
-                                                    method="post" class="offset-3 align-self-center">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </button>
-                                                </form>
-                                            @else
-                                                <a href="{{ route('memoires.show', $memoire->id) }}" title="Détails"
-                                                    class="offset-2">
-                                                    Détails
-                                                </a>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        <!-- Autres informations de l'document -->
+                                    </div>
+                                </a>
+                            </div>
+                        @empty
+                            <div class="col text-center">
+                                <a class="btn btn-gradient-primary" href="#">AUCUN RESULTAT NE CORRESPOND
+                                    A VOTRE RECHERCHE</a>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    {{ $memoires->links() }}
     <div id="login-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">

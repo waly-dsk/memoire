@@ -22,10 +22,10 @@ class SearchMemoireTheseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'annee' => ['string', 'nullable'],
             'entite' => ['string', 'nullable'],
-            'option' => ['string', 'nullable'],
-            'auteur' => ['string', 'nullable'],
+            'mots_cles' => ['string', 'nullable'],
+            'annee' => ['string', 'nullable'],
+            'encadreur' => ['string', 'nullable'],
         ];
     }
 }
