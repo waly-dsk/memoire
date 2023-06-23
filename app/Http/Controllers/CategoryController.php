@@ -11,9 +11,23 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        $categories = DB::table('categories')
+            ->leftJoin('divisions', 'categories.id', '=', 'divisions.category_id')
+            ->select(
+                'categories.id',
+                'categories.classe',
+                'categories.intitule',
+                DB::raw('GROUP_CONCAT(divisions.id, " | ") as division_ids'),
+                DB::raw('GROUP_CONCAT(divisions.classe, " | ") as division_classes'),
+                DB::raw('GROUP_CONCAT(divisions.intitule, " | ") as divisions')
+            )
+            ->groupBy('categories.id', 'categories.classe', 'categories.intitule')
+            ->orderByDesc('categories.created_at')
+            ->get();
+
         return view('category.index', [
             'user' => Auth::user() ?: new User(),
-            'categories' => DB::table('categories')->paginate(5),
+            'categories' => $categories,
         ]);
     }
 

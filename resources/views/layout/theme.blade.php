@@ -210,17 +210,26 @@
                             </div>
                         </li>
 
+
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('category.index') }}">
+                                <span class="menu-title">Livres Imprimés</span>
+                                <i class="mdi mdi-checkbox-multiple-marked-outline menu-icon"></i>
+                            </a>
+                        </li>
+
+
+                        {{-- <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#livres" aria-expanded="false"
                                 aria-controls="livres">
-                                <span class="menu-title">Livres Imprimés</span>
+                                <span class="menu-title"></span>
                                 <i class="menu-arrow"></i>
-                                <i class="mdi mdi-medical-bag menu-icon"></i>
+                                <i class="mdi  mdi mdi-checkbox-multiple-marked-outline  menu-icon"></i>
                             </a>
                             <div class="collapse" id="livres">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('category.index') }}">
+                                        <a class="nav-link" href="">
                                             Catégories de Livres
                                         </a>
                                     </li>
@@ -231,14 +240,14 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#consultations" aria-expanded="false"
                                 aria-controls="consultations">
                                 <span class="menu-title">Consultations</span>
                                 <i class="menu-arrow"></i>
-                                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                                <i class="mdi  mdi mdi-chart-areaspline menu-icon"></i>
                             </a>
                             <div class="collapse" id="consultations">
                                 <ul class="nav flex-column sub-menu">
@@ -262,7 +271,7 @@
                                 aria-expanded="false" aria-controls="stats_memoires_theses">
                                 <span class="menu-title">Stats Consultations</span>
                                 <i class="menu-arrow"></i>
-                                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                                <i class="mdi  mdi mdi-chart-bar  menu-icon"></i>
                             </a>
                             <div class="collapse" id="stats_memoires_theses">
                                 <ul class="nav flex-column sub-menu">

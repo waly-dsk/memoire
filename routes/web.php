@@ -49,8 +49,8 @@ Route::get('memoires_theses/create/{type}', [\App\Http\Controllers\MemoireTheseC
 
 
 
-Route::get('livre_imprimes', [\App\Http\Controllers\LivreImprimeController::class, 'index'])->name('livre_imprimes.index');
-Route::get('livre_imprimes/{id}', [\App\Http\Controllers\LivreImprimeController::class, 'show'])->name('livre_imprimes.show');
+Route::get('livre_imprime/livres_index/{division_id}', [\App\Http\Controllers\LivreImprimeController::class, 'index'])->name('livre_imprime.index');
+Route::get('livre_imprimes/livres_show/{id}', [\App\Http\Controllers\LivreImprimeController::class, 'show'])->name('livre_imprimes.show');
 
 
 /**
@@ -90,7 +90,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('abonne', \App\Http\Controllers\AbonneController::class)->except('show');
     Route::resource('rayon', \App\Http\Controllers\RayonController::class)->except('show');
     Route::resource('memoire_these', \App\Http\Controllers\MemoireTheseController::class)->except(['index', 'create', 'show']);
-    Route::resource('livre_imprime', \App\Http\Controllers\LivreImprimeController::class);
+    Route::resource('livre_imprime', \App\Http\Controllers\LivreImprimeController::class)->except(['index', 'show']);
     Route::resource('pret', \App\Http\Controllers\PretController::class)->except('destroy');
     Route::get('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'pret_retour_create'])->name('pret.retour.create');
     Route::put('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'retour_pret'])->name('pret.retour.put');

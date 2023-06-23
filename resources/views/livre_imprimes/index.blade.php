@@ -39,8 +39,38 @@
                             Rechercher
                         </button>
                     </form>
-                    <hr>
-                    <table class="table table-hover">
+
+                    <div class="row mt-5">
+                        @forelse ($livre_imprimes as $livre_imprime)
+                            <div class="col-md-4 stretch-card grid-margin">
+                                <a href="{{ route('livre_imprimes.show', ['id' => $livre_imprime->id]) }}"
+                                    class="card bg-gradient-primary card-img-holder text-white">
+                                    <div class="card-body">
+                                        <img src="{{ asset('assets/images/dashboard/circle.svg') }}"
+                                            class="card-img-absolute" alt="circle-image" />
+                                        <h4 class="font-weight-normal mb-3">
+                                            {{ $livre_imprime->emplacement }}
+                                            <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                                        </h4>
+                                        <p class="card-text">
+                                            {{ $livre_imprime->division_name }},
+                                            {{ $livre_imprime->cote }}
+                                        </p>
+                                        <p style="text-align: left" class="card-text">{{ $livre_imprime->titre }}</p>
+
+                                        <!-- Autres informations de l'document -->
+                                    </div>
+                                </a>
+                            </div>
+                        @empty
+                            <div class="col text-center">
+                                <a class="btn btn-gradient-primary" href="#">AUCUN RESULTAT NE CORRESPOND
+                                    A VOTRE RECHERCHE</a>
+                            </div>
+                        @endforelse
+                    </div>
+
+                    {{-- <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Cote</th>
@@ -91,7 +121,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table> --}}
                 </div>
             </div>
         </div>

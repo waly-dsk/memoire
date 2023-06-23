@@ -25,19 +25,22 @@ class MemoireTheseController extends Controller
         $documents = DB::table('memoire_theses')
             ->join('options', 'memoire_theses.option_id', '=', 'options.id')
             ->join('entites', 'options.entite_id', '=', 'entites.id')
+            ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
+
             ->where('memoire_theses.type_document_id', '=', $type)
             ->orderBy('entites.intitule')
-            ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+            ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option', 'loges.nom as emplacement')
             ->get();
 
         if ($annee = $request->validated('annee')) {
             $documents = DB::table('memoire_theses')
                 ->join('options', 'memoire_theses.option_id', '=', 'options.id')
                 ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
                 ->where('memoire_theses.type_document_id', '=', $type)
                 ->where('memoire_theses.annee', '=', $annee)
                 ->orderBy('entites.intitule')
-                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option', 'loges.nom as emplacement')
                 ->get();
         }
 
@@ -45,10 +48,12 @@ class MemoireTheseController extends Controller
             $documents = DB::table('memoire_theses')
                 ->join('options', 'memoire_theses.option_id', '=', 'options.id')
                 ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
+
                 ->where('memoire_theses.type_document_id', '=', $type)
                 ->where('entites.intitule', '=', $entite)
                 ->orderBy('entites.intitule')
-                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option', 'loges.nom as emplacement')
                 ->get();
         }
 
@@ -56,10 +61,13 @@ class MemoireTheseController extends Controller
             $documents = DB::table('memoire_theses')
                 ->join('options', 'memoire_theses.option_id', '=', 'options.id')
                 ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
+
                 ->where('memoire_theses.type_document_id', '=', $type)
+
                 ->where('memoire_theses.theme', 'like', '%' . $mots_cles . '%')
                 ->orderBy('entites.intitule')
-                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option', 'loges.nom as emplacement')
                 ->get();
         }
 
@@ -67,13 +75,16 @@ class MemoireTheseController extends Controller
             $documents = DB::table('memoire_theses')
                 ->join('options', 'memoire_theses.option_id', '=', 'options.id')
                 ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
+
                 ->where('memoire_theses.type_document_id', '=', $type)
 
                 ->where('memoire_theses.encadreur', 'like', '%' . $encadreur . '%')
                 ->orderBy('entites.intitule')
-                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option')
+                ->select('memoire_theses.*', 'entites.intitule as entite', 'options.intitule as option', 'loges.nom as emplacement')
                 ->get();
         }
+
         $type_information = DB::table('type_documents')->where('id', '=', $type)->first();
         if ($type_information === null) {
             // Le type d'information n'a pas été trouvé
@@ -131,6 +142,7 @@ class MemoireTheseController extends Controller
             'encadreur' => 'required',
             'annee' => 'required|regex:/\d{4}-\d{4}/',
             'option_id' => 'required',
+            'loge_id' => 'required',
             'pdf' => 'file',
             'exemplaire' => 'required|integer',
         ], [
@@ -141,7 +153,7 @@ class MemoireTheseController extends Controller
             'auteur.required' => 'Le nom de l\'auteur est obligatoire',
             'encadreur.required' => 'Le nom de l\'encadreur est obligatoire',
             'annee.required' => 'L\' année  est obligatoire',
-            'annee.regex' => 'L\' année doit suivre le format XXXX-YYYY',
+            'annee.regex' => 'L\' année doit avoir la forme XXXX-YYYY',
             'exemplaire.required' => 'Indiquez le nombre d\'exemplaire',
         ]);
 
@@ -162,6 +174,7 @@ class MemoireTheseController extends Controller
         $document->encadreur = $validatedData['encadreur'];
         $document->auteur = $validatedData['auteur'];
         $document->option_id = $validatedData['option_id'];
+        $document->loge_id = $validatedData['loge_id'];
         $document->annee = $validatedData['annee'];
         $document->pdf = $pdfPath;
         $document->exemplaire = $validatedData['exemplaire'];
@@ -183,11 +196,13 @@ class MemoireTheseController extends Controller
             ->join('type_documents', 'type_documents.id', '=', 'memoire_theses.type_document_id')
             ->join('options', 'options.id', '=', 'memoire_theses.option_id')
             ->join('entites', 'entites.id', '=', 'options.entite_id')
+            ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
             ->select(
                 'entites.intitule as entite',
                 'options.intitule as option',
                 'memoire_theses.*',
                 'type_documents.id as type_id',
+                'loges.nom as emplacement',
                 'type_documents.intitule as type_document',
             )
             ->where('memoire_theses.id', '=', $id)
@@ -218,6 +233,13 @@ class MemoireTheseController extends Controller
             ->select('type_documents.*')
             ->first();
 
+        $rayon_loge = DB::table('memoire_theses')
+            ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
+            ->join('rayons', 'rayons.id', '=', 'loges.rayon_id')
+            ->where('memoire_theses.id', '=', $id)
+            ->select('rayons.id as rayon_id', 'rayons.nom as rayon_nom', 'loges.id as loge_id', 'loges.nom as loge_nom')
+            ->first();
+
         if ($type_information === null) {
             // Le type d'information n'a pas été trouvé
             return view('errors.404');
@@ -227,6 +249,8 @@ class MemoireTheseController extends Controller
             'entites' => Entite::all(),
             'options' => Option::all(),
             'document' => $document,
+            'rayons' => Rayon::all(),
+            'loges' => DB::table('loges')->get(),
             'types' => $types,
             'type_information' => $type_information,
             'type_document' => $type_information->id,
@@ -313,7 +337,10 @@ class MemoireTheseController extends Controller
     {
         $memoireThese = MemoireThese::findOrFail($id);
         $type_document = $memoireThese->type_document_id;
-        Storage::delete($memoireThese->pdf);
+
+        if (!empty($memoireThese->pdf)) {
+            Storage::delete($memoireThese->pdf);
+        }
         $memoireThese->delete();
         return redirect()->route('memoires_theses.type_index', ['type' => $type_document]);
     }

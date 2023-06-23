@@ -32,34 +32,49 @@
                         @csrf @method($document->exists ? 'PUT' : 'POST')
 
                         <div class="form-group">
-                            <label for="type">Type du Document</label>
+                            <label for="type">Type du document</label>
                             <select name="type_document_id" id="" class="form-control">
-                                <option value="">Type du Document</option>
+                                <option value="">Type du document</option>
                                 @foreach ($types as $type)
                                     <option value="{{ $type->id }}" {{ $type_document == $type->id ? 'selected' : '' }}>
-                                        {{ $type->intitule }}</option>
+                                        {{ $type->intitule }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="rayon">Le rayon</label>
-                            <select name="rayon" id="rayon" class="form-control">
+                            <select name="rayon_id" id="rayon" class="form-control">
                                 @foreach ($rayons as $rayon)
-                                    <option value="{{ $rayon->id }}">
-                                        {{ $rayon->nom }}
-                                    </option>
+                                    @if ($document->exists)
+                                        <option value="{{ $rayon->id }}"
+                                            {{ $document->loge->rayon_id == $rayon->id ? 'selected' : '' }}>
+                                            {{ $rayon->nom }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $rayon->id }}">
+                                            {{ $rayon->nom }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="loge">La loge</label>
-                            <select name="loge" id="loge" class="form-control">
+                            <select name="loge_id" id="loge" class="form-control">
                                 @foreach ($loges as $loge)
-                                    <option value="{{ $loge->id }}">
-                                        {{ $loge->nom }}
-                                    </option>
+                                    @if ($document->exists)
+                                        <option value="{{ $loge->id }}"
+                                            {{ $document->loge_id == $loge->id ? 'selected' : '' }}>
+                                            {{ $loge->nom }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $loge->id }}">
+                                            {{ $loge->nom }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>

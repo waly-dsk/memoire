@@ -8,10 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class MemoireThese extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
+
     protected $table = "memoire_theses";
+
     public function option()
     {
         return $this->belongsTo(Option::class);
+    }
+
+    public function loge()
+    {
+        return $this->belongsTo(Loge::class);
     }
 }

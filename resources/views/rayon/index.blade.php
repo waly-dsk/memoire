@@ -23,15 +23,25 @@
             <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">{{ $rayon->nom }}</h4>
-                        <p class="card-description">Le <code>{{ $rayon->nom }} </code> avec ses <code> Loges </code>.
+                        <h4 class="card-title text-center">{{ $rayon->nom }}</h4>
+                        <p class="card-description">Le <code>{{ $rayon->nom }} </code> avec ses <code> Loges </code>
                         </p>
                         <ul class="list-ticked">
                             @foreach (explode(',', $rayon->loges) as $loge)
                                 <li>{{ $loge }}</li>
                             @endforeach
                         </ul>
-
+                        <div class="mt-5 d-flex justify-content-between">
+                            <a href="{{ route('rayon.edit', $rayon->id) }}" title="Modifier"
+                                class="mdi mdi-grease-pencil"></a>
+                            <form action="{{ route('rayon.destroy', $rayon->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
+                                    <i class="mdi mdi-delete"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,17 +73,7 @@
                                         <td>{{ $rayon->nom }}</td>
                                         <td>{{ $rayon->entite }}</td>
                                         <td>
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <a href="{{ route('rayon.edit', $rayon->id) }}" title="Modifier"
-                                                    class="mdi mdi-grease-pencil"></a>
-                                                <form action="{{ route('rayon.destroy', $rayon->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+
                                         </td>
                                     </tr>
                                 @empty

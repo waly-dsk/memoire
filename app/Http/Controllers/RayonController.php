@@ -71,34 +71,75 @@ class RayonController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Rayon $rayon)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Rayon $rayon)
+    public function edit($id)
     {
-        //
+        $rayon = Rayon::findOrFail($id);
+        $rayon_loges = DB::table('rayons')
+            ->join('loges', 'rayons.id', '=', 'loges.rayon_id')
+            ->where('rayons.id', '=', $id)
+            ->select(DB::raw('COUNT(loges.id) as nombre_de_loges'))
+            ->groupBy('rayons.id', 'rayons.nom')
+            ->first();
+
+        if ($rayon == null) {
+            return view('errors.404');
+        }
+        return view('rayon.form', [
+            'user' => Auth::user(),
+            'rayon' => $rayon,
+            'rayon_loges' => $rayon_loges,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rayon $rayon)
+    public function update(Request $request, $rayonId)
     {
-        //
+        $validateData = $request->validate([
+            'nom' => ['required', 'regex:/^Rayon\s\d+$/'],
+            'nombre_de_loges' => 'required|integer|min:1',
+        ], [
+            'nom.required' => "Le nom du rayon est requis",
+            'nom.regex' => "Ce nom de rayon n'est pas valide",
+            'nombre_de_loges.required' => "Indiquer le nombre de loges pour le rayon",
+            'nombre_de_loges.min' => "Minimum 1",
+        ]);
+
+        $rayon = Rayon::findOrFail($rayonId);
+
+        $rayon->nom = $validateData['nom'];
+        $rayon->save();
+
+        // Supprimer les loges existantes
+        DB::table('loges')->where('rayon_id', $rayon->id)->delete();
+
+        for ($i = 1; $i <= (int) $validateData['nombre_de_loges']; $i++) {
+            DB::table('loges')->insert([
+                'rayon_id' => $rayon->id,
+                'nom' => $validateData['nom'] . ' - Loge ' . $i,
+                'created_at' => now(),
+            ]);
+        }
+
+        return redirect()->route('rayon.index')->with('success', "Mise à jour réussie");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rayon $rayon)
+    public function destroy($rayonId)
     {
-        //
+        $rayon = Rayon::findOrFail($rayonId);
+
+        // Supprimer les loges associées au rayon
+        DB::table('loges')->where('rayon_id', $rayon->id)->delete();
+
+        // Supprimer le rayon lui-même
+        $rayon->delete();
+
+        return redirect()->route('rayon.index')->with('success', "Rayon supprimé avec succès");
     }
 }

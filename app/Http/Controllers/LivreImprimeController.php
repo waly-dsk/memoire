@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SearchLivreImprimeRequest;
 use App\Models\User;
 use App\Models\LivreImprime;
+use App\Models\Rayon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -14,51 +15,67 @@ class LivreImprimeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SearchLivreImprimeRequest $request)
+    public function index(SearchLivreImprimeRequest $request, $division_id)
     {
         $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
-            ->where('livre_imprime_exemplaires.statut', '=', 0) // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-            ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
+            ->join('loges', 'loges.id', 'livre_imprimes.loge_id')
+            ->join('divisions', 'divisions.id', 'livre_imprimes.division_id')
+            ->join('categories', 'categories.id', 'divisions.category_id')
+            ->where('livre_imprimes.division_id', '=', $division_id)
+            ->where('livre_imprime_exemplaires.statut', '=', 0)
+
+            ->select(
+                'livre_imprimes.*',
+                DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'),
+                'loges.nom as emplacement',
+                'categories.intitule as category_name',
+                'divisions.intitule as division_name',
+            )
             ->groupBy('livre_imprimes.id')
-            ->paginate(15);
+            ->get();
 
-        if ($cote = $request->validated('cote')) {
-            $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
-                ->where('livre_imprime_exemplaires.statut', '=', 0) // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-                ->where('livre_imprimes.cote', '=', $cote) // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-                ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
-                ->groupBy('livre_imprimes.id')
-                ->paginate(15);
-        }
+        // if ($cote = $request->validated('cote')) {
+        //     $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+        //         ->where('livre_imprime_exemplaires.statut', '=', 0)
+        //         ->where('livre_imprimes.division_id', '=', $division_id)
+        //         ->where('livre_imprimes.cote', '=', $cote)
+        //         ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
+        //         ->groupBy('livre_imprimes.id')
+        //         ->get();
+        // }
 
-        if ($classe = $request->validated('classe')) {
-            $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
-                ->join('divisions', 'divisions.id', '=', 'livre_imprimes.division_id')
-                ->join('categories', 'categories.id', '=', 'divisions.category_id')
-                ->where('livre_imprime_exemplaires.statut', '=', 0) // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-                ->where('categories.classe', '=', $classe) // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-                ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
-                ->groupBy('livre_imprimes.id')
-                ->paginate(15);
-        }
+        // if ($classe = $request->validated('classe')) {
+        //     $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+        //         ->join('divisions', 'divisions.id', '=', 'livre_imprimes.division_id')
+        //         ->join('categories', 'categories.id', '=', 'divisions.category_id')
+        //         ->where('livre_imprime_exemplaires.statut', '=', 0)
+        //         ->where('livre_imprimes.division_id', '=', $division_id)
+        //         ->where('categories.classe', '=', $classe)
+        //         ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
+        //         ->groupBy('livre_imprimes.id')
+        //         ->get();
+        // }
 
-        if ($auteur = $request->validated('auteur')) {
-            $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
-                ->where('livre_imprime_exemplaires.statut', '=', 0) // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-                ->where('livre_imprimes.auteur', 'like', '%' . $auteur . '%') // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-                ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
-                ->groupBy('livre_imprimes.id')
-                ->paginate(15);
-        }
+        // if ($auteur = $request->validated('auteur')) {
+        //     $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+        //         ->where('livre_imprime_exemplaires.statut', '=', 0)
+        //         ->where('livre_imprimes.division_id', '=', $division_id)
+        //         ->where('livre_imprimes.auteur', 'like', '%' . $auteur . '%')
+        //         ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
+        //         ->groupBy('livre_imprimes.id')
+        //         ->get();
+        // }
 
-        if ($titre = $request->validated('titre')) {
-            $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
-                ->where('livre_imprime_exemplaires.statut', '=', 0) // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-                ->where('livre_imprimes.titre', 'like', '%' . $titre . '%') // Ajoutez cette ligne pour filtrer les exemplaires avec le statut = 0
-                ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
-                ->groupBy('livre_imprimes.id')
-                ->paginate(15);
-        }
+        // if ($titre = $request->validated('titre')) {
+        //     $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+        //         ->where('livre_imprime_exemplaires.statut', '=', 0)
+        //         ->where('livre_imprimes.division_id', '=', $division_id)
+        //         ->where('livre_imprimes.titre', 'like', '%' . $titre . '%')
+        //         ->select('livre_imprimes.*', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
+        //         ->groupBy('livre_imprimes.id')
+        //         ->get();
+        // }
+
 
         return view('livre_imprimes.index', [
             'user' => Auth::user() ?: new User(),
@@ -75,6 +92,8 @@ class LivreImprimeController extends Controller
         return view('livre_imprimes.form', [
             'user' => Auth::user(),
             'livre_imprime' => new LivreImprime(),
+            'rayons' => Rayon::all(),
+            'loges' => DB::table('loges')->get(),
             'categories' => DB::table('categories')->get(),
             'divisions' => DB::table('divisions')->get(),
         ]);
@@ -89,19 +108,22 @@ class LivreImprimeController extends Controller
             'cote' => 'required|unique:livre_imprimes,cote',
             'titre' => 'required',
             'auteur' => 'required',
-            'emplacement' => 'required',
             'division_id' => 'required',
+            'loge_id' => 'required',
             'exemplaire' => 'required',
         ], [
             'cote.required' => "La cote de l'ouvrage est à renseigner.",
             'cote.unique' => 'Cette cote existe déjà pour un autre ouvrage.',
+            'titre.required' => "Le titre de l'ouvrage est à renseigner.",
+            'auteur.required' => "L'auteur de l'ouvrage est à renseigner.",
         ]);
+
         $livreImprime = new LivreImprime();
         $livreImprime->cote = $validateData['cote'];
         $livreImprime->titre = $validateData['titre'];
         $livreImprime->auteur = $validateData['auteur'];
-        $livreImprime->emplacement = $validateData['emplacement'];
         $livreImprime->division_id = $validateData['division_id'];
+        $livreImprime->loge_id = $validateData['loge_id'];
         $livreImprime->save();
 
         $livreImprimeId = $livreImprime->id;
@@ -113,7 +135,7 @@ class LivreImprimeController extends Controller
                 'livre_imprime_id' => $livreImprimeId,
             ]);
         }
-        return redirect('livre_imprime')->with('success', 'Livre Iprimé Ajouté avec succès !');
+        return to_route('livre_imprime.index', ['division_id' => $validateData['division_id']])->with('success', 'Livre Iprimé Ajouté avec succès !');
     }
 
 

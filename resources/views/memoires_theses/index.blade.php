@@ -41,7 +41,7 @@
                         </button>
                     </form>
                     <div class="row mt-5">
-                        <!-- Boucle pour afficher les ouvrages -->
+                        <!-- Boucle pour afficher les mémoires -->
                         @forelse ($documents as $document)
                             <div class="col-md-4 stretch-card grid-margin">
                                 <a href="{{ route('memoires_theses.show', ['id' => $document->id]) }}"
@@ -50,12 +50,12 @@
                                         <img src="{{ asset('assets/images/dashboard/circle.svg') }}"
                                             class="card-img-absolute" alt="circle-image" />
                                         <h4 class="font-weight-normal mb-3">
-                                            {{ $document->auteur }}
+                                            {{ $document->emplacement }}
                                             <i class="mdi mdi-diamond mdi-24px float-right"></i>
                                         </h4>
                                         <p class="card-text">
                                             {{ $document->entite }} :
-                                            {{ $document->option }} {{ $document->annee }}
+                                            {{ $document->option }}
                                         </p>
                                         <p style="text-align: left" class="card-text">{{ $document->theme }}</p>
 

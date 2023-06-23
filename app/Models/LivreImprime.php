@@ -15,4 +15,9 @@ class LivreImprime extends Model
     {
         return $this->belongsTo(Division::class);
     }
+
+    public function loge()
+    {
+        return $this->belongsTo(Loge::class);
+    }
 }

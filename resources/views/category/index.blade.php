@@ -10,7 +10,7 @@
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Catégories</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('livre_imprime.create') }}">Ajouter un Livre Imprimé</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Livres Imprimés</li>
             </ol>
         </nav>
@@ -24,59 +24,40 @@
                         Le <code>CID-UP</code> utilise la <code>Classification Décimale de Dewey</code>
                     </p>
                     <p>
-                        La classification décimale de Dewey (CDD) est le système qui est appliqué afin de permettre à nos
-                        bibliothèques de classer par sujet l’ensemble de la collection de livres. Ce système de
+                        La classification décimale de Dewey (CDD) est le système qui est appliqué afin de permettre à notre
+                        bibliothèque de classer par sujet l’ensemble de la collection de livres. Ce système de
                         classification répartit les livres dans dix classes. Chaque classe est elle-même divisée en dix
-                        divisions, chaque division en dix subdivisions et ainsi de suite.
+                        divisions.
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Catégories</h4>
-                    <p class="card-description"> Les<code>.catégories</code> d'ouvrage</p>
-                    <table class="table text-center">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>CLASSE</th>
-                                <th>INTITULE</th>
-                                <th>DATE AJOUT</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($categories as $category)
-                                <tr>
-                                    <td>
-                                        {{ $category->id }}
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('category.show', $category->id) }}">
-                                            {{ $category->classe }}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('category.show', $category->id) }}">
-                                            {{ $category->intitule }}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <label class="badge badge-danger">
-                                            {{ \Carbon\Carbon::parse($category->created_at)->locale('fr_FR')->isoFormat('LL') }}
-
-                                        </label>
-                                    </td>
-                                </tr>
+    </div>
+    <div class="row">
+        @forelse ($categories as $category)
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ $category->intitule . ' (' . $category->classe . ') ' }}</h4>
+                        <p></p>
+                        <ul class="list-ticked">
+                            @php
+                                $divisionIds = explode(' | ', rtrim($category->division_ids, ' | '));
+                                $divisionClasses = explode(' | ', rtrim($category->division_classes, ' | '));
+                                $divisions = explode(' | ', rtrim($category->divisions, ' | '));
+                            @endphp
+                            @foreach ($divisionIds as $key => $divisionId)
+                                <li><a href="{{ route('livre_imprime.index', ['division_id' => $divisionId]) }}">{{ $divisionClasses[$key] }}
+                                        -
+                                        {{ $divisions[$key] }}</a></li>
                             @endforeach
-                        </tbody>
-                    </table>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        @empty
+        @endforelse
     </div>
-    {{ $categories->links() }}
 
     <div id="login-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">

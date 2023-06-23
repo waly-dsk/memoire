@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('cote')->unique();
             $table->string('auteur');
             $table->string('titre');
-            $table->string('emplacement');
             $table->timestamps();
         });
     }

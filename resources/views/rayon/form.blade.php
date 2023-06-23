@@ -40,7 +40,8 @@
                         <div class="form-group">
                             <label for="nombre_de_loges">Nombre de Loges</label>
                             <input type="text" name="nombre_de_loges" class="form-control" id="nombre_de_loges"
-                                placeholder="Nombre de Loges" value="{{ $rayon->nombre_de_loges }}">
+                                placeholder="Nombre de Loges"
+                                value="{{ $rayon->exists ? $rayon_loges->nombre_de_loges : '' }}">
                         </div>
 
                         <button type="submit" class="btn btn-gradient-primary mr-2">

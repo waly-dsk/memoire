@@ -30,14 +30,19 @@
                         Option : <code>{{ $document->option }}</code>
                     </p>
                     <p class="font-weight-bold">{{ $document->theme }}</p>
-                    <p class="card-description">Cote : {{ $document->cote }} Année : {{ $document->annee }}</p>
+                    <p class="card-description">
+                        Emplacement : <code>{{ $document->emplacement }}</code>
+                    </p>
                 </div>
             </div>
 
             <div class="card grid-margin stretch-card">
                 <div class="card-body">
-                    <p class="card-description">Auteur : {{ $document->auteur }}</p>
+                    <p class="card-description">Année : {{ $document->annee }}</p>
+                    <p class="card-description">Cote : {{ $document->cote }} </p>
                     <p class="card-description">Encadreur : {{ $document->encadreur }}</p>
+                    <p class="card-description">Auteur : {{ $document->auteur }}</p>
+
                     @if ($document->pdf)
                         <div class="form-group">
                             <a class="" href="{{ Storage::url($document->pdf) }}">
