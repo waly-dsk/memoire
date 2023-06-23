@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('memoire_theses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('loge_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('type_document_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('cote')->unique();
             $table->string('theme');

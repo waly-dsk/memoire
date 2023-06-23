@@ -41,6 +41,29 @@
                                 @endforeach
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label for="rayon">Le rayon</label>
+                            <select name="rayon" id="rayon" class="form-control">
+                                @foreach ($rayons as $rayon)
+                                    <option value="{{ $rayon->id }}">
+                                        {{ $rayon->nom }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="loge">La loge</label>
+                            <select name="loge" id="loge" class="form-control">
+                                @foreach ($loges as $loge)
+                                    <option value="{{ $loge->id }}">
+                                        {{ $loge->nom }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="form-group">
                             <label for="cote">Cote</label>
                             <input type="text" name="cote" class="form-control" id="cote" placeholder="Cote"
@@ -159,6 +182,25 @@
                     $.each(options, function(index, option) {
                         optionSelect.append($('<option></option>').val(option.id).text(option
                             .intitule));
+                    });
+                });
+            }
+        });
+
+        $('#rayon').change(function() {
+            var rayonId = $(this).val();
+            var logeSelect = $('#loge');
+
+            // Supprimer toutes les loges existantes
+            logeSelect.empty();
+
+            // Envoyer une requête AJAX pour récupérer les loges associées à l'entité sélectionnée
+            if (rayonId !== '') {
+                $.get('{{ url('get_loges') }}/' + rayonId, function(loges) {
+                    // Ajouter les loges récupérées au select d'loges
+                    $.each(loges, function(index, loge) {
+                        logeSelect.append($('<option></option>').val(loge.id).text(loge
+                            .nom));
                     });
                 });
             }

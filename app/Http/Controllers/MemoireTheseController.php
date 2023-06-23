@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Entite;
 use App\Models\Option;
 use App\Models\MemoireThese;
+use App\Models\Rayon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -106,6 +107,8 @@ class MemoireTheseController extends Controller
             'user' => Auth::user(),
             'entites' => Entite::all(),
             'options' => Option::all(),
+            'rayons' => Rayon::all(),
+            'loges' => DB::table('loges')->get(),
             'document' => $document,
             'types' => $types,
             'type_document' => $type_document,

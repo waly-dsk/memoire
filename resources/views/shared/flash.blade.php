@@ -48,8 +48,8 @@
         flashMessages.forEach(function(message) {
             message.classList.add('fade-out');
         });
-    }, 5000);
+    }, 3000);
     setTimeout(function() {
         document.getElementById('flash').style.display = 'none';
-    }, 6000);
+    }, 4000);
 </script>

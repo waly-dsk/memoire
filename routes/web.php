@@ -75,6 +75,7 @@ Route::get('/non_admin', [\App\Http\Controllers\HomeController::class, 'non_admi
  */
 Route::get('/get_options/{entiteId}', [\App\Http\Controllers\AjaxController::class, 'get_options'])->name('get_options');
 Route::get('/get_divisions/{categoryId}', [\App\Http\Controllers\AjaxController::class, 'get_divisions'])->name('get_divisions');
+Route::get('/get_loges/{rayonId}', [\App\Http\Controllers\AjaxController::class, 'get_loges'])->name('get_loges');
 Route::get('/get_memos/{mois}', [\App\Http\Controllers\AjaxController::class, 'get_memos'])->name('get_memos');
 Route::get('/get_livres/{mois}', [\App\Http\Controllers\AjaxController::class, 'get_livres'])->name('get_livres');
 Route::get('/get_prets/{mois}', [\App\Http\Controllers\AjaxController::class, 'get_prets'])->name('get_prets');
@@ -87,6 +88,7 @@ Route::get('/get_prets/{mois}', [\App\Http\Controllers\AjaxController::class, 'g
 Route::middleware('auth')->group(function () {
     Route::delete('suggestion/{id}', [\App\Http\Controllers\SuggestionController::class, 'destroy'])->name('suggestion.destroy');
     Route::resource('abonne', \App\Http\Controllers\AbonneController::class)->except('show');
+    Route::resource('rayon', \App\Http\Controllers\RayonController::class)->except('show');
     Route::resource('memoire_these', \App\Http\Controllers\MemoireTheseController::class)->except(['index', 'create', 'show']);
     Route::resource('livre_imprime', \App\Http\Controllers\LivreImprimeController::class);
     Route::resource('pret', \App\Http\Controllers\PretController::class)->except('destroy');

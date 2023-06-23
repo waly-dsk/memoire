@@ -76,4 +76,13 @@ class AjaxController extends Controller
             ->get();
         return response()->json($prets);
     }
+
+    public function get_loges($rayonId)
+    {
+        $loges = DB::table('loges')
+            ->where('rayon_id', '=', $rayonId)
+            ->get();
+
+        return response()->json($loges);
+    }
 }

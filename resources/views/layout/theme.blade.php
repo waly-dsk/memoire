@@ -166,6 +166,13 @@
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('rayon.index') }}">
+                                <span class="menu-title">Rayons</span>
+                                <i class="mdi mdi mdi-arrow-expand-all menu-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '1']) }}">
                                 <span class="menu-title">Mémoires Licences</span>
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
