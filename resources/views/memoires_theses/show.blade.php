@@ -24,46 +24,58 @@
             </div>
             <div class="card grid-margin stretch-card">
                 <div class="card-body">
-
+                    <p class="card-description">
+                        Emplacement : <code class="font-weight-bold">{{ $document->emplacement }}</code>
+                    </p>
                     <p class="card-description">
                         Entité : <code>{{ $document->entite }}</code>
                         Option : <code>{{ $document->option }}</code>
                     </p>
                     <p class="font-weight-bold">{{ $document->theme }}</p>
-                    <p class="card-description">
-                        Emplacement : <code>{{ $document->emplacement }}</code>
-                    </p>
                 </div>
             </div>
 
             <div class="card grid-margin stretch-card">
                 <div class="card-body">
-                    <p class="card-description">Année : {{ $document->annee }}</p>
-                    <p class="card-description">Cote : {{ $document->cote }} </p>
-                    <p class="card-description">Encadreur : {{ $document->encadreur }}</p>
-                    <p class="card-description">Auteur : {{ $document->auteur }}</p>
+                    <p class="card-description">Année :
+                        {{ $document->annee }}
+                    </p>
+                    <p class="card-description">Encadreur :
+                        <code class="font-weight-bold">
+                            {{ $document->encadreur }}
+                        </code>
+                    </p>
+                    <p class="card-description">Auteur :
+                        <code class="font-weight-bold">
+                            {{ $document->auteur }}
+                        </code>
+                    </p>
 
                     @if ($document->pdf)
-                        <div class="form-group">
-                            <a class="" href="{{ Storage::url($document->pdf) }}">
-                                Télécharger le PDF
+                        <a class="" href="{{ Storage::url($document->pdf) }}">
+                            Télécharger le PDF
+                        </a>
+                    @endif
+                    @if ($user && $user->exists)
+                        <div class="row mt-2">
+                            <a href="{{ route('memoire_these.edit', $document->id) }}" style="color: blue" class="btn"
+                                title="Modifier">
+                                <i class="mdi mdi-marker"></i>
                             </a>
+                            <form action="{{ route('memoire_these.destroy', $document->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="btn" style="color: red" title="Supprimer">
+                                    <i class="mdi mdi-delete-forever"></i>
+                                </button>
+                            </form>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
-    @if ($user && $user->exists)
-        <div class="row mt-5 ml-2">
-            <a href="{{ route('memoire_these.edit', $document->id) }}" class="btn btn-gradient-primary">Modifier</a>
-            <form action="{{ route('memoire_these.destroy', $document->id) }}" method="post">
-                @csrf
-                @method('delete')
-                <button class="offset-2 btn btn-gradient-danger" title="Supprimer">Supprimer</button>
-            </form>
-        </div>
-    @endif
+
 
     <div id="login-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">

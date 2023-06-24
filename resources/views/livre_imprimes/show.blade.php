@@ -10,7 +10,7 @@
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#"></a></li>
+                <li class="breadcrumb-item"><a href="{{ route('category.index') }}">Tous les livres</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Informations</li>
             </ol>
         </nav>
@@ -23,24 +23,20 @@
                     <h4 class="card-title">Détails du livre</h4>
                     <hr>
                     <p class="card-description mb-2">
-                        Cote : <strong> {{ $livre_imprime->cote }}</strong>
+                        Cote : <code class="font-weight-bold"> {{ $livre_imprime->cote }}</code>
                     </p>
                     <hr>
                     <p class="card-description mb-2">
-                        Titre du Livre : <span class="font-weight-bold">{{ $livre_imprime->titre }}</span>
-                    </p>
-                    <hr>
-                    <p class="card-description mb-2">
-                        Auteur : {{ $livre_imprime->auteur }}
+                        Auteur : <code class="font-weight-bold"> {{ $livre_imprime->auteur }}</code>
                     </p>
                     <hr>
 
                     <p class="card-description mb-2">
-                        Catégorie : <code>{{ $livre_imprime->categorie_intitule }}</code>
+                        Catégorie : <code class="font-weight-bold">{{ $livre_imprime->categorie_intitule }}</code>
                     </p>
                     <hr>
                     <p class="card-description mb-2">
-                        Sous Catégorie : <code>{{ $livre_imprime->division_intitule }}</code>
+                        Sous Catégorie : <code class="font-weight-bold">{{ $livre_imprime->division_intitule }}</code>
                     </p>
                     <hr>
                 </div>
@@ -53,20 +49,19 @@
                     <h4 class="card-title">Autres informations</h4>
                     <hr>
                     <p class="card-description mb-2">
-                        Exemplaires Disponibles : <strong>
-                            {{ $livre_imprime->nombre_exemplaires }}
-                        </strong>
+                        Emplacement : <code class="font-weight-bold">{{ $livre_imprime->emplacement }} </code>
                     </p>
                     <hr>
                     <p class="card-description mb-2">
-                        Date dernière Modification : <span
-                            class="font-weight-bold">{{ \Carbon\Carbon::parse($livre_imprime->updated_at)->locale('fr_FR')->isoFormat('LL') }}</span>
+                        Exemplaires Disponibles : <code class="font-weight-bold">
+                            {{ $livre_imprime->nombre_exemplaires }}
+                        </code>
                     </p>
                     <hr>
 
                     <p class="card-description mb-2">
-                        Date d'Ajout : <span
-                            class="font-weight-bold">{{ \Carbon\Carbon::parse($livre_imprime->created_at)->locale('fr_FR')->isoFormat('LL') }}</span>
+                        Date d'Ajout : <code
+                            class="font-weight-bold">{{ \Carbon\Carbon::parse($livre_imprime->created_at)->locale('fr_FR')->isoFormat('LL') }}</code>
                     </p>
                     <hr>
                 </div>

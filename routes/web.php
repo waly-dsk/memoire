@@ -58,7 +58,6 @@ Route::get('livre_imprimes/livres_show/{id}', [\App\Http\Controllers\LivreImprim
  *      Pour chaque catégorie on peut voir ses SUBDIVISIONS
  */
 Route::get('categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
-Route::get('categories/{id}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
 
 
 /**
@@ -86,7 +85,8 @@ Route::get('/get_prets/{mois}', [\App\Http\Controllers\AjaxController::class, 'g
  *  Il s'agit ici des différentes fonctionnalités qui sont les leurs dans le système
  */
 Route::middleware('auth')->group(function () {
-    Route::delete('suggestion/{id}', [\App\Http\Controllers\SuggestionController::class, 'destroy'])->name('suggestion.destroy');
+    Route::delete('suggestion_generale/{id}', [\App\Http\Controllers\SuggestionGeneraleController::class, 'destroy'])->name('suggestion_generale.destroy');
+    Route::delete('suggestion_ouvrage/{id}', [\App\Http\Controllers\SuggestionOuvrageController::class, 'destroy'])->name('suggestion_ouvrage.destroy');
     Route::resource('abonne', \App\Http\Controllers\AbonneController::class)->except('show');
     Route::resource('rayon', \App\Http\Controllers\RayonController::class)->except('show');
     Route::resource('memoire_these', \App\Http\Controllers\MemoireTheseController::class)->except(['index', 'create', 'show']);

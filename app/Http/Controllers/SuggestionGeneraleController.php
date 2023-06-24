@@ -99,6 +99,6 @@ class SuggestionGeneraleController extends Controller
     public function destroy($id)
     {
         DB::table('suggestion_generales')->where('id', '=', $id)->delete();
-        return to_route('suggestion_generale.index')->with('success', 'Suggestion supprimée avec succès');
+        return redirect()->back();
     }
 }

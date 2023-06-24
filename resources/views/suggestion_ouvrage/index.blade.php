@@ -19,12 +19,6 @@
         <div class="col-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">
-                    </h4>
-                    <p class="card-description">
-                        Toutes les <code> Suggestions d'Ouvrages.</code>
-                        Vous pouvez <code>Filtrer</code> les <code>Résultats.</code>
-                    </p>
                     <form action="" method="get" class="mb-5 forms sample d-flex gap-2">
                         <select class="form-control" name="category_id">
                             <option value="">Sélectionnez une catégorie</option>
@@ -55,7 +49,15 @@
                             Rechercher
                         </button>
                     </form>
-                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -96,7 +98,8 @@
                                                     <a href="" title="Répondre"
                                                         class="offset-1 mdi mdi-message-reply">
                                                     </a>
-                                                    <form action="{{ route('suggestion.destroy', $suggestion->id) }}"
+                                                    <form
+                                                        action="{{ route('suggestion_ouvrage.destroy', $suggestion->id) }}"
                                                         method="post" class="offset-5 align-self-center">
                                                         @csrf
                                                         @method('delete')
@@ -115,7 +118,6 @@
                     </div>
                 </div>
             </div>
-            <hr>
             {{ $suggestions->links() }}
         </div>
     </div>

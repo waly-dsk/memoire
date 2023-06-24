@@ -10,7 +10,10 @@
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('livre_imprime.create') }}">Ajouter un Livre Imprimé</a></li>
+                @if ($user && $user->exists)
+                    <li class="breadcrumb-item"><a href="{{ route('livre_imprime.create') }}">Ajouter un Livre Imprimé</a>
+                    </li>
+                @endif
                 <li class="breadcrumb-item active" aria-current="page">Livres Imprimés</li>
             </ol>
         </nav>
@@ -19,12 +22,12 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Classification Dewey</h4>
+                    <h4 class="card-title">La classification Dewey</h4>
                     <p class="card-description">
                         Le <code>CID-UP</code> utilise la <code>Classification Décimale de Dewey</code>
                     </p>
                     <p>
-                        La classification décimale de Dewey (CDD) est le système qui est appliqué afin de permettre à notre
+                        La Classification Décimale de Dewey (CDD) est le système qui est appliqué afin de permettre à notre
                         bibliothèque de classer par sujet l’ensemble de la collection de livres. Ce système de
                         classification répartit les livres dans dix classes. Chaque classe est elle-même divisée en dix
                         divisions.

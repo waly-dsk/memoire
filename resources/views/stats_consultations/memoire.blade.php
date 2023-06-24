@@ -28,7 +28,6 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Mémoires et Thèses</h4>
                     <p class="card-description"> Les<code> Statistiques de Consultations sur Place</code> /<code>de Mémoires
                             et Thèses</code> </p>
                     <table style="table-layout: fixed;" class="table">
@@ -90,8 +89,7 @@
                                                     $cote = $parts[1];
                                                 @endphp
                                                 @if ($cote !== $previousCote)
-                                                    <a
-                                                        href="{{ route('memoire_these.show', ['memoire_these' => $memoire_id]) }}">
+                                                    <a href="{{ route('memoires_theses.show', ['id' => $memoire_id]) }}">
                                                         {{ $cote }}<br>
                                                     </a>
                                                 @endif

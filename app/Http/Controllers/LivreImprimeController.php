@@ -17,7 +17,20 @@ class LivreImprimeController extends Controller
      */
     public function index(SearchLivreImprimeRequest $request, $division_id)
     {
-        $livresAvecExemplaires = LivreImprime::leftJoin('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+        if (!(is_numeric($division_id) && $division_id >= 1 && $division_id <= 100)) {
+            return view('errors.404');
+        }
+        $sous_categorie = DB::table('divisions')
+            ->where('id', '=', $division_id)
+            ->select('intitule')
+            ->first();
+
+        $livresAvecExemplaires = LivreImprime::leftJoin(
+            'livre_imprime_exemplaires',
+            'livre_imprimes.id',
+            '=',
+            'livre_imprime_exemplaires.livre_imprime_id'
+        )
             ->join('loges', 'loges.id', 'livre_imprimes.loge_id')
             ->join('divisions', 'divisions.id', 'livre_imprimes.division_id')
             ->join('categories', 'categories.id', 'divisions.category_id')
@@ -76,10 +89,10 @@ class LivreImprimeController extends Controller
         //         ->get();
         // }
 
-
         return view('livre_imprimes.index', [
             'user' => Auth::user() ?: new User(),
             'livre_imprimes' => $livresAvecExemplaires,
+            'sous_categorie' => $sous_categorie,
             'input' => $request->validated(),
         ]);
     }
@@ -145,11 +158,18 @@ class LivreImprimeController extends Controller
     public function show($id)
     {
         $livreImprime = DB::table('livre_imprimes')
+            ->join('loges', 'livre_imprimes.loge_id', '=', 'loges.id')
             ->join('divisions', 'livre_imprimes.division_id', '=', 'divisions.id')
             ->join('categories', 'divisions.category_id', '=', 'categories.id')
             ->join('livre_imprime_exemplaires', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
             ->where('livre_imprime_exemplaires.statut', '=', 0)
-            ->select('livre_imprimes.*', 'divisions.intitule AS division_intitule', 'categories.intitule AS categorie_intitule', DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires'))
+            ->select(
+                'livre_imprimes.*',
+                'divisions.intitule AS division_intitule',
+                'categories.intitule AS categorie_intitule',
+                'loges.nom AS emplacement',
+                DB::raw('COUNT(livre_imprime_exemplaires.id) as nombre_exemplaires')
+            )
             ->where('livre_imprimes.id', $id)
             ->first();
 

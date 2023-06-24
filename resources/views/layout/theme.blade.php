@@ -157,18 +157,19 @@
                                     <i class="mdi mdi-account-multiple-plus menu-icon"></i>
                                 </a>
                             </li>
+
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('rayon.index') }}">
+                                    <span class="menu-title">Rayons</span>
+                                    <i class="mdi mdi mdi-arrow-expand-all menu-icon"></i>
+                                </a>
+                            </li>
                         @endif
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('abonne.index') }}">
                                 <span class="menu-title">Abonnés</span>
                                 <i class="mdi mdi-account-convert menu-icon"></i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('rayon.index') }}">
-                                <span class="menu-title">Rayons</span>
-                                <i class="mdi mdi mdi-arrow-expand-all menu-icon"></i>
                             </a>
                         </li>
 
@@ -218,29 +219,6 @@
                             </a>
                         </li>
 
-
-                        {{-- <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#livres" aria-expanded="false"
-                                aria-controls="livres">
-                                <span class="menu-title"></span>
-                                <i class="menu-arrow"></i>
-                                <i class="mdi  mdi mdi-checkbox-multiple-marked-outline  menu-icon"></i>
-                            </a>
-                            <div class="collapse" id="livres">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">
-                                            Catégories de Livres
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('livre_imprime.index') }}">
-                                            Tous les Livres
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li> --}}
 
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#consultations" aria-expanded="false"
@@ -343,26 +321,10 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" href="#livres" aria-expanded="false"
-                                aria-controls="livres">
+                            <a class="nav-link" href="{{ route('category.index') }}">
                                 <span class="menu-title">Livres Imprimés</span>
-                                <i class="menu-arrow"></i>
-                                <i class="mdi mdi-medical-bag menu-icon"></i>
+                                <i class="mdi mdi-checkbox-multiple-marked-outline menu-icon"></i>
                             </a>
-                            <div class="collapse" id="livres">
-                                <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('category.index') }}">
-                                            Catégories de Livres
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('livre_imprimes.index') }}">
-                                            Tous les Livres
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                     @endif
                 </ul>

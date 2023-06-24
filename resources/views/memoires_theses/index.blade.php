@@ -24,9 +24,6 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-description">
-                        Vous pouvez <code> Filtrer </code> la <code>Liste</code>.
-                    </p>
                     <form action="" method="get" class="forms sample d-flex gap-2">
                         <input type="text" placeholder="Entité" class="form-control" name="entite"
                             value="{{ $input['entite'] ?? '' }}">
@@ -40,39 +37,35 @@
                             Rechercher
                         </button>
                     </form>
-                    <div class="row mt-5">
-                        <!-- Boucle pour afficher les mémoires -->
-                        @forelse ($documents as $document)
-                            <div class="col-md-4 stretch-card grid-margin">
-                                <a href="{{ route('memoires_theses.show', ['id' => $document->id]) }}"
-                                    class="card bg-gradient-primary card-img-holder text-white">
-                                    <div class="card-body">
-                                        <img src="{{ asset('assets/images/dashboard/circle.svg') }}"
-                                            class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3">
-                                            {{ $document->emplacement }}
-                                            <i class="mdi mdi-diamond mdi-24px float-right"></i>
-                                        </h4>
-                                        <p class="card-text">
-                                            {{ $document->entite }} :
-                                            {{ $document->option }}
-                                        </p>
-                                        <p style="text-align: left" class="card-text">{{ $document->theme }}</p>
-
-                                        <!-- Autres informations de l'document -->
-                                    </div>
-                                </a>
-                            </div>
-                        @empty
-                            <div class="col text-center">
-                                <a class="btn btn-gradient-primary" href="#">AUCUN RESULTAT NE CORRESPOND
-                                    A VOTRE RECHERCHE</a>
-                            </div>
-                        @endforelse
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <!-- Boucle pour afficher les mémoires -->
+        @forelse ($documents as $document)
+            <div class="col-md-4 stretch-card grid-margin">
+                <a href="{{ route('memoires_theses.show', ['id' => $document->id]) }}"
+                    class="card bg-gradient-primary card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{{ asset('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
+                            alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            {{ $document->emplacement }}
+                            <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                        </h4>
+                        <p class="card-text">
+                            {{ $document->entite }} :
+                            {{ $document->option }}
+                        </p>
+                        <p style="text-align: left" class="card-text">{{ $document->theme }}</p>
+
+                        <!-- Autres informations de l'document -->
+                    </div>
+                </a>
+            </div>
+        @empty
+        @endforelse
     </div>
     <div id="login-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">

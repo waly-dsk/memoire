@@ -6,7 +6,7 @@
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-book-open-page-variant"></i>
             </span>
-            Livres Imprimés
+            {{ $sous_categorie->intitule }}
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -22,10 +22,6 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Livres Disponibles</h4>
-                    <p class="card-description">
-                        Vous pouvez <code> Filtrer </code> les <code> Livres Imprimés</code>.
-                    </p>
                     <form action="" method="get" class="forms sample d-flex gap-2">
                         <input type="text" placeholder="Cote" class="form-control" name="cote"
                             value="{{ $input['cote'] ?? '' }}">
@@ -40,57 +36,7 @@
                         </button>
                     </form>
 
-                    <div class="row mt-5">
-                        @forelse ($livre_imprimes as $livre_imprime)
-                            <div class="col-md-4 stretch-card grid-margin">
-                                <a href="{{ route('livre_imprimes.show', ['id' => $livre_imprime->id]) }}"
-                                    class="card bg-gradient-primary card-img-holder text-white">
-                                    <div class="card-body">
-                                        <img src="{{ asset('assets/images/dashboard/circle.svg') }}"
-                                            class="card-img-absolute" alt="circle-image" />
-                                        <h4 class="font-weight-normal mb-3">
-                                            {{ $livre_imprime->emplacement }}
-                                            <i class="mdi mdi-diamond mdi-24px float-right"></i>
-                                        </h4>
-                                        <p class="card-text">
-                                            {{ $livre_imprime->division_name }},
-                                            {{ $livre_imprime->cote }}
-                                        </p>
-                                        <p style="text-align: left" class="card-text">{{ $livre_imprime->titre }}</p>
-
-                                        <!-- Autres informations de l'document -->
-                                    </div>
-                                </a>
-                            </div>
-                        @empty
-                            <div class="col text-center">
-                                <a class="btn btn-gradient-primary" href="#">AUCUN RESULTAT NE CORRESPOND
-                                    A VOTRE RECHERCHE</a>
-                            </div>
-                        @endforelse
-                    </div>
-
                     {{-- <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Cote</th>
-                                <th>Titre</th>
-                                <th>Auteur</th>
-                                <th>Exemplaire</th>
-                                <th>
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($livre_imprimes as $livre_imprime)
-                                <tr>
-                                    <td>{{ $livre_imprime->cote }}</td>
-                                    <td>{{ $livre_imprime->titre }}</td>
-                                    <td class="">{{ $livre_imprime->auteur }}</td>
-                                    <td>
-                                        <label class="badge badge-danger">{{ $livre_imprime->nombre_exemplaires }}</label>
-                                    </td>
                                     @if ($user->exists)
                                         <td>
                                             <div class="row">
@@ -125,6 +71,34 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        @forelse ($livre_imprimes as $livre_imprime)
+            <div class="col-md-4 stretch-card grid-margin">
+                <a href="{{ route('livre_imprimes.show', ['id' => $livre_imprime->id]) }}"
+                    class="card bg-gradient-primary card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="{{ asset('assets/images/dashboard/circle.svg') }}" class="card-img-absolute"
+                            alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            {{ $livre_imprime->emplacement }}
+                            <i class="mdi mdi-diamond mdi-24px float-right"></i>
+                        </h4>
+                        <p class="card-text">
+                            {{ $livre_imprime->division_name }}, {{ $livre_imprime->cote }}
+                        </p>
+                        <p style="text-align: left" class="card-text">{{ $livre_imprime->titre }}</p>
+                        <p class="card-text">
+                            {{ $livre_imprime->auteur }}
+                        </p>
+                        <p class="card-text">
+                            Exemplaires : {{ $livre_imprime->nombre_exemplaires }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        @empty
+        @endforelse
     </div>
     <div id="login-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">

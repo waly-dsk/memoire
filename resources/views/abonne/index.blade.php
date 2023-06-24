@@ -22,10 +22,6 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title"></h4>
-                    <p class="card-description">
-                        Vous pouvez <code> Filtrer </code> la liste des <code> Abonnés.</code>
-                    </p>
                     <form action="" method="get" class="mb-5 forms sample d-flex gap-2">
                         <input type="text" placeholder="Entité" class="form-control" name="entite"
                             value="{{ $input['entite'] ?? '' }}">
@@ -39,6 +35,14 @@
                             Rechercher
                         </button>
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -75,19 +79,10 @@
                                         </td>
                                     </tr>
                                 @empty
-                                    <tr>
-                                        <td colspan="6" class="text-center">
-                                            <div class="col mt-5">
-                                                <a href="#" class="">AUCUN ABONNE NE CORRESPOND A
-                                                    VOTRE RECHERCHE</a>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
         </div>

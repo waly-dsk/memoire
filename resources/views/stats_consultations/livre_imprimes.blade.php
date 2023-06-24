@@ -6,7 +6,7 @@
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-account-multiple-plus"></i>
             </span>
-            Statistiques des Consultations
+            Consultations Livres Imprimés
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -24,10 +24,6 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Livres Imprimés</h4>
-                    <p class="card-description">
-                        Les <code>Statistiques de Consultations sur Place de </code>Livres Imprimés
-                    </p>
                     <table style="table-layout: fixed;" class="table">
                         @if (count($stats) > 0)
                             <thead>
@@ -78,7 +74,7 @@
                                                 @endphp
                                                 @if ($cote !== $previousCote)
                                                     <a
-                                                        href="{{ route('livre_imprime.show', ['livre_imprime' => $livre_imprime_id]) }}">
+                                                        href="{{ route('livre_imprimes.show', ['id' => $livre_imprime_id]) }}">
                                                         {{ $cote }}<br>
                                                     </a>
                                                 @endif

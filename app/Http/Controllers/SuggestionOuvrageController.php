@@ -113,6 +113,6 @@ class SuggestionOuvrageController extends Controller
     public function destroy($id)
     {
         DB::table('suggestion_ouvrages')->where('id', '=', $id)->delete();
-        return to_route('suggestion_ouvrages.index')->with('success', 'Suggestion supprimée avec succès');
+        return redirect()->back();
     }
 }
