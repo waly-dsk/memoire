@@ -208,6 +208,7 @@ class MemoireTheseController extends Controller
             ->where('memoire_theses.id', '=', $id)
             ->first();
 
+            
         if ($document == null) {
             // Le type d'information n'a pas été trouvé
             return view('errors.404');

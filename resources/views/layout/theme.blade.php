@@ -183,7 +183,6 @@
                                 </a>
                             </li>
 
-
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('rayon.index') }}">
                                     <span class="menu-title">Rayons</span>
@@ -200,13 +199,13 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '1']) }}">
-                                <span class="menu-title">Mémoires Licences</span>
+                                <span class="menu-title">Mémoires de Licences</span>
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '2']) }}">
-                                <span class="menu-title">Mémoires Master</span>
+                                <span class="menu-title">Mémoires de Master</span>
                                 <i class="mdi  mdi mdi-book-open-page-variant menu-icon"></i>
                             </a>
                         </li>
@@ -308,13 +307,13 @@
                     @else
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '1']) }}">
-                                <span class="menu-title">Mémoires Licences</span>
+                                <span class="menu-title">Mémoires de Licences</span>
                                 <i class="mdi mdi-book-open-variant menu-icon"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('memoires_theses.type_index', ['type' => '2']) }}">
-                                <span class="menu-title">Mémoires Master</span>
+                                <span class="menu-title">Mémoires de Master</span>
                                 <i class="mdi  mdi mdi-book-open-page-variant menu-icon"></i>
                             </a>
                         </li>

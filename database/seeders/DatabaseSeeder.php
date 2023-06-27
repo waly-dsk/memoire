@@ -198,5 +198,68 @@ class DatabaseSeeder extends Seeder
             ['classe' => '980', 'intitule' => 'Histoire de l’Amérique du Sud', 'category_id' => 10],
             ['classe' => '990', 'intitule' => 'Histoire des autres régions du monde', 'category_id' => 10],
         ]);
+
+
+        DB::table('rayons')->insert([
+            ['id' => 1, 'nom' => 'R-0-0-01', 'created_at' => now()],
+            ['id' => 2, 'nom' => 'R-0-0-02', 'created_at' => now()],
+            ['id' => 3, 'nom' => 'R-0-0-03', 'created_at' => now()],
+            ['id' => 4, 'nom' => 'R-0-0-04', 'created_at' => now()],
+        ]);
+
+        // Code pour enregistrer 5 loges par rayon
+
+        $rayons = DB::table('rayons')->get(); // Récupérer tous les rayons
+
+        foreach ($rayons as $rayon) {
+            for ($i = 1; $i <= 5; $i++) {
+                DB::table('loges')->insert([
+                    'rayon_id' => $rayon->id,
+                    'nom' => $rayon->nom . ' / Loge ' . $i,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+
+
+        $livres = [
+            ['loge_id' => 1, 'division_id' => 1, 'cote' => 'A001', 'auteur' => 'John Doe', 'titre' => 'Le Seigneur des Anneaux'],
+            ['loge_id' => 2, 'division_id' => 2, 'cote' => 'A002', 'auteur' => 'Jane Smith', 'titre' => 'Harry Potter à l\'école des sorciers'],
+            ['loge_id' => 3, 'division_id' => 1, 'cote' => 'A003', 'auteur' => 'James Johnson', 'titre' => '1984'],
+            ['loge_id' => 1, 'division_id' => 2, 'cote' => 'A004', 'auteur' => 'Emily Davis', 'titre' => 'Pride and Prejudice'],
+            ['loge_id' => 2, 'division_id' => 1, 'cote' => 'A005', 'auteur' => 'Michael Wilson', 'titre' => 'Le Petit Prince'],
+            ['loge_id' => 3, 'division_id' => 2, 'cote' => 'A006', 'auteur' => 'Sarah Thompson', 'titre' => 'To Kill a Mockingbird'],
+            ['loge_id' => 1, 'division_id' => 1, 'cote' => 'A007', 'auteur' => 'David Anderson', 'titre' => 'Le Comte de Monte-Cristo'],
+            ['loge_id' => 2, 'division_id' => 2, 'cote' => 'A008', 'auteur' => 'Olivia Lee', 'titre' => 'Guerre et Paix'],
+            ['loge_id' => 3, 'division_id' => 1, 'cote' => 'A009', 'auteur' => 'William Turner', 'titre' => 'L\'Odyssée'],
+            ['loge_id' => 1, 'division_id' => 2, 'cote' => 'A010', 'auteur' => 'Sophia Garcia', 'titre' => 'Les Misérables'],
+            ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI001', 'auteur' => 'René Descartes', 'titre' => 'Méditations métaphysiques'],
+            ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI002', 'auteur' => 'Friedrich Nietzsche', 'titre' => 'Ainsi parlait Zarathoustra'],
+            ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI003', 'auteur' => 'Platon', 'titre' => 'La République'],
+            ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI004', 'auteur' => 'Jean-Paul Sartre', 'titre' => 'L\'Être et le Néant'],
+            ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI005', 'auteur' => 'Aristote', 'titre' => 'Éthique à Nicomaque'],
+            ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI006', 'auteur' => 'Immanuel Kant', 'titre' => 'Critique de la raison pure'],
+            ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI007', 'auteur' => 'Martin Heidegger', 'titre' => 'Être et Temps'],
+            ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI008', 'auteur' => 'Michel Foucault', 'titre' => 'Surveiller et Punir'],
+            ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI009', 'auteur' => 'Simone de Beauvoir', 'titre' => 'Le Deuxième Sexe'],
+            ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI010', 'auteur' => 'John Locke', 'titre' => 'Essai philosophique concernant l\'entendement humain'],
+
+        ];
+
+        DB::table('livre_imprimes')->insert($livres);
+        $livreIds = DB::table('livre_imprimes')->get();
+
+        foreach ($livreIds as $livre) {
+            // Boucle pour enregistrer 5 exemplaires pour chaque livre
+            for ($i = 1; $i <= 5; $i++) {
+                DB::table('livre_imprime_exemplaires')->insert([
+                    'livre_imprime_id' => $livre->id,
+                    'statut' => false,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
 }

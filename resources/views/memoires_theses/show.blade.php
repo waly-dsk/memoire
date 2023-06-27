@@ -75,8 +75,6 @@
             </div>
         </div>
     </div>
-
-
     <div id="login-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -90,9 +88,13 @@
                     <div class="grid-margin stretch-card">
                         <div class="card mt-2">
                             <div class="card-body">
-                                <div class="auth-form-light text-left p-5">
-                                    <h4> Bonjour ! Commençons.</h4>
-                                    <h6 class="font-weight-light">Connectez-vous pour continuer.</h6>
+                                <div class="auth-form-light text-left">
+                                    <div class="brand-logo text-center mb-3">
+                                        <img src="{{ asset('assets/images/logo2.png') }}">
+                                    </div>
+
+                                    <h4 class="mt-3">Bonjour ! Commençons.</h4>
+                                    <h6 class="mt-3 font-weight-light">Connectez-vous pour continuer.</h6>
                                     @include('shared.flash')
                                     <form class="pt-3" action="{{ route('login') }}" method="post">
                                         @csrf @method('post')
@@ -109,6 +111,13 @@
                                                 class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">
                                                 CONNEXION
                                             </button>
+                                        </div>
+                                        <div class="mt-5 my-2 d-flex justify-content-between align-items-center">
+                                            <div class="form-check">
+                                                <label class="form-check-label text-muted">
+                                                </label>
+                                            </div>
+                                            <a href="#" class="auth-link text-black">Mot de passe oublié ?</a>
                                         </div>
                                     </form>
                                 </div>

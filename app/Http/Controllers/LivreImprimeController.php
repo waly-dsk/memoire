@@ -157,6 +157,9 @@ class LivreImprimeController extends Controller
      */
     public function show($id)
     {
+        if (!is_numeric($id)) {
+            return view('errors.404');
+        }
         $livreImprime = DB::table('livre_imprimes')
             ->join('loges', 'livre_imprimes.loge_id', '=', 'loges.id')
             ->join('divisions', 'livre_imprimes.division_id', '=', 'divisions.id')
@@ -172,6 +175,10 @@ class LivreImprimeController extends Controller
             )
             ->where('livre_imprimes.id', $id)
             ->first();
+
+        if ($livreImprime == null) {
+            return view('errors.404');
+        }
 
         return view('livre_imprimes.show', [
             'user' => Auth::user() ?: new User(),
