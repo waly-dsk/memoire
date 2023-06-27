@@ -33,8 +33,8 @@
 
                         <div class="form-group">
                             <label for="nom">Nom</label>
-                            <input type="text" name="nom" class="form-control" id="nom" placeholder="Nom"
-                                value="{{ $rayon->nom }}">
+                            <input type="text" name="nom" class="form-control" id="nom"
+                                placeholder="Nom : R-0-0-01" value="{{ $rayon->nom }}">
                         </div>
 
                         <div class="form-group">

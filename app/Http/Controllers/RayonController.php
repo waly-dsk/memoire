@@ -45,7 +45,7 @@ class RayonController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nom' => 'required|unique:rayons,nom|regex:/^Rayon\s\d+$/',
+            'nom' => 'required|unique:rayons,nom|regex:/^[RP]-[01234]-\d-\d{2}$/',
             'nombre_de_loges' => 'required|integer|min:1',
         ], [
             'nom.required' => "Le nom du rayon est requis",
@@ -63,7 +63,7 @@ class RayonController extends Controller
         for ($i = 1; $i <= (int) ($validateData['nombre_de_loges']); $i++) {
             DB::table('loges')->insert([
                 'rayon_id' => $rayon_id,
-                'nom' => $validateData['nom'] . ' - Loge ' . $i,
+                'nom' => $validateData['nom'] . ' / Loge ' . $i,
                 'created_at' => now(),
             ]);
         }

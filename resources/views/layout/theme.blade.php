@@ -19,9 +19,23 @@
     <!-- inject:css -->
     <title>Title | @yield('title')</title>
     <style>
-        @media (max-width: 768px) {
-            .baniere {
-                display: none;
+        .scrolling-banner {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .banner-content {
+            display: inline-block;
+            animation: scroll 20s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
             }
         }
     </style>
@@ -46,8 +60,9 @@
                             <div class="input-group-prepend bg-transparent">
                                 <i class="input-group-text border-0  mdi mdi-book-open-page-variant"></i>
                             </div>
-                            <input type="text" disabled class="form-control bg-transparent border-0"
-                                placeholder="CID-UP / Bibliothèque Centrale" />
+                            <input type="text"
+                                class="text-danger form-control bg-transparent border-0 banner-content" disabled
+                                value="CID-UP / Bibliothèque Centrale" />
                         </div>
                     </form>
                 </div>
@@ -136,18 +151,28 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suggestion_generale.index') }}">
-                            <span class="menu-title">Suggestion Générale</span>
-                            <i class="mdi mdi-format-wrap-tight  menu-icon"></i>
+                        <a class="nav-link" data-toggle="collapse" href="#suggestions" aria-expanded="false"
+                            aria-controls="suggestions">
+                            <span class="menu-title">Suggestions</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi mdi-av-timer menu-icon"></i>
                         </a>
+                        <div class="collapse" id="suggestions">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('suggestion_generale.index') }}">
+                                        Générale
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('suggestion_ouvrage.index') }}">
+                                        D'ouvrage
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('suggestion_ouvrage.index') }}">
-                            <span class="menu-title">Suggestion Ouvrage</span>
-                            <i class="mdi mdi mdi-av-timer  menu-icon"></i>
-                        </a>
-                    </li>
 
                     @if ($user && $user->exists)
                         @if ($user->role == 'admin')
@@ -333,20 +358,22 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
-                        <div class="col-12 baniere">
+                        {{-- <div class="col-12 baniere">
                             <span class="d-flex align-items-center purchase-popup">
                                 <p>
-                                    Bienvenue au Centre d'Information et de Documentation (CID)
+                                    Centre d'Information et de Documentation (CID)
                                 </p>
-                                <a href="#" class="btn ml-auto download-button">
+                                <a href="#" target="_blank" class="btn ml-auto download-button">
+
                                     Bibliothèque Centrale
                                 </a>
-                                <a href="#" class="btn purchase-button">
+                                <a href="#" target="_blank" class="btn purchase-button">
                                     Université de Parakou
                                 </a>
                                 <i class="mdi mdi-close popup-dismiss"></i>
                             </span>
-                        </div>
+                        </div> --}}
+
                     </div>
 
                     @yield('content')
@@ -388,10 +415,32 @@
     <script src="{{ asset('assets/js/file-upload.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $('a[href="#memoires"]').click(function(e) {
-                e.preventDefault(); // Empêche le comportement par défaut du lien
-                $('#memoires').collapse('toggle'); // Ouvre ou ferme le menu "Mémoires"
+            var bannerContent = $('.banner-content');
+            var bannerWidth = bannerContent.width();
+            var containerWidth = $('.scrolling-banner').width();
+
+            function startScrolling() {
+                bannerContent.animate({
+                    'left': -bannerWidth
+                }, 20000, 'linear', function() {
+                    bannerContent.css('left', containerWidth);
+                    startScrolling();
+                });
+            }
+
+            // Optionnel : Arrête le défilement au survol du curseur
+            $('.scrolling-banner').mouseenter(function() {
+                bannerContent.stop();
+            }).mouseleave(function() {
+                startScrolling();
             });
+
+            startScrolling();
+        });
+
+        $('a[href="#memoires"]').click(function(e) {
+            e.preventDefault(); // Empêche le comportement par défaut du lien
+            $('#memoires').collapse('toggle'); // Ouvre ou ferme le menu "Mémoires"
         });
     </script>
 
