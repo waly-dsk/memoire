@@ -11,9 +11,9 @@ class Abonne extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function option()
+    public function entite()
     {
-        return $this->belongsTo(Option::class);
+        return $this->belongsTo(Entite::class);
     }
     public function prets()
     {

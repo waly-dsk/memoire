@@ -19,12 +19,7 @@
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Détails Prêt</h4>
-                    <p class="card-description">
-                        Ici, toutes les <code>Informations</code> relatives au <code>Prêt</code>
-                    </p>
                     @if ($pret)
-                        <hr>
                         <form class="forms-sample">
                             <div class="form-group">
                                 <label for="abonne">Agent ayant servi Prêt</label>

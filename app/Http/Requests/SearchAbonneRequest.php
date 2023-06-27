@@ -23,7 +23,7 @@ class SearchAbonneRequest extends FormRequest
     {
         return [
             'entite' => ['string', 'nullable'],
-            'option' => ['string', 'nullable'],
+            'type_abonne' => ['string', 'nullable'],
             'matricule' => ['numeric', 'gte:0', 'nullable'],
             'nom' => ['string', 'nullable'],
         ];

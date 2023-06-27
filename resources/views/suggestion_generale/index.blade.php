@@ -21,7 +21,7 @@
         <div class="col-md-12 grid-margin">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="get" class="mb-5 forms sample d-flex gap-2">
+                    <form action="" method="get" class="forms sample d-flex gap-2">
                         <select class="form-control" name="type">
                             <option value="">Sélectionnez un type de Suggestion</option>
                             @foreach ($types as $type)

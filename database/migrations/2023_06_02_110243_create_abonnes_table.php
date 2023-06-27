@@ -15,7 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('matricule')->unique()->nullable();
             $table->string('nom');
-            $table->foreignId('option_id')->constrained()->onDelete('cascade')->onUpdate('cascade')->nullable();
+            $table->foreignId('type_abonne_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade')
+                ->nullable();
+            $table->foreignId('entite_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade')
+                ->nullable();
             $table->timestamps();
         });
     }

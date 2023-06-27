@@ -31,6 +31,24 @@
                         method="post">
                         @csrf @method($abonne->exists ? 'PUT' : 'POST')
 
+
+                        <div class="form-group">
+                            <label for="type_abonne_id">Type d'abonné</label>
+                            <select class="form-control" name="type_abonne_id" id="type_abonne_id">
+                                @foreach ($type_abonnes as $type_abonne)
+                                    @if ($abonne->exists)
+                                        <option value="{{ $type_abonne->id }}"
+                                            {{ $abonne->type_abonne_id == $type_abonne->id ? 'selected' : '' }}>
+                                            {{ $type_abonne->nom }}
+                                        </option>
+                                    @else
+                                        <option value="{{ $type_abonne->id }}">{{ $type_abonne->nom }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </div>
+
+
                         <div class="form-group">
                             <label for="matricule">Matricule</label>
                             <input type="text" name="matricule" class="form-control" id="matricule"
@@ -45,30 +63,14 @@
                         <div class="form-group">
                             <label for="entite">Entité</label>
                             <select class="form-control" name="entite_id" id="entite">
-                                <option value="">Choisissez une Entité</option>
                                 @foreach ($entites as $entite)
                                     @if ($abonne->exists)
                                         <option value="{{ $entite->id }}"
-                                            {{ $abonne->option->entite_id == $entite->id ? 'selected' : '' }}>
-                                            {{ $entite->intitule }}</option>
+                                            {{ $abonne->entite_id == $entite->id ? 'selected' : '' }}>
+                                            {{ $entite->intitule }}
+                                        </option>
                                     @else
                                         <option value="{{ $entite->id }}">{{ $entite->intitule }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="option">Option</label>
-                            <select class="form-control" name="option_id" id="option">
-                                <option value="">Choisissez une Option</option>
-                                @foreach ($options as $option)
-                                    @if ($abonne->exists)
-                                        <option value="{{ $option->id }}"
-                                            {{ $abonne->option_id == $option->id ? 'selected' : '' }}>
-                                            {{ $option->intitule }}</option>
-                                    @else
-                                        <option value="{{ $option->id }}">{{ $option->intitule }}</option>
                                     @endif
                                 @endforeach
                             </select>

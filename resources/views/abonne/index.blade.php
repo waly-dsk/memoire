@@ -22,13 +22,20 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="get" class="mb-5 forms sample d-flex gap-2">
+                    <form action="" method="get" class="forms sample d-flex gap-2">
                         <input type="text" placeholder="Entité" class="form-control" name="entite"
                             value="{{ $input['entite'] ?? '' }}">
-                        <input type="text" placeholder="Option" class="form-control" name="option"
-                            value="{{ $input['option'] ?? '' }}">
-                        <input type="number" placeholder="Matricule" class="form-control" name="matricule"
-                            value="{{ $input['matricule'] ?? '' }}">
+                        <select name="type_abonne" id="" class="form-control">
+                            <option value="">Type d'abonné</option>
+                            @foreach ($type_abonnes as $type_abonne)
+                                <option value="{{ $type_abonne->id }}"
+                                    {{ ($input['type_abonne'] ?? '') == $type_abonne->id ? 'selected' : '' }}>
+                                    {{ $type_abonne->nom }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <input type="text" placeholder="Matricule" class="form-control" id="search_by_matricule"
+                            name="matricule" value="{{ $input['matricule'] ?? '' }}">
                         <input type="text" placeholder="Nom Prénoms" class="form-control" name="nom"
                             value="{{ $input['nom'] ?? '' }}">
                         <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
@@ -47,10 +54,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Matricule</th>
-                                    <th>Nom &amp; Prénoms</th>
                                     <th>Entité</th>
-                                    <th>Option</th>
+                                    <th>Type</th>
+                                    <th>Nom - Prénoms</th>
                                     <th>Date d'Ajout</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
@@ -58,11 +64,17 @@
                             <tbody>
                                 @forelse($abonnes as $abonne)
                                     <tr>
-                                        <td>{{ $abonne->matricule }}</td>
-                                        <td>{{ $abonne->nom }}</td>
-                                        <td>{{ $abonne->entite }}</td>
-                                        <td>{{ $abonne->option }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($abonne->created_at)->locale('fr_FR')->isoFormat('LL') }}
+                                        <td>
+                                            {{ $abonne->entite }}
+                                        </td>
+                                        <td>
+                                            {{ $abonne->type_abonne == 'Administratif Technique et de Service (ATS)' ? 'ATS' : $abonne->type_abonne }}
+                                        </td>
+                                        <td>
+                                            {{ $abonne->nom }}
+                                        </td>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($abonne->created_at)->locale('fr_FR')->isoFormat('LL') }}
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center">
@@ -87,5 +99,17 @@
             </div>
         </div>
     </div>
-    {{ $abonnes->links() }}
+@endsection
+@section('script')
+    <script>
+        $(function() {
+            $('#search_by_matricule').on('input', function() {
+                let value = $(this).val();
+                if (/\D/g.test(value)) {
+                    value = value.substr(0, value.length - 1);
+                    $(this).val(value);
+                }
+            })
+        })
+    </script>
 @endsection

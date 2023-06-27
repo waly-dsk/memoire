@@ -11,6 +11,8 @@ class Entite extends Model
 
     protected $guarded = [];
     protected $table = "entites";
+
+
     public function abonnes()
     {
         return $this->hasMany(Abonne::class);

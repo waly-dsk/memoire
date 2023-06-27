@@ -40,8 +40,8 @@
         @forelse ($categories as $category)
             <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
-                    <h4 class="card-title">{{ $category->intitule . ' (' . $category->classe . ') ' }}</h4>
                     <div class="card-body">
+                        <h4 class="card-title">{{ $category->intitule . ' (' . $category->classe . ') ' }}</h4>
                         <p></p>
                         <ul class="list-ticked">
                             @php

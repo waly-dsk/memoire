@@ -29,6 +29,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        DB::table('type_abonnes')->insert([
+            ['id' => 1, 'nom' => 'Etudiant'],
+            ['id' => 2, 'nom' => 'Enseignant'],
+            ['id' => 3, 'nom' => 'Administratif Technique et de Service (ATS)'],
+        ]);
+
         DB::table('entites')->insert([
             ['id' => 1,  'intitule' => 'ENATSE'],
             ['id' => 2,  'intitule' => 'ENSPD'],

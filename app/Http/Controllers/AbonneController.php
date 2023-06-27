@@ -16,105 +16,107 @@ class AbonneController extends Controller
     public function index(SearchAbonneRequest $request)
     {
         $abonnes = DB::table('abonnes')
-            ->join('options', 'abonnes.option_id', '=', 'options.id')
-            ->join('entites', 'options.entite_id', '=', 'entites.id')
+            ->join('type_abonnes', 'abonnes.type_abonne_id', '=', 'type_abonnes.id')
+            ->join('entites', 'abonnes.entite_id', '=', 'entites.id')
             ->select(
                 'entites.intitule as entite',
-                'options.intitule as option',
                 'abonnes.id',
+                'type_abonnes.nom as type_abonne',
                 'abonnes.matricule',
                 'abonnes.nom',
                 'abonnes.created_at'
             )
             ->orderBy('entite', 'asc')
-            ->orderBy('option', 'asc')
+            ->orderBy('type_abonne', 'asc')
             ->orderBy('abonnes.nom', 'asc')
-            ->paginate(1);
+            ->get();
 
         if ($entite = $request->validated('entite')) {
             $abonnes = DB::table('abonnes')
-                ->join('options', 'abonnes.option_id', '=', 'options.id')
-                ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->join('type_abonnes', 'abonnes.type_abonne_id', '=', 'type_abonnes.id')
+
+                ->join('entites', 'abonnes.entite_id', '=', 'entites.id')
                 ->where('entites.intitule', '=', $entite)
                 ->select(
                     'entites.intitule as entite',
-                    'options.intitule as option',
                     'abonnes.id',
                     'abonnes.matricule',
+                    'type_abonnes.nom as type_abonne',
                     'abonnes.nom',
                     'abonnes.created_at'
                 )
                 ->orderBy('entite', 'asc')
-                ->orderBy('option', 'asc')
+                ->orderBy('type_abonne', 'asc')
                 ->orderBy('abonnes.nom', 'asc')
-                ->paginate(1);
+                ->get();
         }
 
-        if ($option = $request->validated('option')) {
+        if ($type_abonne = $request->validated('type_abonne')) {
             $abonnes = DB::table('abonnes')
-                ->join('options', 'abonnes.option_id', '=', 'options.id')
-                ->join('entites', 'options.entite_id', '=', 'entites.id')
-                ->where('options.intitule', 'like', '%' . $option . '%')
+                ->join('type_abonnes', 'abonnes.type_abonne_id', '=', 'type_abonnes.id')
+                ->join('entites', 'abonnes.entite_id', '=', 'entites.id')
+                ->where('type_abonnes.id', '=', $type_abonne)
                 ->select(
                     'entites.intitule as entite',
-                    'options.intitule as option',
                     'abonnes.id',
+                    'type_abonnes.nom as type_abonne',
                     'abonnes.matricule',
                     'abonnes.nom',
                     'abonnes.created_at'
                 )
                 ->orderBy('entite', 'asc')
-                ->orderBy('option', 'asc')
+                ->orderBy('type_abonne', 'asc')
                 ->orderBy('abonnes.nom', 'asc')
-                ->paginate(1);
+                ->get();
         }
 
 
 
         if ($matricule = $request->validated('matricule')) {
             $abonnes = DB::table('abonnes')
-                ->join('options', 'abonnes.option_id', '=', 'options.id')
-                ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->join('type_abonnes', 'abonnes.type_abonne_id', '=', 'type_abonnes.id')
+                ->join('entites', 'abonnes.entite_id', '=', 'entites.id')
                 ->where('abonnes.matricule', '=', $matricule)
                 ->select(
                     'entites.intitule as entite',
-                    'options.intitule as option',
+                    'type_abonnes.nom as type_abonne',
                     'abonnes.id',
                     'abonnes.matricule',
                     'abonnes.nom',
                     'abonnes.created_at'
                 )
                 ->orderBy('entite', 'asc')
-                ->orderBy('option', 'asc')
+                ->orderBy('type_abonne', 'asc')
                 ->orderBy('abonnes.nom', 'asc')
-                ->paginate(1);
+                ->get();
         }
 
 
 
         if ($nom = $request->validated('nom')) {
             $abonnes = DB::table('abonnes')
-                ->join('options', 'abonnes.option_id', '=', 'options.id')
-                ->join('entites', 'options.entite_id', '=', 'entites.id')
+                ->join('type_abonnes', 'abonnes.type_abonne_id', '=', 'type_abonnes.id')
+                ->join('entites', 'abonnes.entite_id', '=', 'entites.id')
                 ->where('abonnes.nom', 'like', '%' . $nom . '%')
                 ->select(
                     'entites.intitule as entite',
-                    'options.intitule as option',
+                    'type_abonnes.nom as type_abonne',
                     'abonnes.id',
                     'abonnes.matricule',
                     'abonnes.nom',
                     'abonnes.created_at'
                 )
                 ->orderBy('entite', 'asc')
-                ->orderBy('option', 'asc')
+                ->orderBy('type_abonne', 'asc')
                 ->orderBy('abonnes.nom', 'asc')
-                ->paginate(1);
+                ->get();
         }
 
 
         return view('abonne.index', [
             'user' => Auth::user(),
             'abonnes' => $abonnes,
+            'type_abonnes' => DB::table('type_abonnes')->get(),
             'input' => $request->validated(),
         ]);
     }
@@ -128,6 +130,7 @@ class AbonneController extends Controller
         return view('abonne.form', [
             'user' => Auth::user(),
             'abonne' => new Abonne(),
+            'type_abonnes' => DB::table('type_abonnes')->get(),
             'entites' => DB::table('entites')->get(),
             'options' => DB::table('options')->get(),
         ]);
@@ -140,26 +143,21 @@ class AbonneController extends Controller
     {
         $validateData = $request->validate([
             'type_abonne_id' => 'required',
+            'matricule' => 'required|unique:abonnes,matricule',
             'nom' => 'required',
+            'entite_id' => 'required',
         ], [
-            'type_abonne_id.required' => "Veuillez choisir un type d'Abonné",
-            'matricule.unique' => 'Ce matricule est déjà utilisé par un Abonné.',
+            'type_abonne_id.required' => 'Veuillez choisir un type d\'abonné.',
             'matricule.required' => 'Le numéro matricule est obligatoire.',
+            'matricule.unique' => 'Ce matricule est déjà utilisé par un Abonné.',
             'nom.required' => 'Le champ nom est obligatoire.',
-            'option.required' => 'Vous devez choisir une option.',
+            'entite.required' => 'Vous devez choisir une entité.',
         ]);
 
-        if ($validateData['type_abonne_id'] == 1) {
-            $validateData['matricule'] = $request->input('matricule');
-            $validateData['option_id'] = $request->input('option_id');
-            $validateData['entite_id'] = 1; // Ou toute autre valeur par défaut appropriée
-        } elseif ($validateData['type_abonne_id'] == 2) {
-            $validateData['option_id'] = 1; // Ou toute autre valeur par défaut appropriée
-            $validateData['entite_id'] = $request->input('entite_id');
-        } else {
-            $validateData['option_id'] = 1; // Ou toute autre valeur par défaut appropriée
-            $validateData['entite_id'] = 1; // Ou toute autre valeur par défaut appropriée
-        }
+        $validateData['nom'] = $request->input('nom');
+        $validateData['matricule'] = $request->input('matricule');
+        $validateData['entite_id'] = $request->input('entite_id');
+        $validateData['type_abonne_id'] = $request->input('type_abonne_id');
 
         Abonne::create($validateData);
 
@@ -174,6 +172,7 @@ class AbonneController extends Controller
         return view('abonne.form', [
             'user' => Auth::user(),
             'abonne' => $abonne,
+            'type_abonnes' => DB::table('type_abonnes')->get(),
             'entites' => DB::table('entites')->get(),
             'options' => DB::table('options')->get(),
         ]);
@@ -185,14 +184,17 @@ class AbonneController extends Controller
     public function update(Request $request, Abonne $abonne)
     {
         $validateData = $request->validate([
+            'type_abonne_id' => 'required',
+            'entite_id' => 'required',
             'matricule' => 'required',
             'nom' => 'required',
-            'option_id' => 'required',
         ], [
+            'type_abonne_id.required' => 'Le type d\'abonné est obligatoire.',
+            'entite_id.required' => 'Vous devez choisir une entité.',
             'matricule.required' => 'Le numéro matricule est obligatoire.',
             'nom.required' => 'Le champ nom est obligatoire.',
-            'option_id.required' => 'Vous devez choisir une option.',
         ]);
+
         $abonne->update($validateData);
 
         return to_route('abonne.index')->with('success', 'Abonné édité avec succès');
