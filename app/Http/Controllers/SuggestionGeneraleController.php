@@ -26,27 +26,27 @@ class SuggestionGeneraleController extends Controller
 
         $suggestions = DB::table('suggestion_generales')
             ->join('type_suggestions', 'type_suggestions.id', '=', 'suggestion_generales.type_suggestion_id')
-            ->select('suggestion_generales.*', 'type_suggestions.created_at as ddate', 'type_suggestions.intitule')
+            ->select('suggestion_generales.*', 'type_suggestions.intitule')
             ->orderBy('suggestion_generales.created_at', 'desc')
-            ->paginate(5);
+            ->get();
 
         if ($type = $request->validated('type')) {
             $suggestions = DB::table('suggestion_generales')
                 ->join('type_suggestions', 'type_suggestions.id', '=', 'suggestion_generales.type_suggestion_id')
                 ->select('suggestion_generales.*', 'type_suggestions.created_at as ddate', 'type_suggestions.intitule')
-                ->orderBy('suggestion_generales.created_at', 'desc')
                 ->where('type_suggestion_id', '=',  $type)
-                ->paginate(5);
+                ->orderBy('suggestion_generales.created_at', 'desc')
+                ->get();
         }
 
 
         if ($mot_cles = $request->validated('mot_cles')) {
             $suggestions = DB::table('suggestion_generales')
                 ->join('type_suggestions', 'type_suggestions.id', '=', 'suggestion_generales.type_suggestion_id')
-                ->select('suggestion_generales.*', 'type_suggestions.created_at as ddate', 'type_suggestions.intitule')
+                ->select('suggestion_generales.*', 'type_suggestions.intitule')
                 ->orderBy('suggestion_generales.created_at', 'desc')
                 ->where('suggestion_generales.contenu', 'like', '%' . $mot_cles . '%')
-                ->paginate(5);
+                ->get();
         }
 
 
@@ -56,7 +56,7 @@ class SuggestionGeneraleController extends Controller
                 ->join('type_suggestions', 'type_suggestions.id', '=', 'suggestion_generales.type_suggestion_id')
                 ->select('suggestion_generales.*', 'type_suggestions.created_at as ddate', 'type_suggestions.intitule')
                 ->where('suggestion_generales.created_at', 'like', '%' . $date_ajout . '%')
-                ->paginate(5);
+                ->get();
         }
 
         return view('suggestion_generale.index', [

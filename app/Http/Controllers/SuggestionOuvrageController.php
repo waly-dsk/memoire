@@ -23,14 +23,14 @@ class SuggestionOuvrageController extends Controller
         $suggestions = DB::table('suggestion_ouvrages')
             ->join('categories', 'suggestion_ouvrages.category_id', '=', 'categories.id')
             ->orderBy('suggestion_ouvrages.created_at', 'desc')
-            ->paginate(5);
+            ->get();
 
 
         if ($category_id = $request->validated('category_id')) {
             $suggestions = DB::table('suggestion_ouvrages')
                 ->join('categories', 'suggestion_ouvrages.category_id', '=', 'categories.id')
                 ->where('categories.id', '=', $category_id)
-                ->paginate(5);
+                ->get();
         }
 
 
@@ -39,7 +39,7 @@ class SuggestionOuvrageController extends Controller
                 ->join('categories', 'suggestion_ouvrages.category_id', '=', 'categories.id')
 
                 ->where('suggestion_ouvrages.auteur', 'like', '%' . $auteur . '%')
-                ->paginate(5);
+                ->get();
         }
 
 
@@ -47,7 +47,7 @@ class SuggestionOuvrageController extends Controller
             $suggestions = DB::table('suggestion_ouvrages')
                 ->join('categories', 'suggestion_ouvrages.category_id', '=', 'categories.id')
                 ->where('suggestion_ouvrages.titre', 'like', '%' . $mot_cles . '%')
-                ->paginate(5);
+                ->get();
         }
 
 
@@ -56,7 +56,7 @@ class SuggestionOuvrageController extends Controller
                 ->join('categories', 'suggestion_ouvrages.category_id', '=', 'categories.id')
 
                 ->where('suggestion_ouvrages.created_at', 'like', '%' . $date_ajout . '%')
-                ->paginate(5);
+                ->get();
         }
 
         $categories = DB::table('categories')->get();

@@ -144,11 +144,12 @@ class AbonneController extends Controller
         $validateData = $request->validate([
             'type_abonne_id' => 'required',
             'matricule' => 'required|unique:abonnes,matricule',
-            'nom' => 'required',
+            'nom' => 'required|unique:abonnes,nom',
             'entite_id' => 'required',
         ], [
             'type_abonne_id.required' => 'Veuillez choisir un type d\'abonné.',
             'matricule.required' => 'Le numéro matricule est obligatoire.',
+            'matricule.nom' => 'Ce nom est déjà utilisé par un Abonné.',
             'matricule.unique' => 'Ce matricule est déjà utilisé par un Abonné.',
             'nom.required' => 'Le champ nom est obligatoire.',
             'entite.required' => 'Vous devez choisir une entité.',

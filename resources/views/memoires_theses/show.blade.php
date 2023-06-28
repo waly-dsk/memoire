@@ -25,11 +25,11 @@
             <div class="card grid-margin stretch-card">
                 <div class="card-body">
                     <p class="card-description">
-                        Emplacement : <code class="font-weight-bold">{{ $document->emplacement }}</code>
+                        Emplacement : <span class="text-info font-weight-bold">{{ $document->emplacement }}</span>
                     </p>
                     <p class="card-description">
-                        Entité : <code>{{ $document->entite }}</code>
-                        Option : <code>{{ $document->option }}</code>
+                        Entité : <span class="text-info">{{ $document->entite }}</span>
+                        Option : <span class="text-info">{{ $document->option }}</span>
                     </p>
                     <p class="font-weight-bold">{{ $document->theme }}</p>
                 </div>
@@ -41,14 +41,14 @@
                         {{ $document->annee }}
                     </p>
                     <p class="card-description">Encadreur :
-                        <code class="font-weight-bold">
+                        <span class="text-info font-weight-bold">
                             {{ $document->encadreur }}
-                        </code>
+                        </span>
                     </p>
                     <p class="card-description">Auteur :
-                        <code class="font-weight-bold">
+                        <span class="text-info font-weight-bold">
                             {{ $document->auteur }}
-                        </code>
+                        </span>
                     </p>
 
                     @if ($document->pdf)

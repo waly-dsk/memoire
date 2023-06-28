@@ -274,4 +274,33 @@ class PretController extends Controller
         // Rediriger vers la page d'accueil ou une autre vue appropriée
         return redirect()->back()->with('success', 'Retour de Prêt enregistré avec succès.');
     }
+
+
+    public function historique()
+    {
+        $historique = DB::table('prets')
+            ->join('users', 'users.id', '=', 'prets.user_id')
+            ->join('abonnes', 'abonnes.id', '=', 'prets.abonne_id')
+            ->join('exemplaire_pretes', 'prets.id', '=', 'exemplaire_pretes.pret_id')
+            ->join('livre_imprime_exemplaires', 'livre_imprime_exemplaires.id', '=', 'exemplaire_pretes.livre_imprime_exemplaire_id')
+            ->join('livre_imprimes', 'livre_imprimes.id', '=', 'livre_imprime_exemplaires.livre_imprime_id')
+            ->where('exemplaire_pretes.retourne', '=', true)
+            ->select(
+                'livre_imprimes.titre',
+                'livre_imprimes.cote',
+                'users.name as agent_nom',
+                'prets.date_debut',
+                'prets.date_fin_prevue',
+                'exemplaire_pretes.updated_at as date_retour_relle',
+                'abonnes.nom as abonne_name',
+                'abonnes.matricule'
+            )
+            ->orderByDesc('prets.date_debut')
+            ->get();
+
+        return view('prets.historique', [
+            'user' => Auth::user(),
+            'historique' => $historique,
+        ]);
+    }
 }

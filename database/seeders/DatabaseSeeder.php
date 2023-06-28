@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         DB::table('type_abonnes')->insert([
             ['id' => 1, 'nom' => 'Etudiant'],
             ['id' => 2, 'nom' => 'Enseignant'],
-            ['id' => 3, 'nom' => 'Administratif Technique et de Service (ATS)'],
+            ['id' => 3, 'nom' => 'Personnel Administratif Technique et de Service (ATS)'],
         ]);
 
         DB::table('entites')->insert([

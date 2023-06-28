@@ -23,20 +23,21 @@
                     <h4 class="card-title">Détails du livre</h4>
                     <hr>
                     <p class="card-description mb-2">
-                        Cote : <code class="font-weight-bold"> {{ $livre_imprime->cote }}</code>
+                        Cote : <span class="text-info font-weight-bold"> {{ $livre_imprime->cote }}</span>
                     </p>
                     <hr>
                     <p class="card-description mb-2">
-                        Auteur : <code class="font-weight-bold"> {{ $livre_imprime->auteur }}</code>
+                        Auteur : <span class="text-info font-weight-bold"> {{ $livre_imprime->auteur }}</span>
                     </p>
                     <hr>
 
                     <p class="card-description mb-2">
-                        Catégorie : <code class="font-weight-bold">{{ $livre_imprime->categorie_intitule }}</code>
+                        Catégorie : <span class="text-info font-weight-bold">{{ $livre_imprime->categorie_intitule }}</span>
                     </p>
                     <hr>
                     <p class="card-description mb-2">
-                        Sous Catégorie : <code class="font-weight-bold">{{ $livre_imprime->division_intitule }}</code>
+                        Sous Catégorie : <span
+                            class=" text-info font-weight-bold">{{ $livre_imprime->division_intitule }}</span>
                     </p>
                     <hr>
                 </div>
@@ -49,19 +50,19 @@
                     <h4 class="card-title">Autres informations</h4>
                     <hr>
                     <p class="card-description mb-2">
-                        Emplacement : <code class="font-weight-bold">{{ $livre_imprime->emplacement }} </code>
+                        Emplacement : <span class="text-info font-weight-bold">{{ $livre_imprime->emplacement }} </span>
                     </p>
                     <hr>
                     <p class="card-description mb-2">
-                        Exemplaires Disponibles : <code class="font-weight-bold">
+                        Exemplaires Disponibles : <span class="text-info font-weight-bold">
                             {{ $livre_imprime->nombre_exemplaires }}
-                        </code>
+                        </span>
                     </p>
                     <hr>
 
                     <p class="card-description mb-2">
-                        Date d'Ajout : <code
-                            class="font-weight-bold">{{ \Carbon\Carbon::parse($livre_imprime->created_at)->locale('fr_FR')->isoFormat('LL') }}</code>
+                        Date d'Ajout : <span
+                            class="text-info font-weight-bold">{{ \Carbon\Carbon::parse($livre_imprime->created_at)->locale('fr_FR')->isoFormat('LL') }}</span>
                     </p>
                     <hr>
                 </div>

@@ -72,7 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($suggestions as $suggestion)
+                                @forelse ($suggestions as $suggestion)
                                     <tr>
                                         <td>
                                             {{ $suggestion->intitule }}
@@ -81,7 +81,6 @@
                                             {{ $suggestion->contenu }}
                                         </td>
                                         <td>
-                                            {{-- {{ $suggestion->created_at }} --}}
                                             {{ \Carbon\Carbon::parse($suggestion->created_at)->locale('fr_FR')->isoFormat('LL') }}
                                         </td>
                                         @if ($user->exists)
@@ -104,13 +103,17 @@
                                             </td>
                                         @endif
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="4">Aucune suggestion trouvée !</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
+
                         </table>
                     </div>
                 </div>
             </div>
-            {{ $suggestions->links() }}
         </div>
     </div>
     <div id="login-modal" class="modal" tabindex="-1">

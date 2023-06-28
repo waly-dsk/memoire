@@ -118,7 +118,6 @@
                     </div>
                 </div>
             </div>
-            {{ $suggestions->links() }}
         </div>
     </div>
     <div id="login-modal" class="modal" tabindex="-1">

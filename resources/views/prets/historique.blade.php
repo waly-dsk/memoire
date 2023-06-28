@@ -1,17 +1,17 @@
 @extends('layout.theme')
-@section('title', 'Abonnés')
+@section('title', 'Historique')
 @section('content')
     <div class="page-header">
         <h3 class="page-title">
             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                 <i class="mdi mdi-account-multiple-plus"></i>
             </span>
-            Abonnés
+            Historique des prêts
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('abonne.create') }}">Ajouter un Abonné</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Abonnés</li>
+                <li class="breadcrumb-item"><a href="{{ route('pret.index') }}">Prêts en cours</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Prêts à Domicile</li>
             </ol>
         </nav>
     </div>
@@ -25,15 +25,7 @@
                     <form action="" method="get" class="forms sample d-flex gap-2">
                         <input type="text" placeholder="Entité" class="form-control" name="entite"
                             value="{{ $input['entite'] ?? '' }}">
-                        <select name="type_abonne" id="" class="form-control">
-                            <option value="">Type d'abonné</option>
-                            @foreach ($type_abonnes as $type_abonne)
-                                <option value="{{ $type_abonne->id }}"
-                                    {{ ($input['type_abonne'] ?? '') == $type_abonne->id ? 'selected' : '' }}>
-                                    {{ $type_abonne->nom }}
-                                </option>
-                            @endforeach
-                        </select>
+
                         <input type="text" placeholder="Matricule" class="form-control" id="search_by_matricule"
                             name="matricule" value="{{ $input['matricule'] ?? '' }}">
                         <input type="text" placeholder="Nom Prénoms" class="form-control" name="nom"
@@ -54,44 +46,57 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Entité</th>
-                                    <th>Type</th>
-                                    <th>Nom - Prénoms</th>
-                                    <th>Date d'Ajout</th>
-                                    <th class="text-center">Actions</th>
+                                    <th>Abonné</th>
+                                    <th>Exemplaire</th>
+                                    <th>Sorti le</th>
+                                    <th>Retour prévu le </th>
+                                    <th>Retourné le </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($abonnes as $abonne)
+                                @php
+                                    $nomPrecedent = '';
+                                @endphp
+                                @forelse($historique as $pret)
+                                    @php
+                                        $dateFinPrevue = \Carbon\Carbon::parse($pret->date_fin_prevue)
+                                            ->locale('fr_FR')
+                                            ->isoFormat('LL');
+                                        $dateRetourReelle = \Carbon\Carbon::parse($pret->date_retour_relle)
+                                            ->locale('fr_FR')
+                                            ->isoFormat('LL');
+                                        $difference = $dateRetourReelle > $dateFinPrevue;
+                                    @endphp
                                     <tr>
                                         <td>
-                                            {{ $abonne->entite }}
+                                            @if ($pret->abonne_name != $nomPrecedent)
+                                                {{ $pret->abonne_name }}
+                                            @endif
                                         </td>
                                         <td>
-                                            {{ $abonne->type_abonne == 'Personnel Administratif Technique et de Service (ATS)' ? 'ATS' : $abonne->type_abonne }}
+                                            {{ $pret->titre . ' [' . $pret->cote . '] ' }}
                                         </td>
                                         <td>
-                                            {{ $abonne->nom }}
+                                            {{ \Carbon\Carbon::parse($pret->date_debut)->locale('fr_FR')->isoFormat('LL') }}
                                         </td>
                                         <td>
-                                            {{ \Carbon\Carbon::parse($abonne->created_at)->locale('fr_FR')->isoFormat('LL') }}
+                                            {{ \Carbon\Carbon::parse($pret->date_fin_prevue)->locale('fr_FR')->isoFormat('LL') }}
                                         </td>
                                         <td>
-                                            <div class="d-flex justify-content-center align-items-center">
-                                                <a href="{{ route('abonne.edit', $abonne->id) }}" title="Modifier"
-                                                    class="mdi mdi-grease-pencil"></a>
-                                                <form action="{{ route('abonne.destroy', $abonne->id) }}" method="post">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button style="color:red;" class="btn btn-link p-0" title="Supprimer">
-                                                        <i class="mdi mdi-delete"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            @if ($difference)
+                                                <span style="color: red;">{{ $dateRetourReelle }}</span>
+                                            @else
+                                                {{ $dateRetourReelle }}
+                                            @endif
                                         </td>
                                     </tr>
+
+                                    @php
+                                        $nomPrecedent = $pret->abonne_name;
+                                    @endphp
                                 @empty
                                 @endforelse
+
                             </tbody>
                         </table>
                     </div>

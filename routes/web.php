@@ -92,6 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('memoire_these', \App\Http\Controllers\MemoireTheseController::class)->except(['index', 'create', 'show']);
     Route::resource('livre_imprime', \App\Http\Controllers\LivreImprimeController::class)->except(['index', 'show']);
     Route::resource('pret', \App\Http\Controllers\PretController::class)->except('destroy');
+    Route::get('/pret/debut/historique', [\App\Http\Controllers\PretController::class, 'historique'])->name('pret.historique');
     Route::get('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'pret_retour_create'])->name('pret.retour.create');
     Route::put('/pret/{id}/retour', [\App\Http\Controllers\PretController::class, 'retour_pret'])->name('pret.retour.put');
     Route::resource('consultation_memoire_these', \App\Http\Controllers\ConsultationMemoireController::class)->except(['destroy', 'show', 'index', 'update', 'edit']);

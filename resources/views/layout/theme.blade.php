@@ -130,12 +130,12 @@
                                 <div class="nav-profile-text d-flex flex-column">
                                     <span class="font-weight-bold mb-2">
                                         @if ($user->name)
-                                            {{ $user->name }}
+                                            {{ substr($user->name, 0, 15) }}
                                         @endif
                                     </span>
                                     <span class="text-secondary text-small">
                                         @if ($user->role)
-                                            {{ Str::ucfirst($user->role) }}
+                                            {{ $user->role == 'admin' ? 'Le Responsable' : Str::ucfirst($user->role) }}
                                         @endif
                                     </span>
                                 </div>
