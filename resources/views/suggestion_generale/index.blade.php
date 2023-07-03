@@ -105,9 +105,12 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="4">Aucune suggestion trouvée !</td>
+                                        <td colspan="4" class="text-center">
+                                            Aucune suggestion trouvée !
+                                        </td>
                                     </tr>
                                 @endforelse
+
                             </tbody>
 
                         </table>
