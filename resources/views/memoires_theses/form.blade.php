@@ -1,4 +1,11 @@
 @extends('layout.theme')
+<style>
+    .inline {
+        display: inline-block;
+        margin-right: 10px;
+        /* Vous pouvez ajuster la marge selon vos besoins */
+    }
+</style>
 @section('title', $document->exists ? 'Editer ' . $type_information->intitule : 'Ajouter ' .
     $type_information->intitule)
 @section('content')
@@ -31,7 +38,7 @@
                         method="post" enctype="multipart/form-data">
                         @csrf @method($document->exists ? 'PUT' : 'POST')
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="type">Type du document</label>
                             <select name="type_document_id" id="" class="form-control">
                                 <option value="">Type du document</option>
@@ -43,7 +50,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="rayon">Le rayon</label>
                             <select name="rayon_id" id="rayon" class="form-control">
                                 @foreach ($rayons as $rayon)
@@ -61,7 +68,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="loge">La loge</label>
                             <select name="loge_id" id="loge" class="form-control">
                                 @foreach ($loges as $loge)
@@ -79,10 +86,10 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="cote">Cote</label>
-                            <input type="text" name="cote" class="form-control" id="cote" placeholder="Cote"
-                                value="{{ $document->cote }}">
+                            <input type="text" name="cote" class="form-control" id="cote"
+                                placeholder="Cote du document" value="{{ $document->cote }}">
                         </div>
 
                         <div class="form-group">
@@ -91,25 +98,38 @@
                                 value="{{ $document->theme }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="auteur">Auteur</label>
                             <input type="text" name="auteur" class="form-control" id="auteur" placeholder="Auteur"
                                 value="{{ $document->auteur }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="encadreur">Encadreur</label>
                             <input type="text" name="encadreur" class="form-control" id="encadreur"
                                 placeholder="Encadreur" value="{{ $document->encadreur }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="annee">Année</label>
                             <input type="text" name="annee" class="form-control" id="annee" placeholder="Année"
                                 value="{{ $document->annee }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
+                            <label for="mention">Mention</label>
+                            <select name="mention" id="mention" class="form-control">
+                                <option value="Mention Très Honorable">Mention Très Honorable</option>
+                                <option value="Mention Honorable">Mention Honorable</option>
+                                <option value="Mention Bien">Mention Bien</option>
+                                <option value="Mention Assez Bien">Mention Assez Bien</option>
+                                <option value="Mention Passable">Mention Passable</option>
+                            </select>
+                        </div>
+
+
+
+                        <div class="form-group inline">
                             <label for="entite_id">Entité</label>
                             <select name="entite_id" class="form-control" id="entite">
                                 <!-- Afficher les options disponibles dans la base de données -->
@@ -126,7 +146,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="option_id">Option</label>
                             <select name="option_id" class="form-control" id="option">
                                 <!-- Afficher les options disponibles dans la base de données -->
@@ -142,7 +162,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label>Format PDF</label>
                             <input type="file" name="pdf" class="file-upload-default">
                             <div class="input-group col-xs-12">
@@ -155,7 +175,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="exemplaire">Exemplaire (Papier)</label>
                             <input type="text" name="exemplaire" class="form-control" id="exemplaire"
                                 placeholder="Exemplaire" value="{{ $document->exemplaire }}">

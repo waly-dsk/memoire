@@ -17,7 +17,7 @@
     <!-- inject select2 css -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/select2/css/select2.min.css') }}">
     <!-- inject:css -->
-    <title>Title | @yield('title')</title>
+    <title>BiblioInfo | @yield('title')</title>
     <style>
         .scrolling-banner {
             overflow: hidden;

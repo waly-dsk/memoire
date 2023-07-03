@@ -1,4 +1,11 @@
 @extends('layout.theme')
+<style>
+    .inline {
+        display: inline-block;
+        margin-right: 10px;
+        /* Vous pouvez ajuster la marge selon vos besoins */
+    }
+</style>
 @section('title', $livre_imprime->exists ? 'Editer un livre' : 'Ajouter un livre')
 @section('content')
     <div class="page-header">
@@ -32,7 +39,7 @@
                         method="post" enctype="multipart/form-data">
                         @csrf @method($livre_imprime->exists ? 'PUT' : 'POST')
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="rayon">Le rayon</label>
                             <select name="rayon_id" id="rayon" class="form-control">
                                 @foreach ($rayons as $rayon)
@@ -50,7 +57,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="loge">La loge</label>
                             <select name="loge_id" id="loge" class="form-control">
                                 @foreach ($loges as $loge)
@@ -68,7 +75,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="cote">Cote</label>
                             <input type="text" name="cote" class="form-control" id="cote" placeholder="Cote"
                                 value="{{ $livre_imprime->cote }}">
@@ -80,13 +87,13 @@
                                 value="{{ $livre_imprime->titre }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="auteur">Auteur</label>
                             <input type="text" name="auteur" class="form-control" id="auteur" placeholder="Auteur"
                                 value="{{ $livre_imprime->auteur }}">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="category_id">Catégorie</label>
                             <select name="category_id" class="form-control" id="category">
                                 <!-- Afficher les options disponibles dans la base de données -->
@@ -103,7 +110,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="division_id">Division</label>
                             <select name="division_id" class="form-control" id="division">
                                 <!-- Afficher les options disponibles dans la base de données -->
@@ -120,7 +127,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group inline">
                             <label for="exemplaire">Exemplaire</label>
                             <input type="text" name="exemplaire" class="form-control" id="exemplaire"
                                 placeholder="Exemplaire" value="{{ $livre_imprime->exemplaire }}">

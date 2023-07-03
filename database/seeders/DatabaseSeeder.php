@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ['id' => 1, 'intitule' => 'Cadre'],
             ['id' => 2, 'intitule' => 'Equipements'],
             ['id' => 3, 'intitule' => 'Technologie'],
+            ['id' => 4, 'intitule' => 'Autres'],
         ]);
 
         DB::table('type_documents')->insert([

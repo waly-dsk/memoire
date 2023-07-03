@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('theme');
             $table->string('auteur');
             $table->string('encadreur');
+            $table->string('mention');
             $table->foreignId('option_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('annee');
             $table->binary('pdf')->nullable();
