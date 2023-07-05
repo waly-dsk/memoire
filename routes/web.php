@@ -22,6 +22,9 @@ Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'
 /**
  * On gère ici le login et le logout
  */
+Route::get('/getloginform', [\App\Http\Controllers\AuthController::class, 'getloginform'])->name('getloginform');
+Route::get('/getpasswordresetform', [\App\Http\Controllers\AuthController::class, 'getpasswordresetform'])->name('getpasswordresetform');
+Route::post('/reset_perform', [\App\Http\Controllers\AuthController::class, 'reset_perform'])->name('reset_perform');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 

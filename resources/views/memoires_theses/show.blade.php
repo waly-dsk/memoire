@@ -18,55 +18,69 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col-lg-12 card-group">
+        <div class="col-6 grid-margin">
             <div class="card">
-                <img src="{{ asset('assets/arriere/6920933.jpg') }}" alt="image">
-            </div>
-            <div class="card grid-margin stretch-card">
                 <div class="card-body">
                     <p class="card-description">
                         Emplacement : <span class="text-info font-weight-bold">{{ $document->emplacement }}</span>
                     </p>
                     <p class="card-description">
                         Entité : <span class="text-info">{{ $document->entite }}</span>
+                    </p>
+                    <p class="card-description">
                         Option : <span class="text-info">{{ $document->option }}</span>
                     </p>
                     <p class="font-weight-bold">{{ $document->theme }}</p>
+
                 </div>
             </div>
+        </div>
 
-            <div class="card grid-margin stretch-card">
+        <div class="col-6 grid-margin">
+            <div class="card">
                 <div class="card-body">
-                    <p class="card-description">Année :
-                        {{ $document->annee }}
-                    </p>
-                    <p class="card-description">Encadreur :
-                        <span class="text-info font-weight-bold">
-                            {{ $document->encadreur }}
-                        </span>
-                    </p>
                     <p class="card-description">Auteur :
                         <span class="text-info font-weight-bold">
                             {{ $document->auteur }}
                         </span>
                     </p>
 
+                    <p class="card-description">Mention :
+                        <span class="text-info font-weight-bold">
+                            {{ $document->mention }}
+                        </span>
+                    </p>
+
+                    <p class="card-description">Encadreur :
+                        <span class="text-info font-weight-bold">
+                            {{ $document->encadreur }}
+                        </span>
+                    </p>
+
+                    <p class="card-description">Année :
+                        <span class="text-info font-weight-bold">
+                            {{ $document->annee }}
+                        </span>
+                    </p>
+
+
                     @if ($document->pdf)
                         <a class="" href="{{ Storage::url($document->pdf) }}">
                             Télécharger le PDF
                         </a>
                     @endif
+
                     @if ($user && $user->exists)
                         <div class="row mt-2">
-                            <a href="{{ route('memoire_these.edit', $document->id) }}" style="color: blue" class="btn"
-                                title="Modifier">
-                                <i class="mdi mdi-marker"></i>
+                            <a href="{{ route('memoire_these.edit', $document->id) }}"
+                                class="ml-3 btn btn-gradient-primary">
+                                Modifier
                             </a>
                             <form action="{{ route('memoire_these.destroy', $document->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="btn" style="color: red" title="Supprimer">
-                                    <i class="mdi mdi-delete-forever"></i>
+                                <button class="ml-3 btn btn-gradient-danger">
+                                    Supprimer
                                 </button>
                             </form>
                         </div>
@@ -75,6 +89,8 @@
             </div>
         </div>
     </div>
+
+
     <div id="login-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">

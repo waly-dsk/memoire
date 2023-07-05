@@ -88,13 +88,14 @@ class SuggestionOuvrageController extends Controller
             'category_id' => 'required',
             'titre' => 'required',
             'edition' => 'required',
-            'annee_parution' => 'required',
+            'annee_parution' => 'required|min:4',
             'auteur' => 'required',
         ], [
             'category_id.required' => 'Catégorie requise',
             'titre.required' => 'Titre requis.',
             'edition.required' => 'Édition requise.',
             'annee_parution.required' => 'Indiquez l \'année  de parution.',
+            'annee_parution.min' => '4 chiffres pour l\'année de parution',
             'auteur.required' => 'Indiquez l \'auteur.',
         ]);
 

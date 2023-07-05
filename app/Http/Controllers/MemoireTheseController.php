@@ -139,6 +139,7 @@ class MemoireTheseController extends Controller
             'cote' => 'required|unique:memoire_theses,cote',
             'theme' => 'required',
             'auteur' => 'required',
+            'mention' => 'required',
             'encadreur' => 'required',
             'annee' => 'required|regex:/\d{4}-\d{4}/',
             'option_id' => 'required',
@@ -150,6 +151,7 @@ class MemoireTheseController extends Controller
             'cote.required' => 'La cote  est obligatoire',
             'cote.unique' => 'Cette cote a déjà été utilisée',
             'theme.required' => 'Le thème  est obligatoire',
+            'mention.required' => 'Choisissez une mention',
             'auteur.required' => 'Le nom de l\'auteur est obligatoire',
             'encadreur.required' => 'Le nom de l\'encadreur est obligatoire',
             'annee.required' => 'L\' année  est obligatoire',
@@ -171,6 +173,7 @@ class MemoireTheseController extends Controller
         $document->type_document_id = $validatedData['type_document_id'];
         $document->cote = $validatedData['cote'];
         $document->theme = $validatedData['theme'];
+        $document->mention = $validatedData['mention'];
         $document->encadreur = $validatedData['encadreur'];
         $document->auteur = $validatedData['auteur'];
         $document->option_id = $validatedData['option_id'];
@@ -208,7 +211,6 @@ class MemoireTheseController extends Controller
             ->where('memoire_theses.id', '=', $id)
             ->first();
 
-            
         if ($document == null) {
             // Le type d'information n'a pas été trouvé
             return view('errors.404');

@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         DB::table('type_documents')->insert([
             ['id' => 1, 'intitule' => 'Mémoire Licence'],
             ['id' => 2, 'intitule' => 'Mémoire Master'],
-            ['id' => 3, 'intitule' => 'Thèse Classique'],
+            ['id' => 3, 'intitule' => 'Doctorat en  Médecine'],
             ['id' => 4, 'intitule' => 'Thèse PHD'],
         ]);
 

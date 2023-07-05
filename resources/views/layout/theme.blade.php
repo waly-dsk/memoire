@@ -101,13 +101,19 @@
                         </a>
                     </li>
 
+                    @if (!$user || !$user->exists)
+                        {{-- <button id="open-modal-btn" class="nav-item" style="border: none; background:none"
+                            title="Se connecter">
+                            <span class="mdi mdi-login"></span>
+                        </button> --}}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('getloginform') }}">
+                                <i class="mdi mdi-login" id=""></i>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
-                @if (!$user || !$user->exists)
-                    <button id="open-modal-btn" class="nav-item" style="border: none; background:none"
-                        title="Se connecter">
-                        <span class="mdi mdi-login"></span>
-                    </button>
-                @endif
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                     data-toggle="offcanvas">
                     <span class="mdi mdi-menu"></span>
@@ -222,7 +228,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link"
                                             href="{{ route('memoires_theses.type_index', ['type' => '3']) }}">
-                                            Thèses Classiques
+                                            Doctorat en Médecine
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -330,7 +336,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link"
                                             href="{{ route('memoires_theses.type_index', ['type' => '3']) }}">
-                                            Thèses Classiques
+                                            Doctorat en Médecine
                                         </a>
                                     </li>
                                     <li class="nav-item">

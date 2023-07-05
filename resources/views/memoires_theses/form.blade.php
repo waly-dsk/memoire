@@ -118,13 +118,33 @@
 
                         <div class="form-group inline">
                             <label for="mention">Mention</label>
-                            <select name="mention" id="mention" class="form-control">
-                                <option value="Mention Très Honorable">Mention Très Honorable</option>
-                                <option value="Mention Honorable">Mention Honorable</option>
-                                <option value="Mention Bien">Mention Bien</option>
-                                <option value="Mention Assez Bien">Mention Assez Bien</option>
-                                <option value="Mention Passable">Mention Passable</option>
-                            </select>
+                            @if ($document->exists)
+                                <select name="mention" id="mention" class="form-control">
+                                    <option value="Mention Très Honorable"
+                                        {{ $document->mention == 'Mention Très Honorable' ? 'selected' : ' ' }}>Mention
+                                        Très Honorable</option>
+                                    <option value="Mention Honorable"
+                                        {{ $document->mention == 'Mention Honorable' ? 'selected' : ' ' }}>
+                                        Mention Honorable</option>
+                                    <option value="Mention Bien"
+                                        {{ $document->mention == 'Mention Bien' ? 'selected' : ' ' }}>Mention
+                                        Bien</option>
+                                    <option value="Mention Assez Bien"
+                                        {{ $document->mention == 'Mention Assez Bien' ? 'selected' : ' ' }}>
+                                        Mention Assez Bien</option>
+                                    <option value="Mention Passable"
+                                        {{ $document->mention == 'Mention Passable' ? 'selected' : ' ' }}>
+                                        Mention Passable</option>
+                                </select>
+                            @else
+                                <select name="mention" id="mention" class="form-control">
+                                    <option value="Mention Très Honorable">Mention Très Honorable</option>
+                                    <option value="Mention Honorable">Mention Honorable</option>
+                                    <option value="Mention Bien">Mention Bien</option>
+                                    <option value="Mention Assez Bien">Mention Assez Bien</option>
+                                    <option value="Mention Passable">Mention Passable</option>
+                                </select>
+                            @endif
                         </div>
 
 
