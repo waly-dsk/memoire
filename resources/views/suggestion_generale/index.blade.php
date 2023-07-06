@@ -16,7 +16,9 @@
             </ol>
         </nav>
     </div>
-
+    <div id="flash">
+        @include('shared.flash')
+    </div>
     <div class="row">
         <div class="col-md-12 grid-margin">
             <div class="card">

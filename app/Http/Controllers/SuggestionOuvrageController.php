@@ -108,12 +108,12 @@ class SuggestionOuvrageController extends Controller
             'created_at' => now(),
         ]);
 
-        return to_route('suggestion_ouvrage.index');
+        return to_route('suggestion_ouvrage.index')->with('success', 'Suggestion bien ajoutée');
     }
 
     public function destroy($id)
     {
         DB::table('suggestion_ouvrages')->where('id', '=', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Suggestion supprimée avec succès.');
     }
 }

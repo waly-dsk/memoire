@@ -159,6 +159,8 @@ class MemoireTheseController extends Controller
             'exemplaire.required' => 'Indiquez le nombre d\'exemplaire',
         ]);
 
+        $type_document =  DB::table('type_documents')->select('intitule')->where('id', '=', $validatedData['type_document_id'])->first();
+
         $filename = $validatedData['cote'];
         if ($request->hasFile('pdf')) {
             $pdf = $request->file('pdf');
@@ -167,6 +169,7 @@ class MemoireTheseController extends Controller
         } else {
             $pdfPath = null;
         }
+
 
         // Créer un nouvel objet Mémoire avec les données validées
         $document = new MemoireThese();
@@ -186,7 +189,7 @@ class MemoireTheseController extends Controller
         $document->save();
 
         // Rediriger vers une autre page ou afficher un message de succès
-        return redirect()->route('memoires_theses.type_index', ['type' => $validatedData['type_document_id']]);
+        return redirect()->route('memoires_theses.type_index', ['type' => $validatedData['type_document_id']])->with('success', $type_document->intitule . ' ajouté (e) avec succès.');
     }
 
 

@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SearchSuggestionGeneraleRequest;
 use App\Models\User;
-use App\Models\Suggestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\SearchSuggestionGeneraleRequest;
 
 class SuggestionGeneraleController extends Controller
 {
@@ -38,7 +37,6 @@ class SuggestionGeneraleController extends Controller
                 ->orderBy('suggestion_generales.created_at', 'desc')
                 ->get();
         }
-
 
         if ($mot_cles = $request->validated('mot_cles')) {
             $suggestions = DB::table('suggestion_generales')
@@ -93,12 +91,12 @@ class SuggestionGeneraleController extends Controller
             'created_at' => now(),
         ]);
 
-        return to_route('suggestion_generale.index');
+        return to_route('suggestion_generale.index')->with('success', 'Suggestion bien ajoutée.');
     }
 
     public function destroy($id)
     {
         DB::table('suggestion_generales')->where('id', '=', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Suggestion supprimée avec succès.');
     }
 }
