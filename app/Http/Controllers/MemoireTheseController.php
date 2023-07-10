@@ -147,16 +147,16 @@ class MemoireTheseController extends Controller
             'pdf' => 'file',
             'exemplaire' => 'required|integer',
         ], [
-            'type_document_id.required' => "Choisissez un Type",
-            'cote.required' => 'La cote  est obligatoire',
-            'cote.unique' => 'Cette cote a déjà été utilisée',
-            'theme.required' => 'Le thème  est obligatoire',
-            'mention.required' => 'Choisissez une mention',
-            'auteur.required' => 'Le nom de l\'auteur est obligatoire',
-            'encadreur.required' => 'Le nom de l\'encadreur est obligatoire',
-            'annee.required' => 'L\' année  est obligatoire',
-            'annee.regex' => 'L\' année doit avoir la forme XXXX-YYYY',
-            'exemplaire.required' => 'Indiquez le nombre d\'exemplaire',
+            'type_document_id.required' => "Choisissez un Type.",
+            'cote.required' => 'La cote  est obligatoire.',
+            'cote.unique' => 'Cette cote a déjà été utilisée.',
+            'theme.required' => 'Le thème  est obligatoire.',
+            'mention.required' => 'Choisissez une mention.',
+            'auteur.required' => 'Le nom de l\'auteur est obligatoire.',
+            'encadreur.required' => 'Le nom de l\'encadreur est obligatoire.',
+            'annee.required' => 'L\' année  est obligatoire.',
+            'annee.regex' => 'L\' année doit avoir la forme XXXX-YYYY.',
+            'exemplaire.required' => 'Indiquez le nombre d\'exemplaire.',
         ]);
 
         $type_document =  DB::table('type_documents')->select('intitule')->where('id', '=', $validatedData['type_document_id'])->first();

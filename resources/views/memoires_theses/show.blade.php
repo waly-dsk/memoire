@@ -18,25 +18,31 @@
         </nav>
     </div>
     <div class="row">
-        <div class="col-6 grid-margin">
+        <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <p class="card-description">
                         Emplacement : <span class="text-info font-weight-bold">{{ $document->emplacement }}</span>
                     </p>
+                    <hr>
                     <p class="card-description">
                         Entité : <span class="text-info">{{ $document->entite }}</span>
                     </p>
+                    <hr>
+
                     <p class="card-description">
                         Option : <span class="text-info">{{ $document->option }}</span>
                     </p>
-                    <p class="font-weight-bold">{{ $document->theme }}</p>
+                    <hr>
+
+                    <p class="font-weight-bold">THEME : {{ $document->theme }}</p>
+                    <hr>
 
                 </div>
             </div>
         </div>
 
-        <div class="col-6 grid-margin">
+        <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
                     <p class="card-description">Auteur :
@@ -44,30 +50,35 @@
                             {{ $document->auteur }}
                         </span>
                     </p>
+                    <hr>
 
                     <p class="card-description">Mention :
                         <span class="text-info font-weight-bold">
                             {{ $document->mention }}
                         </span>
                     </p>
+                    <hr>
 
                     <p class="card-description">Encadreur :
                         <span class="text-info font-weight-bold">
                             {{ $document->encadreur }}
                         </span>
                     </p>
+                    <hr>
 
                     <p class="card-description">Année :
                         <span class="text-info font-weight-bold">
                             {{ $document->annee }}
                         </span>
                     </p>
+                    <hr>
 
 
                     @if ($document->pdf)
                         <a class="" href="{{ Storage::url($document->pdf) }}">
                             Télécharger le PDF
                         </a>
+                        <hr>
                     @endif
 
                     @if ($user && $user->exists)
@@ -85,6 +96,8 @@
                             </form>
                         </div>
                     @endif
+                    <hr>
+
                 </div>
             </div>
         </div>

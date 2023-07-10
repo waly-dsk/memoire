@@ -442,11 +442,6 @@
 
             startScrolling();
         });
-
-        $('a[href="#memoires"]').click(function(e) {
-            e.preventDefault(); // Empêche le comportement par défaut du lien
-            $('#memoires').collapse('toggle'); // Ouvre ou ferme le menu "Mémoires"
-        });
     </script>
 
     @yield('script')

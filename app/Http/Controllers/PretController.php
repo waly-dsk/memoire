@@ -74,7 +74,7 @@ class PretController extends Controller
             'date_debut' => ['required'],
             'date_fin_prevue' => ['required'],
         ], [
-            'abonne_id.required' => 'Le champ Abonné est requis.',
+            'abonne_id.required' => 'Le nom de l \'abonné est obligatoire.',
             'livre_imprime_exemplaire_id.required' => 'Choisissez au moins un ouvrage.',
             'livre_imprime_exemplaire_id.array' => 'Le champ livre_imprime_exemplaire_id doit être un tableau.',
             'date_debut.required' => 'Renseignez la date de début.',
