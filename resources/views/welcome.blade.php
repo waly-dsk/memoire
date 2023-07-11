@@ -77,9 +77,11 @@
                         <br>
                         Cordialement,
                     <div class="text-right">
-                        Monsieur Kayodé Gilles Roland CHABI,
+                        Monsieur Roland CHABI,
                         <br>
-                        Responsable de la Bibliothèque Centrale de l'Université de Parakou.
+                        <span class="mt-3">
+                            Responsable BCUP.
+                        </span>
                     </div>
                     </p>
                 </div>

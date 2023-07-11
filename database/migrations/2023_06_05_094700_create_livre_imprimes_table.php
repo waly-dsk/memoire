@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('loge_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('division_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('cote')->unique();
+            $table->string('cote');
             $table->string('auteur');
             $table->string('titre');
             $table->timestamps();

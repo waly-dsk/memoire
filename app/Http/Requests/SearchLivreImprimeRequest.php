@@ -25,7 +25,7 @@ class SearchLivreImprimeRequest extends FormRequest
             'cote' => ['string', 'nullable'],
             'classe' => ['numeric', 'nullable'],
             'auteur' => ['string', 'nullable'],
-            'titre' => ['string', 'nullable'],
+            'mots_cles' => ['string', 'nullable'],
         ];
     }
 }

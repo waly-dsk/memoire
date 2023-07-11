@@ -25,12 +25,10 @@
                     <form action="" method="get" class="forms sample d-flex gap-2">
                         <input type="text" placeholder="Cote" class="form-control" name="cote"
                             value="{{ $input['cote'] ?? '' }}">
-                        <input type="number" placeholder="Classe" class="form-control" name="classe"
-                            value="{{ $input['classe'] ?? '' }}">
                         <input type="text" placeholder="Auteur" class="form-control" name="auteur"
                             value="{{ $input['auteur'] ?? '' }}">
-                        <input type="text" placeholder="Titre" class="form-control" name="titre"
-                            value="{{ $input['titre'] ?? '' }}">
+                        <input type="text" placeholder="Mots Clés" class="form-control" name="mots_cles"
+                            value="{{ $input['mots_cles'] ?? '' }}">
                         <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
                             Rechercher
                         </button>

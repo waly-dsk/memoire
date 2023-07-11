@@ -222,45 +222,67 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
+        $memoires_theses = [
+            ['loge_id' => 1, 'type_document_id' => 1, 'mention' => 'Mention Bien', 'cote' => "MEM E EFI SIN", 'theme' => "Dépenses publiques en insfrastructures routières et croissance économique au Bénin", 'auteur' => "SINAGORIGUI Loukoumane", "encadreur" => "Dr Mohamed PARAPE", "option_id" => 6, "annee" => "2018-2019", "exemplaire" => 2],
+            ['loge_id' => 1, 'type_document_id' => 1, 'mention' => 'Mention Bien', 'cote' => "MEM E EFI SEG", 'theme' => "Analyse de la nature et du volume des échanges commerciaux entre le Bénin et le Niger", 'auteur' => "SEGNON Wiliam", "encadreur" => "Dr Camille GUIDIME", "option_id" => 6, "annee" => "2019-2020", "exemplaire" => 2],
+            ['loge_id' => 1, 'type_document_id' => 1, 'mention' => 'Mention Bien', 'cote' => "MEM E EFI SEK", 'theme' => "Libéralisation commerciale et pauvreté au Bénin", 'auteur' => "SEKE KORA Abdel Fadel Mora", "encadreur" => "Dr Mathieu AVOUTOU", "option_id" => 6, "annee" => "2018-2019", "exemplaire" => 2],
+            ['loge_id' => 1, 'type_document_id' => 1, 'mention' => 'Mention Bien', 'cote' => "MEM E EFI SAL", 'theme' => "Facteurs Sociaux Economiques des investissements dans la production cotonière dans la commune de Kérou", 'auteur' => "SALIFOU Nazif TOURE", "encadreur" => "Dr Jacob AFOUDA YABI", "option_id" => 6, "annee" => "2018-2019", "exemplaire" => 2],
+            ['loge_id' => 2, 'type_document_id' => 1, 'mention' => 'Mention Bien', 'cote' => "MEM EPI GBA", 'theme' => "Facteurs associés à l'utilisation des moustiquaires impregnées à longue durée (MILD) dans la commune de Cobly en 2014", 'auteur' => "Gwladys Nadia GBAGUIDI", "encadreur" => "Pr Dismand HOINATO", "option_id" => 1, "annee" => "2013-2014", "exemplaire" => 2],
+            ['loge_id' => 2, 'type_document_id' => 1, 'mention' => 'Mention Bien', 'cote' => "MEM EPI SIK", 'theme' => "Facteurs associés au don volontaire de sang en population générale à Parakou (Bénin) en 2015", 'auteur' => "Choucouratou SIKARO", "encadreur" => "Dr Georgia B. DAMIEN", "option_id" => 1, "annee" => "2013-2014", "exemplaire" => 2],
+            ['loge_id' => 3, 'type_document_id' => 3, 'mention' => 'Mention Bien', 'cote' => "THE MED KOU", 'theme' => "Morbidité oculaire en milieu universitaire à Parakou", 'auteur' => "Evard KOUTCHORO", "encadreur" => "Pr Ag Ignance SOUNOUVOU", "option_id" => 15, "annee" => "2012-2013", "exemplaire" => 2],
+            ['loge_id' => 3, 'type_document_id' => 3, 'mention' => 'Mention Bien', 'cote' => "THE MED DAN", 'theme' => "Evaluation du traitement chirurgical de l'Ulcère de Buruli au Centre Sanitaire et Nutritionel Gbemontin de Zagnanado de 2006 a 2008", 'auteur' => "Houénoukpo Armand DANDJLESSA", "encadreur" => "Pr Ag Jean Léon OLORY TOGBE", "option_id" => 15, "annee" => "2011-2012", "exemplaire" => 2],
+            ['loge_id' => 3, 'type_document_id' => 3, 'mention' => 'Mention Bien', 'cote' => "THE MED DJO", 'theme' => "Diamètres échographiques de l'aorte abdominale dans une population a rique d'anévrysme en milieu hospitalier à Parakou en 2014", 'auteur' => "Mahunan Jaurès DJOCHOU", "encadreur" => "Pr Martin Dèdonougbo HOUENASSI", "option_id" => 15, "annee" => "2011-2012", "exemplaire" => 2],
+            ['loge_id' => 3, 'type_document_id' => 3, 'mention' => 'Mention Bien', 'cote' => "THE MED KPA", 'theme' => "Aspects épidémiologiques, cliniques et évolutifs du paludisme neonatal au Centre Hospitalier Départemental du Borgou (CHD-B) en 2014", 'auteur' => "Jean-marie Vianey KPADONOU", "encadreur" => "Pr Titulaire Simon AKPONA", "option_id" => 15, "annee" => "2013-2014", "exemplaire" => 2],
+            ['loge_id' => 3, 'type_document_id' => 3, 'mention' => 'Mention Bien', 'cote' => "THE MED TOI", 'theme' => "Evaluation de la prise en charge de la sinusite aigue de l'adulte par les médecins généralistes du Nord-Bénin en 2019", 'auteur' => "Kpèssou Mahuwèdo Lucrèce TOI", "encadreur" => "Dr Spéro HOUNKPATIN", "option_id" => 15, "annee" => "2013-2014", "exemplaire" => 2],
+        ];
 
+        DB::table('memoire_theses')->insert($memoires_theses);
 
-        // $livres = [
-        //     ['loge_id' => 1, 'division_id' => 1, 'cote' => 'A001', 'auteur' => 'John Doe', 'titre' => 'Le Seigneur des Anneaux'],
-        //     ['loge_id' => 2, 'division_id' => 2, 'cote' => 'A002', 'auteur' => 'Jane Smith', 'titre' => 'Harry Potter à l\'école des sorciers'],
-        //     ['loge_id' => 3, 'division_id' => 1, 'cote' => 'A003', 'auteur' => 'James Johnson', 'titre' => '1984'],
-        //     ['loge_id' => 1, 'division_id' => 2, 'cote' => 'A004', 'auteur' => 'Emily Davis', 'titre' => 'Pride and Prejudice'],
-        //     ['loge_id' => 2, 'division_id' => 1, 'cote' => 'A005', 'auteur' => 'Michael Wilson', 'titre' => 'Le Petit Prince'],
-        //     ['loge_id' => 3, 'division_id' => 2, 'cote' => 'A006', 'auteur' => 'Sarah Thompson', 'titre' => 'To Kill a Mockingbird'],
-        //     ['loge_id' => 1, 'division_id' => 1, 'cote' => 'A007', 'auteur' => 'David Anderson', 'titre' => 'Le Comte de Monte-Cristo'],
-        //     ['loge_id' => 2, 'division_id' => 2, 'cote' => 'A008', 'auteur' => 'Olivia Lee', 'titre' => 'Guerre et Paix'],
-        //     ['loge_id' => 3, 'division_id' => 1, 'cote' => 'A009', 'auteur' => 'William Turner', 'titre' => 'L\'Odyssée'],
-        //     ['loge_id' => 1, 'division_id' => 2, 'cote' => 'A010', 'auteur' => 'Sophia Garcia', 'titre' => 'Les Misérables'],
-        //     ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI001', 'auteur' => 'René Descartes', 'titre' => 'Méditations métaphysiques'],
-        //     ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI002', 'auteur' => 'Friedrich Nietzsche', 'titre' => 'Ainsi parlait Zarathoustra'],
-        //     ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI003', 'auteur' => 'Platon', 'titre' => 'La République'],
-        //     ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI004', 'auteur' => 'Jean-Paul Sartre', 'titre' => 'L\'Être et le Néant'],
-        //     ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI005', 'auteur' => 'Aristote', 'titre' => 'Éthique à Nicomaque'],
-        //     ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI006', 'auteur' => 'Immanuel Kant', 'titre' => 'Critique de la raison pure'],
-        //     ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI007', 'auteur' => 'Martin Heidegger', 'titre' => 'Être et Temps'],
-        //     ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI008', 'auteur' => 'Michel Foucault', 'titre' => 'Surveiller et Punir'],
-        //     ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI009', 'auteur' => 'Simone de Beauvoir', 'titre' => 'Le Deuxième Sexe'],
-        //     ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI010', 'auteur' => 'John Locke', 'titre' => 'Essai philosophique concernant l\'entendement humain'],
+        $livres = [
+            ['loge_id' => 4, 'division_id' => 1, 'cote' => '004.COU', 'auteur' => "Ouvrage Collectif : Luc Albert", 'titre' => "Cours et execices d'informatique"],
+            ['loge_id' => 4, 'division_id' => 1, 'cote' => '005.107 DAB6', 'auteur' => 'Christophe Dabancourt', 'titre' => "Apprendre à programmer"],
+            ['loge_id' => 5, 'division_id' => 1, 'cote' => '005.1INI', 'auteur' => "Ouvrage Collectif : Michèle Soria", 'titre' => "Initiation à la programmation par Word et Excel"],
+            ['loge_id' => 5, 'division_id' => 1, 'cote' => '004.678 SMT', 'auteur' => 'Bud Smith et Arthur Bebak', 'titre' => "Créez vos pages Web"],
+            ['loge_id' => 6, 'division_id' => 1, 'cote' => '005.13 TAS', 'auteur' => 'Anne Tasso', 'titre' => "Le livre de Java, premier langage"],
+            ['loge_id' => 6, 'division_id' => 1, 'cote' => '005.13 DEL', 'auteur' => 'Claude Delannoy', 'titre' => "Exercices en Turbo Pascal"],
+            ['loge_id' => 7, 'division_id' => 1, 'cote' => '005.27 AJA', 'auteur' => 'Christian Darie', 'titre' => "AJAX ET PHP"],
+            ['loge_id' => 7, 'division_id' => 1, 'cote' => '004.015 VEL', 'auteur' => 'Jacques Vélu', 'titre' => "Méthodes mathématiques pour l'informatique"],
+            ['loge_id' => 8, 'division_id' => 1, 'cote' => '004.2 GOU', 'auteur' => 'Pierre-Alain Goupille', 'titre' => "Technique des ordinateurs et des réseaux"],
+            ['loge_id' => 9, 'division_id' => 1, 'cote' => '005.13 DEL', 'auteur' => 'Claude Delannoy', 'titre' => "Programmer en langage C++"],
+            ['loge_id' => 9, 'division_id' => 1, 'cote' => '005.13 DEL', 'auteur' => 'Claude Delannoy', 'titre' => "Programmer en langage C"],
+            ['loge_id' => 9, 'division_id' => 1, 'cote' => '005.13 DEL', 'auteur' => 'Claude Delannoy', 'titre' => "Le livre du C"],
+            ['loge_id' => 9, 'division_id' => 1, 'cote' => '020.3 DIC', 'auteur' => 'Serge CACALY', 'titre' => "Dictionnaire de l'Information"],
+            ['loge_id' => 9, 'division_id' => 1, 'cote' => '004 WEI', 'auteur' => 'Daniel WEISSBERG', 'titre' => "Monde de l'Informatique, Informatique - Monde"],
+            ['loge_id' => 10, 'division_id' => 1, 'cote' => '004.678 CRU', 'auteur' => 'Christian Crumlish', 'titre' => "Internet"],
+            ['loge_id' => 10, 'division_id' => 1, 'cote' => '004.678 LIL', 'auteur' => 'Henri Lilen', 'titre' => "Internet"],
+            ['loge_id' => 10, 'division_id' => 1, 'cote' => '004.16 GOO', 'auteur' => 'Dan Gookin', 'titre' => "Le PC"],
+            ['loge_id' => 10, 'division_id' => 1, 'cote' => '004.65 ATE', 'auteur' => 'Philippe ATELIN - José DORDOIGNE', 'titre' => "Réseaux Informatique"],
+            ['loge_id' => 10, 'division_id' => 1, 'cote' => '004.65 PUJ', 'auteur' => 'Guy PUJELLE', 'titre' => "Les réseaux"],
+            ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI002', 'auteur' => 'Friedrich Nietzsche', 'titre' => 'Ainsi parlait Zarathoustra'],
+            ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI003', 'auteur' => 'Platon', 'titre' => 'La République'],
+            ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI004', 'auteur' => 'Jean-Paul Sartre', 'titre' => 'L\'Être et le Néant'],
+            ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI005', 'auteur' => 'Aristote', 'titre' => 'Éthique à Nicomaque'],
+            ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI006', 'auteur' => 'Immanuel Kant', 'titre' => 'Critique de la raison pure'],
+            ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI007', 'auteur' => 'Martin Heidegger', 'titre' => 'Être et Temps'],
+            ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI008', 'auteur' => 'Michel Foucault', 'titre' => 'Surveiller et Punir'],
+            ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI009', 'auteur' => 'Simone de Beauvoir', 'titre' => 'Le Deuxième Sexe'],
+            ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI010', 'auteur' => 'John Locke', 'titre' => 'Essai philosophique concernant l\'entendement humain'],
+        ];
 
-        // ];
+        DB::table('livre_imprimes')->insert($livres);
 
-        // DB::table('livre_imprimes')->insert($livres);
-        // $livreIds = DB::table('livre_imprimes')->get();
+        $livreIds = DB::table('livre_imprimes')->get();
 
-        // foreach ($livreIds as $livre) {
-        //     // Boucle pour enregistrer 5 exemplaires pour chaque livre
-        //     for ($i = 1; $i <= 5; $i++) {
-        //         DB::table('livre_imprime_exemplaires')->insert([
-        //             'livre_imprime_id' => $livre->id,
-        //             'statut' => false,
-        //             'created_at' => now(),
-        //             'updated_at' => now(),
-        //         ]);
-        //     }
-        // }
+        foreach ($livreIds as $livre) {
+            // Boucle pour enregistrer 5 exemplaires pour chaque livre
+            for ($i = 1; $i <= 4; $i++) {
+                DB::table('livre_imprime_exemplaires')->insert([
+                    'livre_imprime_id' => $livre->id,
+                    'statut' => false,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
     }
 }
