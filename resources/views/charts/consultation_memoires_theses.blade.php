@@ -10,7 +10,7 @@
         </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Consultation sur place</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('stats_memoires_theses') }}">Consultation sur place</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Mémoires - Thèses</li>
             </ol>
         </nav>

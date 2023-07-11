@@ -267,6 +267,17 @@ class DatabaseSeeder extends Seeder
             ['loge_id' => 2, 'division_id' => 10, 'cote' => 'PHI008', 'auteur' => 'Michel Foucault', 'titre' => 'Surveiller et Punir'],
             ['loge_id' => 3, 'division_id' => 10, 'cote' => 'PHI009', 'auteur' => 'Simone de Beauvoir', 'titre' => 'Le Deuxième Sexe'],
             ['loge_id' => 1, 'division_id' => 10, 'cote' => 'PHI010', 'auteur' => 'John Locke', 'titre' => 'Essai philosophique concernant l\'entendement humain'],
+            ['loge_id' => 10, 'division_id' => 61, 'cote' => '616 PAT', 'auteur' => 'Ouvrage Collectif', 'titre' => 'Pathologie Médicale 1'],
+            ['loge_id' => 10, 'division_id' => 61, 'cote' => '616 PAT', 'auteur' => 'Ouvrage Collectif', 'titre' => 'Pathologie Médicale 2'],
+            ['loge_id' => 10, 'division_id' => 61, 'cote' => '611.9 KAM', 'auteur' => 'Pierre KAMINA', 'titre' => 'ANATOMIE Clinique'],
+
+            ['loge_id' => 11, 'division_id' => 32, 'cote' => '320.3 MEN', 'auteur' => 'Yves MENY', 'titre' => 'Politique Comparée'],
+
+            ['loge_id' => 11, 'division_id' => 51, 'cote' => '510 MAN', 'auteur' => 'Ouvrage Collectif', 'titre' => 'MATHS'],
+            ['loge_id' => 11, 'division_id' => 51, 'cote' => '519.5 BER', 'auteur' => 'Frédéric Bertrand', 'titre' => 'Initiation a la Statistique avec R'],
+            ['loge_id' => 11, 'division_id' => 51, 'cote' => '518.10 ALG', 'auteur' => 'Cormen - Leiserson - Rivest - Stein', 'titre' => 'Algorithmique'],
+            ['loge_id' => 12, 'division_id' => 54, 'cote' => '544.076 ARN', 'auteur' => 'Paul ARNAUD', 'titre' => 'CHIMIE ORGANIQUE'],
+
         ];
 
         DB::table('livre_imprimes')->insert($livres);

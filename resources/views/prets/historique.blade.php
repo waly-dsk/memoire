@@ -22,26 +22,6 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <form action="" method="get" class="forms sample d-flex gap-2">
-                        <input type="text" placeholder="Entité" class="form-control" name="entite"
-                            value="{{ $input['entite'] ?? '' }}">
-
-                        <input type="text" placeholder="Matricule" class="form-control" id="search_by_matricule"
-                            name="matricule" value="{{ $input['matricule'] ?? '' }}">
-                        <input type="text" placeholder="Nom Prénoms" class="form-control" name="nom"
-                            value="{{ $input['nom'] ?? '' }}">
-                        <button type="submit" class="btn btn-gradient-primary btn-sm flex-grow-0">
-                            Rechercher
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-                <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -59,12 +39,8 @@
                                 @endphp
                                 @forelse($historique as $pret)
                                     @php
-                                        $dateFinPrevue = \Carbon\Carbon::parse($pret->date_fin_prevue)
-                                            ->locale('fr_FR')
-                                            ->isoFormat('LL');
-                                        $dateRetourReelle = \Carbon\Carbon::parse($pret->date_retour_relle)
-                                            ->locale('fr_FR')
-                                            ->isoFormat('LL');
+                                        $dateFinPrevue = $pret->date_fin_prevue;
+                                        $dateRetourReelle = $pret->date_retour_relle;
                                         $difference = $dateRetourReelle > $dateFinPrevue;
                                     @endphp
                                     <tr>
@@ -84,9 +60,10 @@
                                         </td>
                                         <td>
                                             @if ($difference)
-                                                <span style="color: red;">{{ $dateRetourReelle }}</span>
+                                                <span
+                                                    style="color: red;">{{ \Carbon\Carbon::parse($dateRetourReelle)->locale('fr_FR')->isoFormat('LL') }}</span>
                                             @else
-                                                {{ $dateRetourReelle }}
+                                                {{ \Carbon\Carbon::parse($dateRetourReelle)->locale('fr_FR')->isoFormat('LL') }}
                                             @endif
                                         </td>
                                     </tr>
