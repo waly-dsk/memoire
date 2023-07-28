@@ -134,6 +134,9 @@ class MemoireTheseController extends Controller
     public function store(Request $request)
     {
         // Valider les données entrées par l'utilisateur
+        if ($request->pdf->getError()) {
+            return redirect()->back()->with('error', "Erreur lors du chargement du fichier pdf");
+        }
         $validatedData = $request->validate([
             'type_document_id' => 'required',
             'cote' => 'required|unique:memoire_theses,cote',
@@ -141,10 +144,10 @@ class MemoireTheseController extends Controller
             'auteur' => 'required',
             'mention' => 'required',
             'encadreur' => 'required',
-            'annee' => 'required|regex:/\d{4}-\d{4}/',
+            'annee' => 'required|regex:/^\d{4}$/',
             'option_id' => 'required',
             'loge_id' => 'required',
-            'pdf' => 'file',
+            'pdf' => 'file|mimes:pdf|max:2048',
             'exemplaire' => 'required|integer',
         ], [
             'type_document_id.required' => "Choisissez un Type.",
@@ -155,7 +158,10 @@ class MemoireTheseController extends Controller
             'auteur.required' => 'Le nom de l\'auteur est obligatoire.',
             'encadreur.required' => 'Le nom de l\'encadreur est obligatoire.',
             'annee.required' => 'L\' année  est obligatoire.',
-            'annee.regex' => 'L\' année doit avoir la forme XXXX-YYYY.',
+            'pdf.file' => "Erreur lors du chargement du fichier.",
+            'pdf.mimes' => "Format pdf uniquement pour le fichier.",
+            'pdf.max' => "Fichier trop volumineux.",
+            'annee.regex' => 'L\' année doit avoir la forme XXXX',
             'exemplaire.required' => 'Indiquez le nombre d\'exemplaire.',
         ]);
 
@@ -239,12 +245,12 @@ class MemoireTheseController extends Controller
             ->select('type_documents.*')
             ->first();
 
-        $rayon_loge = DB::table('memoire_theses')
-            ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
-            ->join('rayons', 'rayons.id', '=', 'loges.rayon_id')
-            ->where('memoire_theses.id', '=', $id)
-            ->select('rayons.id as rayon_id', 'rayons.nom as rayon_nom', 'loges.id as loge_id', 'loges.nom as loge_nom')
-            ->first();
+        // $rayon_loge = DB::table('memoire_theses')
+        //     ->join('loges', 'loges.id', '=', 'memoire_theses.loge_id')
+        //     ->join('rayons', 'rayons.id', '=', 'loges.rayon_id')
+        //     ->where('memoire_theses.id', '=', $id)
+        //     ->select('rayons.id as rayon_id', 'rayons.nom as rayon_nom', 'loges.id as loge_id', 'loges.nom as loge_nom')
+        //     ->first();
 
         if ($type_information === null) {
             // Le type d'information n'a pas été trouvé
@@ -275,7 +281,7 @@ class MemoireTheseController extends Controller
             'theme' => 'required',
             'auteur' => 'required',
             'encadreur' => 'required',
-            'annee' => 'required|regex:/\d{4}-\d{4}/',
+            'annee' => 'required|regex:/^\d{4}$/',
             'option_id' => 'required',
             'pdf' => 'file',
             'exemplaire' => 'required|integer',
@@ -287,7 +293,7 @@ class MemoireTheseController extends Controller
             'auteur.required' => 'Le nom de l\'auteur est obligatoire',
             'encadreur.required' => 'Le nom de l\'encadreur est obligatoire',
             'annee.required' => 'L\' année  est obligatoire',
-            'annee.regex' => 'L\' année doit suivre le format XXXX-YYYY',
+            'annee.regex' => 'L\' année doit suivre le format XXXX',
             'exemplaire.required' => 'Indiquez le nombre d\'exemplaire',
         ]);
 

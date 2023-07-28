@@ -61,11 +61,4 @@
         @empty
         @endforelse
     </div>
-
-
-@endsection
-@section('script')
-    <script>
-        // Open the modal when the button is clicked
-    </script>
 @endsection

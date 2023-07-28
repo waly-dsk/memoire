@@ -62,7 +62,7 @@
                             </div>
                             <input type="text"
                                 class="text-danger form-control bg-transparent border-0 banner-content" disabled
-                                value="CID-UP / Bibliothèque Centrale" />
+                                value="CID / BCUP" />
                         </div>
                     </form>
                 </div>
@@ -244,7 +244,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('category.index') }}">
-                                <span class="menu-title">Livres Imprimés</span>
+                                <span class="menu-title">Livres Imprimés </span>
                                 <i class="mdi mdi-checkbox-multiple-marked-outline menu-icon"></i>
                             </a>
                         </li>

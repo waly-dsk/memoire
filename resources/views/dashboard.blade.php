@@ -63,7 +63,7 @@
                     </h4>
                     <br>
                     <p style="text-align: justify">
-                        Je suis ravi de vous
+                        Nous sommes ravis de vous
                         accueillir sur BiblioInfo. Cette application représente un outil précieux pour faciliter votre
                         accès à nos ressources documentaires et vous accompagner dans vos recherches académiques.
                         <br>
