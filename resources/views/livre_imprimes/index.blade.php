@@ -36,8 +36,6 @@
                             Rechercher
                         </button>
                     </form>
-
-
                 </div>
             </div>
         </div>
@@ -70,8 +68,4 @@
         @empty
         @endforelse
     </div>
-
-@endsection
-@section('script')
-    <script></script>
 @endsection

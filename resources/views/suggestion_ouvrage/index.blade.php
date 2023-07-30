@@ -76,7 +76,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($suggestions as $suggestion)
+                                @forelse ($suggestions as $suggestion)
                                     <tr>
                                         <td>
                                             {{ $suggestion->intitule }}
@@ -115,7 +115,13 @@
                                             </td>
                                         @endif
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">
+                                            Aucune suggestion trouvée !
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -123,8 +129,4 @@
             </div>
         </div>
     </div>
-
-@endsection
-@section('script')
-    <script></script>
 @endsection

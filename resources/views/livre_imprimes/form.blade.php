@@ -129,8 +129,13 @@
 
                         <div class="form-group inline">
                             <label for="exemplaire">Exemplaire</label>
-                            <input type="text" name="exemplaire" class="form-control" id="exemplaire"
-                                placeholder="Exemplaire" value="{{ $livre_imprime->exemplaire }}">
+                            @if ($livre_imprime->exists)
+                                <input type="text" name="exemplaire" class="form-control" id="exemplaire"
+                                    placeholder="Exemplaire" value="{{ $exemplaire }}">
+                            @else
+                                <input type="text" name="exemplaire" class="form-control" id="exemplaire"
+                                    placeholder="Exemplaire">
+                            @endif
                         </div>
                         @if ($livre_imprime->exists)
                             <button type="submit" class="btn btn-gradient-primary">Modifier</button>

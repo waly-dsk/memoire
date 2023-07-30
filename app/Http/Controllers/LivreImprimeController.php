@@ -145,7 +145,6 @@ class LivreImprimeController extends Controller
             'exemplaire' => 'required',
         ], [
             'cote.required' => "La cote de l'ouvrage est à renseigner.",
-            'cote.unique' => 'Cette cote existe déjà pour un autre ouvrage.',
             'titre.required' => "Le titre de l'ouvrage est à renseigner.",
             'auteur.required' => "L'auteur de l'ouvrage est à renseigner.",
         ]);
@@ -211,11 +210,18 @@ class LivreImprimeController extends Controller
     public function edit($id)
     {
         $livreImprime = LivreImprime::findOrFail($id);
+        $exemplaire = DB::table('livre_imprime_exemplaires')
+            ->where('livre_imprime_id', '=', $id)
+            ->count();
+
         return view('livre_imprimes.form', [
             'user' => Auth::user(),
             'livre_imprime' => $livreImprime,
+            'rayons' => Rayon::all(),
+            'loges' => DB::table('loges')->get(),
             'categories' => DB::table('categories')->get(),
             'divisions' => DB::table('divisions')->get(),
+            'exemplaire' => $exemplaire,
         ]);
     }
 
@@ -227,19 +233,26 @@ class LivreImprimeController extends Controller
         $livreImprime = LivreImprime::findOrFail($id);
 
         DB::table('livre_imprime_exemplaires')->where('livre_imprime_id', $id)->delete();
-        $validateData = $request->validate([
-            'cote' => 'required',
-            'titre' => 'required',
-            'emplacement' => 'required',
-            'auteur' => 'required',
-            'division_id' => 'required',
-            'exemplaire' => 'required',
-        ]);
+        $validateData = $request->validate(
+            [
+                'cote' => 'required',
+                'titre' => 'required',
+                'loge_id' => 'required',
+                'auteur' => 'required',
+                'division_id' => 'required',
+                'exemplaire' => 'required',
+            ],
+            [
+                'cote.required' => "La cote de l'ouvrage est à renseigner.",
+                'titre.required' => "Le titre de l'ouvrage est à renseigner.",
+                'auteur.required' => "L'auteur de l'ouvrage est à renseigner.",
+            ]
+        );
         $livreImprime->update([
             'cote' => $validateData['cote'],
             'titre' => $validateData['titre'],
             'auteur' => $validateData['auteur'],
-            'emplacement' => $validateData['emplacement'],
+            'loge_id' => $validateData['loge_id'],
             'division_id' => $validateData['division_id'],
         ]);
 
@@ -251,7 +264,7 @@ class LivreImprimeController extends Controller
                 'livre_imprime_id' => $id,
             ]);
         }
-        return redirect('livre_imprime');
+        return to_route('livre_imprime.index', ['division_id' => $validateData['division_id']])->with('success', 'Livre modifié avec succès !');
     }
 
     /**
@@ -261,6 +274,7 @@ class LivreImprimeController extends Controller
     {
         $livreImprime = LivreImprime::findOrFail($id);
         $livreImprime->delete();
-        return redirect()->back();
+
+        return to_route('livre_imprime.index', ['division_id' => $livreImprime->division_id])->with('success', 'Livre supprimé avec succès !');
     }
 }
