@@ -1,37 +1,34 @@
-# Système de gestion du fonds documentaire
-### Bibliothèque centrale de l'Université de Parakou
+# Gestion du fonds documentaire de la Bibliothèque centrale de l'Université de Parakou
 
-> Application web développée dans le cadre de mon mémoire de fin de formation en Licence Informatique de Gestion à l'Université de Parakou, au Bénin.
+> Application web développée dans le cadre de mon mémoire de fin de formation en Licence Informatique de Gestion à l'Université de Parakou.
 
----
+## Présentation
 
-## À propos du projet
+Ce projet porte sur l'informatisation de la gestion du fonds documentaire de la Bibliothèque centrale de l'Université de Parakou.
 
-La gestion d'un fonds documentaire implique plusieurs opérations liées : référencement des documents, organisation physique des collections, consultation, gestion des abonnés, prêts, retours et suivi de l'activité de la bibliothèque.
+L'objectif est de concevoir un système d'information permettant de structurer et de gérer différentes informations liées au fonctionnement d'une bibliothèque universitaire, notamment les documents, leurs exemplaires, les abonnés, les agents ainsi que les opérations de prêt et de retour.
 
-Ce projet consiste à concevoir et développer une application web permettant d'informatiser une partie de ces processus au sein de la Bibliothèque centrale de l'Université de Parakou.
-
-L'objectif n'était donc pas uniquement de développer une interface web, mais de **traduire un besoin métier en un système d'information structuré**, depuis la modélisation des données jusqu'à l'implémentation des fonctionnalités.
+Le projet ne se limite donc pas à la réalisation d'une interface web. Il s'agit de traduire un besoin métier en une application structurée, depuis la modélisation des données jusqu'à l'implémentation des fonctionnalités.
 
 ---
 
 ## Problématique
 
-La gestion d'un fonds documentaire mobilise plusieurs informations qui doivent rester cohérentes :
+La gestion d'un fonds documentaire nécessite de maintenir des informations cohérentes sur plusieurs éléments :
 
 - les documents disponibles ;
-- leurs catégories et subdivisions ;
-- leur emplacement physique ;
-- leurs différents exemplaires ;
+- les différents exemplaires d'un même document ;
+- leur classification et leur emplacement ;
 - les abonnés ;
 - les agents de la bibliothèque ;
+- les prêts ;
+- les retours ;
 - les consultations ;
-- les prêts et les retours ;
-- les suggestions d'acquisition ou d'amélioration.
+- les suggestions.
 
-Le projet cherche ainsi à répondre à une question centrale :
+Le projet cherche ainsi à répondre à la problématique suivante :
 
-> **Comment concevoir un système d'information permettant de centraliser et de faciliter la gestion du fonds documentaire et des principales opérations réalisées par une bibliothèque universitaire ?**
+> **Comment concevoir un système d'information permettant de structurer et de faciliter la gestion d'un fonds documentaire universitaire ainsi que les principales opérations qui lui sont associées ?**
 
 ---
 
@@ -39,24 +36,24 @@ Le projet cherche ainsi à répondre à une question centrale :
 
 ### Objectif général
 
-Concevoir et développer une application web permettant d'informatiser la gestion du fonds documentaire de la Bibliothèque centrale de l'Université de Parakou.
+Concevoir et développer une application web destinée à informatiser la gestion du fonds documentaire de la Bibliothèque centrale de l'Université de Parakou.
 
 ### Objectifs spécifiques
 
-Le système permet notamment de :
+Le projet vise notamment à :
 
-- structurer et centraliser les informations relatives aux documents ;
+- structurer les informations relatives aux documents ;
 - organiser les documents selon leur classification ;
-- gérer les emplacements physiques du fonds documentaire ;
-- gérer les abonnés de la bibliothèque ;
-- enregistrer et suivre les prêts ;
-- gérer les retours d'ouvrages ;
+- gérer les emplacements du fonds documentaire ;
+- gérer les abonnés ;
+- gérer les agents ;
+- enregistrer les prêts ;
+- gérer les retours ;
 - conserver l'historique des prêts ;
+- permettre la recherche de documents ;
 - enregistrer les consultations ;
-- rechercher des documents selon différents critères ;
 - recueillir des suggestions ;
-- produire des statistiques sur l'utilisation du fonds documentaire ;
-- différencier les fonctionnalités accessibles aux agents et à l'administrateur.
+- produire des statistiques relatives à l'activité documentaire.
 
 ---
 
@@ -64,23 +61,28 @@ Le système permet notamment de :
 
 Le projet a été abordé comme un problème de conception de système d'information.
 
+La démarche peut être résumée ainsi :
+
 ```text
-                    BESOIN MÉTIER
-                         │
-                         ▼
-              Analyse des processus
-                         │
-                         ▼
-              Identification des entités
-                         │
-                         ▼
-              Modélisation des données
-                         │
-                         ▼
-              Conception de l'application
-                         │
-                         ▼
-                  Implémentation
-                         │
-                         ▼
-               Tests et validation
+Besoin métier
+     │
+     ▼
+Analyse des besoins
+     │
+     ▼
+Identification des acteurs et des données
+     │
+     ▼
+Modélisation du système
+     │
+     ▼
+Conception de la base de données
+     │
+     ▼
+Conception de l'application
+     │
+     ▼
+Implémentation
+     │
+     ▼
+Tests et validation
