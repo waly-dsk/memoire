@@ -1,88 +1,87 @@
-# Gestion du fonds documentaire de la Bibliothèque centrale de l'Université de Parakou
+# Informatisation de la gestion du fonds documentaire
 
-> Application web développée dans le cadre de mon mémoire de fin de formation en Licence Informatique de Gestion à l'Université de Parakou.
+Projet de mémoire de fin de formation réalisé en Licence Informatique de Gestion.
 
-## Présentation
+## Objectif
 
-Ce projet porte sur l'informatisation de la gestion du fonds documentaire de la Bibliothèque centrale de l'Université de Parakou.
+Concevoir une application web permettant d'informatiser la gestion du fonds documentaire d'une bibliothèque universitaire.
 
-L'objectif est de concevoir un système d'information permettant de structurer et de gérer différentes informations liées au fonctionnement d'une bibliothèque universitaire, notamment les documents, leurs exemplaires, les abonnés, les agents ainsi que les opérations de prêt et de retour.
+L'application couvre notamment la gestion des documents, des exemplaires, des abonnés, des agents et des opérations de prêt.
 
-Le projet ne se limite donc pas à la réalisation d'une interface web. Il s'agit de traduire un besoin métier en une application structurée, depuis la modélisation des données jusqu'à l'implémentation des fonctionnalités.
+## Fonctionnalités
 
----
+* Gestion des documents
+* Gestion des exemplaires
+* Gestion des abonnés
+* Gestion des agents
+* Recherche de documents
+* Gestion des prêts et retours
+* Gestion des consultations
+* Gestion des suggestions
+* Authentification et gestion des accès
+* Consultation de statistiques
 
-## Problématique
+## Technologies
 
-La gestion d'un fonds documentaire nécessite de maintenir des informations cohérentes sur plusieurs éléments :
+* PHP
+* Laravel
+* MySQL
+* Blade
+* JavaScript
+* HTML / CSS
 
-- les documents disponibles ;
-- les différents exemplaires d'un même document ;
-- leur classification et leur emplacement ;
-- les abonnés ;
-- les agents de la bibliothèque ;
-- les prêts ;
-- les retours ;
-- les consultations ;
-- les suggestions.
+Le projet utilise Laravel avec une architecture MVC et une base de données relationnelle. Le dépôt utilise actuellement Laravel 10 et PHP 8.1 ou supérieur.
 
-Le projet cherche ainsi à répondre à la problématique suivante :
+## Installation
 
-> **Comment concevoir un système d'information permettant de structurer et de faciliter la gestion d'un fonds documentaire universitaire ainsi que les principales opérations qui lui sont associées ?**
+### Prérequis
 
----
+* PHP >= 8.1
+* Composer
+* Node.js
+* MySQL
 
-## Objectifs
+### Installation
 
-### Objectif général
+```bash
+git clone https://github.com/waly-dsk/memoire.git
+cd memoire
 
-Concevoir et développer une application web destinée à informatiser la gestion du fonds documentaire de la Bibliothèque centrale de l'Université de Parakou.
+composer install
+npm install
 
-### Objectifs spécifiques
+cp .env.example .env
+php artisan key:generate
+```
 
-Le projet vise notamment à :
+Configurer ensuite la connexion à la base de données dans `.env`.
 
-- structurer les informations relatives aux documents ;
-- organiser les documents selon leur classification ;
-- gérer les emplacements du fonds documentaire ;
-- gérer les abonnés ;
-- gérer les agents ;
-- enregistrer les prêts ;
-- gérer les retours ;
-- conserver l'historique des prêts ;
-- permettre la recherche de documents ;
-- enregistrer les consultations ;
-- recueillir des suggestions ;
-- produire des statistiques relatives à l'activité documentaire.
+```bash
+php artisan migrate
+```
 
----
+Lancer l'application :
 
-# Du besoin métier au système d'information
+```bash
+php artisan serve
+```
 
-Le projet a été abordé comme un problème de conception de système d'information.
+Pour compiler les assets :
 
-La démarche peut être résumée ainsi :
+```bash
+npm run dev
+```
 
-```text
-Besoin métier
-     │
-     ▼
-Analyse des besoins
-     │
-     ▼
-Identification des acteurs et des données
-     │
-     ▼
-Modélisation du système
-     │
-     ▼
-Conception de la base de données
-     │
-     ▼
-Conception de l'application
-     │
-     ▼
-Implémentation
-     │
-     ▼
-Tests et validation
+Les scripts frontend utilisent Vite.
+
+## Contexte
+
+Ce projet a été réalisé dans le cadre de mon mémoire de fin de formation en Licence Informatique de Gestion.
+
+Il m'a permis de mettre en pratique l'analyse d'un besoin, la conception d'un système d'information, la modélisation des données et le développement d'une application web.
+
+## Auteur
+
+**Davo Kpinde Sèwlannou Wilfried**
+
+[GitHub](https://github.com/waly-dsk)
